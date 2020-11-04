@@ -8,6 +8,10 @@
         "sourceMap": true,
         "target": "ES2018",
         "strict": true,
-        "lib": ["DOM", "ES2020"]
+        "lib": ["DOM", "ES2020"],
+        "baseUrl": ".",
+        "paths": {
+            "@utils/*": ["./src/utils/*"]
+        }
     }
 }
