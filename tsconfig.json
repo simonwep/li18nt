@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "declaration": true,
+        "declarationDir": "lib",
+        "resolveJsonModule": true,
+        "moduleResolution": "node",
+        "noImplicitAny": true,
+        "sourceMap": true,
+        "target": "ES2018",
+        "strict": true,
+        "lib": ["DOM", "ES2020"]
+    }
+}
