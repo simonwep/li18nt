@@ -5,6 +5,7 @@ module.exports = {
         '\\.[jt]sx?$': 'babel-jest'
     },
     moduleNameMapper: {
-        '@utils/(.*)': ['<rootDir>/src/utils/$1']
+        '@utils/(.*)': ['<rootDir>/src/utils/$1'],
+        '@tools/(.*)': ['<rootDir>/src/tools/$1']
     }
 };

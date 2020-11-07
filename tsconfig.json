@@ -11,7 +11,8 @@
         "lib": ["DOM", "ES2020"],
         "baseUrl": ".",
         "paths": {
-            "@utils/*": ["./src/utils/*"]
+            "@utils/*": ["./src/utils/*"],
+            "@tools/*": ["./src/tools/*"]
         }
     }
 }

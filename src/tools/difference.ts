@@ -1,9 +1,6 @@
 import {keysFrom} from '@utils/keysFrom';
 import {typeOfJsonValue} from '@utils/typeOfJsonValue';
-
-type JSONRecord = {[key: string]: JSONValue;};
-type JSONValue = string | number | JSONRecord | JSONArray;
-type JSONArray = string[] | number[] | JSONValue[];
+import {JSONArray, JSONObject, JSONValue} from '../types';
 
 export type PropertyPath = (string | number)[];
 export type Difference = {
@@ -16,7 +13,7 @@ export type Difference = {
  * @param target
  * @param others
  */
-const compare = (target: JSONRecord, others: JSONRecord[]): Difference => {
+const compare = (target: JSONObject, others: JSONObject[]): Difference => {
     const diff: Difference = {
         conflicts: [],
         missing: []
@@ -55,7 +52,7 @@ const compare = (target: JSONRecord, others: JSONRecord[]): Difference => {
 
             // Child object?
             if (objType === 'object' && objType === targetType) {
-                resolve(targetValue as JSONRecord, [objValue] as Record<number, JSONArray>[], [...parent, key]);
+                resolve(targetValue as JSONObject, [objValue] as Record<number, JSONArray>[], [...parent, key]);
                 return;
             }
 
@@ -74,7 +71,7 @@ const compare = (target: JSONRecord, others: JSONRecord[]): Difference => {
         }
     }
 
-    function resolve<T extends JSONRecord | JSONArray, O extends(T extends JSONRecord ? JSONRecord[] : JSONArray)>(
+    function resolve<T extends JSONObject | JSONArray, O extends(T extends JSONObject ? JSONObject[] : JSONArray)>(
         target: T,
         others: O,
         parent: PropertyPath = []
@@ -89,8 +86,8 @@ const compare = (target: JSONRecord, others: JSONRecord[]): Difference => {
                 handle(i, target as JSONArray, others as Record<number, JSONArray>[], parent);
             }
         } else {
-            for (const key of keysFrom([target as JSONRecord, ...(others as JSONRecord[])])) {
-                handle(key, target as JSONRecord, others as Record<string, JSONArray>[], parent);
+            for (const key of keysFrom([target as JSONObject, ...(others as JSONObject[])])) {
+                handle(key, target as JSONObject, others as Record<string, JSONArray>[], parent);
             }
         }
     }
@@ -103,7 +100,7 @@ const compare = (target: JSONRecord, others: JSONRecord[]): Difference => {
  * Finds the difference between given objects
  * @param objects
  */
-export const difference = (objects: JSONRecord[]): Difference[] => {
+export const difference = (objects: JSONObject[]): Difference[] => {
 
     // Create result objects
     const differences: Difference[] = [];

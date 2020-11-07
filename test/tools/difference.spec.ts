@@ -1,4 +1,4 @@
-import {difference} from '../../src/tools/difference';
+import {difference} from '@tools/difference';
 
 describe('[tool] difference', () => {
 
