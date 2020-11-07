@@ -1,6 +1,6 @@
-import {JSONArray, JSONObject, JSONValue, PropertyPath} from '@types';
-import {typeOfJsonValue} from '@utils/typeOfJsonValue';
-import {keysFrom} from '@utils/keysFrom';
+import {JSONArray, JSONObject, JSONValue, PropertyPath} from '../types';
+import {typeOfJsonValue} from '../utils/typeOfJsonValue';
+import {keysFrom} from '../utils/keysFrom';
 
 export type Difference = {
     missing: PropertyPath[];

@@ -16,7 +16,8 @@
         "test": "jest --runInBand",
         "test:watch": "jest --runInBand --watch",
         "lint": "eslint ./src/**/*.ts ./test/**/*.ts",
-        "lint:fix": "eslint ./src/**/*.ts ./test/**/*.ts --fix"
+        "lint:fix": "eslint ./src/**/*.ts ./test/**/*.ts --fix",
+        "install:local": "npm run build && npm install -g ."
     },
     "keywords": [
         "lint",
@@ -44,5 +45,10 @@
         "rollup": "^2.33.1",
         "rollup-plugin-terser": "^7.0.2",
         "typescript": "^4.0.5"
+    },
+    "dependencies": {
+        "chalk": "^4.1.0",
+        "commander": "^6.2.0",
+        "glob": "^7.1.6"
     }
 }

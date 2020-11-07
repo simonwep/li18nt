@@ -1,5 +1,5 @@
-import {JSONArray, JSONObject, PropertyPath} from '@types';
-import {typeOfJsonValue} from '@utils/typeOfJsonValue';
+import {JSONArray, JSONObject, PropertyPath} from '../types';
+import {typeOfJsonValue} from '../utils/typeOfJsonValue';
 
 /**
  * Finds duplicate keys in the given object.

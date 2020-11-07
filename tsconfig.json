@@ -4,6 +4,7 @@
         "declarationDir": "lib",
         "resolveJsonModule": true,
         "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
         "noImplicitAny": true,
         "sourceMap": true,
         "target": "ES2018",
@@ -11,9 +12,9 @@
         "lib": ["DOM", "ES2020"],
         "baseUrl": ".",
         "paths": {
-            "@utils/*": ["./src/utils/*"],
-            "@tools/*": ["./src/tools/*"],
-            "@types": ["./src/types.ts"]
+            "@utils/*": ["./src/app/utils/*"],
+            "@tools/*": ["./src/app/tools/*"],
+            "@types": ["./src/app/types.ts"]
         }
     }
 }

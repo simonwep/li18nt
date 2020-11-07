@@ -12,15 +12,16 @@ const variables = replace({
 
 export default [
     {
-        input: 'src/cli.ts',
-        plugins: [variables],
+        input: 'src/cli/index.ts',
+        plugins: [ts(), variables],
+        external: ['commander', 'chalk', 'fs', 'path'],
         output: {
             file: 'lib/cli.js',
-            format: 'iife'
+            format: 'cjs'
         }
     },
     {
-        input: 'src/index.ts',
+        input: 'src/app/index.ts',
         plugins: [
             ts(),
             ...(production ? [terser()] : []),
