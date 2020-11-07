@@ -13,8 +13,8 @@
     "scripts": {
         "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",
         "watch": "cross-env NODE_ENV=development rollup -c rollup.config.js --watch",
-        "test": "jest",
-        "test:watch": "jest --watch",
+        "test": "jest --runInBand",
+        "test:watch": "jest --runInBand --watch",
         "lint": "eslint ./src/**/*.ts ./test/**/*.ts",
         "lint:fix": "eslint ./src/**/*.ts ./test/**/*.ts --fix"
     },

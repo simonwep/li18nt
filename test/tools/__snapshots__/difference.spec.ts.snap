@@ -1,0 +1,131 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[tool] difference Should find the difference between three, two-dimensional object 1`] = `
+Array [
+  Object {
+    "conflicts": Array [
+      Array [
+        "b",
+      ],
+    ],
+    "missing": Array [
+      Array [
+        "c",
+      ],
+      Array [
+        "z",
+      ],
+    ],
+  },
+  Object {
+    "conflicts": Array [
+      Array [
+        "b",
+      ],
+    ],
+    "missing": Array [
+      Array [
+        "a",
+      ],
+      Array [
+        "z",
+      ],
+    ],
+  },
+  Object {
+    "conflicts": Array [],
+    "missing": Array [
+      Array [
+        "a",
+      ],
+      Array [
+        "b",
+      ],
+    ],
+  },
+]
+`;
+
+exports[`[tool] difference Should work with nested objects 1`] = `
+Array [
+  Object {
+    "conflicts": Array [
+      Array [
+        "b",
+      ],
+    ],
+    "missing": Array [
+      Array [
+        "x",
+        "p",
+        "k",
+      ],
+      Array [
+        "x",
+        "i",
+      ],
+      Array [
+        "c",
+      ],
+    ],
+  },
+  Object {
+    "conflicts": Array [
+      Array [
+        "b",
+      ],
+    ],
+    "missing": Array [
+      Array [
+        "a",
+      ],
+    ],
+  },
+  Object {
+    "conflicts": Array [
+      Array [
+        "b",
+      ],
+    ],
+    "missing": Array [
+      Array [
+        "a",
+      ],
+    ],
+  },
+]
+`;
+
+exports[`[tool] difference Should work with nested objects and arrays 1`] = `
+Array [
+  Object {
+    "conflicts": Array [],
+    "missing": Array [
+      Array [
+        "x",
+        2,
+      ],
+      Array [
+        "l",
+      ],
+    ],
+  },
+  Object {
+    "conflicts": Array [],
+    "missing": Array [
+      Array [
+        "x",
+        2,
+      ],
+    ],
+  },
+  Object {
+    "conflicts": Array [],
+    "missing": Array [
+      Array [
+        "l",
+      ],
+    ],
+  },
+]
+`;
