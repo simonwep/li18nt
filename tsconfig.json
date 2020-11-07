@@ -12,7 +12,8 @@
         "baseUrl": ".",
         "paths": {
             "@utils/*": ["./src/utils/*"],
-            "@tools/*": ["./src/tools/*"]
+            "@tools/*": ["./src/tools/*"],
+            "@types": ["./src/types.ts"]
         }
     }
 }

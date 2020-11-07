@@ -1,5 +1,5 @@
+import {JSONArray, JSONObject, JSONValue} from '@types';
 import {typeOfJsonValue} from '@utils/typeOfJsonValue';
-import {JSONArray, JSONObject, JSONValue} from '../types';
 
 /**
  * Returns the sorted keys of an object as string array

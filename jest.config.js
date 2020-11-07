@@ -6,6 +6,7 @@ module.exports = {
     },
     moduleNameMapper: {
         '@utils/(.*)': ['<rootDir>/src/utils/$1'],
-        '@tools/(.*)': ['<rootDir>/src/tools/$1']
+        '@tools/(.*)': ['<rootDir>/src/tools/$1'],
+        '@types': ['<rootDir>/src/types.ts']
     }
 };

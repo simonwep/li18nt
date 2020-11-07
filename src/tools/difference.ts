@@ -1,8 +1,7 @@
-import {keysFrom} from '@utils/keysFrom';
+import {JSONArray, JSONObject, JSONValue, PropertyPath} from '@types';
 import {typeOfJsonValue} from '@utils/typeOfJsonValue';
-import {JSONArray, JSONObject, JSONValue} from '../types';
+import {keysFrom} from '@utils/keysFrom';
 
-export type PropertyPath = (string | number)[];
 export type Difference = {
     missing: PropertyPath[];
     conflicts: PropertyPath[];

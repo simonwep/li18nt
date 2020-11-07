@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[tool] duplicates Should find a duplicate property and its paths 1`] = `
+Map {
+  "welcome" => Array [
+    Array [
+      "home",
+      "welcome",
+    ],
+  ],
+}
+`;
+
+exports[`[tool] duplicates Should find multiple, nested duplicate 1`] = `
+Map {
+  "welcome" => Array [
+    Array [
+      "home",
+      "welcome",
+    ],
+    Array [
+      "home",
+      "sideBar",
+      "welcome",
+    ],
+  ],
+}
+`;
+
+exports[`[tool] duplicates Should work with arrays too 1`] = `
+Map {
+  "welcome" => Array [
+    Array [
+      "home",
+      "welcome",
+    ],
+    Array [
+      "home",
+      "sideBar",
+      "welcome",
+    ],
+    Array [
+      "about",
+      "footer",
+      0,
+      "welcome",
+    ],
+    Array [
+      "about",
+      "footer",
+      1,
+      "welcome",
+    ],
+    Array [
+      "about",
+      "footer",
+      2,
+      "welcome",
+    ],
+  ],
+  "copyright" => Array [
+    Array [
+      "about",
+      "footer",
+      2,
+      "copyright",
+    ],
+  ],
+}
+`;
