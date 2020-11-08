@@ -1,4 +1,4 @@
-import {PropertyPath} from '../app/types';
+import {PropertyPath} from '@types';
 
 const NO_WHITESPACE = /^\S*$/;
 
@@ -12,7 +12,7 @@ export const prettyPropertyPath = (path: PropertyPath): string => {
     for (const part of path) {
         if (typeof part === 'string') {
             if (NO_WHITESPACE.exec(part)) {
-                str += (str.length ? '.' : '') + part;
+                str += (str.length ? ' > ' : '') + part;
             } else {
                 str += `['${part.replace(/'/g, '\\\'')}']`;
             }

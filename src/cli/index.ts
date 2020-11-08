@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+import chalk from 'chalk';
 import {duplicates, sort} from '../app';
 import {JSONObject} from '@types';
 import {debug, error, info, success, warn} from './log';
@@ -62,30 +63,33 @@ function run(files: string[], cmd: Command) {
     }
 
     if (cmd.duplicates) {
-        const dupes = duplicates(objects[0].content);
+        let count = 0;
 
-        if (dupes.size) {
-            info(`Found ${dupes.size === 1 ? 'one duplicate' : `${dupes.size} duplicates`}:`);
+        for (const {name, content} of objects) {
+            const dupes = duplicates(content);
 
-            let i = 1;
-            for (const [key, paths] of dupes.entries()) {
-                process.stdout.write(` ${i}. '${key}': `);
+            if (dupes.size) {
+                info(`${chalk.blueBright(`${name}:`)} Found ${dupes.size === 1 ? 'one duplicate' : `${dupes.size} duplicates`}:`);
 
-                if (paths.length > 1) {
-                    process.stdout.write('\n');
+                for (const [key, paths] of dupes.entries()) {
+                    process.stdout.write(`    ${chalk.cyanBright(key)} (${paths.length}x): `);
 
-                    for (const path of paths) {
-                        console.log(`   + ${prettyPropertyPath(['[root]', ...path])}`);
+                    if (paths.length > 1) {
+                        process.stdout.write('\n');
+
+                        for (const path of paths) {
+                            console.log(`        ${prettyPropertyPath(path)}`);
+                        }
+                    } else if (paths.length) {
+                        console.log(prettyPropertyPath(paths[0]));
                     }
-                } else if (paths.length) {
-                    console.log(prettyPropertyPath(['[root]', ...paths[0]]));
                 }
 
-                i++;
+                count++;
             }
-        } else {
-            success('No duplicates found!');
         }
+
+        !count && success('No duplicates found!');
     }
 
     // Write files

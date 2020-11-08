@@ -2,22 +2,22 @@
 import chalk from 'chalk';
 
 export const warn = (str: string): void => {
-    console.log(`${chalk.yellowBright('[⚠]')}: ${str}`);
+    console.log(`${chalk.yellowBright('[⚠]')} ${str}`);
 };
 
 export const error = (str: string): void => {
-    console.log(`${chalk.redBright('[✖]')}: ${str}`);
+    console.log(`${chalk.redBright('[X]')} ${str}`);
 };
 
 export const success = (str: string): void => {
-    console.log(`${chalk.greenBright('[✔]')}: ${str}`);
+    console.log(`${chalk.greenBright('[✓]')} ${str}`);
 };
 
 export const info = (str: string): void => {
-    console.log(`${chalk.blueBright('[ℹ]')}: ${str}`);
+    console.log(`${chalk.blueBright('[i]')} ${str}`);
 };
 
 export const debug = (str: string): void => {
-    console.log(`'[ℹ]': ${str}`);
+    console.log(`'[-]' ${str}`);
 };
 
