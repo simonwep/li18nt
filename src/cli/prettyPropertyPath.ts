@@ -1,24 +1,35 @@
 import {PropertyPath} from '@types';
+import {Chalk} from 'chalk';
 
 const NO_WHITESPACE = /^\S*$/;
 
 /**
  * Prettifies a property path
  * @param path
+ * @param last
  */
-export const prettyPropertyPath = (path: PropertyPath): string => {
+export const prettyPropertyPath = (path: PropertyPath, last: Chalk | null = null): string => {
     let str = '';
 
-    for (const part of path) {
+    for (let i = 0; i < path.length; i++) {
+        const part = path[i];
+        let divider = false;
+        let snippet;
+
         if (typeof part === 'string') {
             if (NO_WHITESPACE.exec(part)) {
-                str += (str.length ? ' > ' : '') + part;
+                divider = !!i;
+                snippet = part;
             } else {
-                str += `['${part.replace(/'/g, '\\\'')}']`;
+                snippet = `['${part.replace(/'/g, '\\\'')}']`;
             }
         } else {
-            str += `[${part}]`;
+            snippet = `[${part}]`;
         }
+
+        str += (i === path.length - 1) && last ?
+            (divider ? ' > ' : '') + last(snippet) :
+            (divider ? ' > ' : '') + snippet;
     }
 
     return str;
