@@ -8,7 +8,8 @@
     "author": "Simon Reinisch <trash@reinisch.io>",
     "license": "MIT",
     "bin": {
-        "lint-i18n": "bin/cli.js"
+        "lint-i18n": "bin/cli.js",
+        "li18nt": "bin/cli.js"
     },
     "scripts": {
         "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",
