@@ -1,11 +1,11 @@
+import {CLIModule, CLIOptions, SourceFile} from '@types';
+import {debugLn, errorLn, warnLn} from '@utils/log';
+import {differencesFlag} from './flags/differences.flag';
+import {duplicatesFlag} from './flags/duplicates.flag';
 import {sort} from '@tools/sort';
 import {Command} from 'commander';
 import fs from 'fs';
 import path from 'path';
-import {differencesFlag} from './flags/differences.flag';
-import {duplicatesFlag} from './flags/duplicates.flag';
-import {CLIModule, CLIOptions, SourceFile} from './types';
-import {debugLn, errorLn, warnLn} from './utils/log';
 
 const flags: CLIModule[] = [
     differencesFlag,

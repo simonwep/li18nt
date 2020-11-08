@@ -1,4 +1,3 @@
-import {JSONObject} from '@types';
 import {Command} from 'commander';
 
 export type CLIOptions = {
@@ -21,4 +20,13 @@ export type CLIModuleArguments = {
 
 export interface CLIModule {
     (args: CLIModuleArguments): boolean | void;
+}
+
+export type PropertyPath = (string | number)[];
+
+export type JSONValue = string | number | boolean | null | JSONObject | JSONArray;
+export type JSONArray = JSONValue[] | JSONObject[];
+
+export interface JSONObject {
+    [key: string]: JSONValue;
 }

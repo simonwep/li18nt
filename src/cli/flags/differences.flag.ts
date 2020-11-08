@@ -1,8 +1,8 @@
 import {difference} from '@tools/difference';
+import {errorLn, successLn, warn} from '@utils/log';
+import {prettyPropertyPath} from '@utils/prettyPropertyPath';
+import {CLIModule} from '@types';
 import chalk from 'chalk';
-import {CLIModule} from '../types';
-import {errorLn, successLn, warn} from '../utils/log';
-import {prettyPropertyPath} from '../utils/prettyPropertyPath';
 
 /* eslint-disable no-console */
 export const differencesFlag: CLIModule = ({files, cmd}) => {

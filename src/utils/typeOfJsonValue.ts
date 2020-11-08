@@ -1,13 +1,13 @@
-import {JSONArray, JSONObject, JSONValue} from '../types';
+import {JSONArray, JSONObject, JSONValue} from '@types';
 
 type ReturnType<T extends JSONValue> =
     T extends JSONObject ? 'object' :
-    T extends JSONArray ? 'array' :
-    T extends number ? 'number' :
-    T extends string ? 'string' :
-    T extends undefined ? 'undefined' :
-    T extends boolean ? 'boolean' :
-    T extends null ? 'null' : never;
+        T extends JSONArray ? 'array' :
+            T extends number ? 'number' :
+                T extends string ? 'string' :
+                    T extends undefined ? 'undefined' :
+                        T extends boolean ? 'boolean' :
+                            T extends null ? 'null' : never;
 
 /**
  * Returns the type of a value. Limited to json types, excluding undefined.
