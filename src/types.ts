@@ -2,7 +2,7 @@ import {Command} from 'commander';
 
 export type CLIOptions = {
     debug: boolean;
-    pretty: boolean;
+    prettify: boolean;
     duplicates: true | 'strict' | 'loose';
     diff: true | 'strict' | 'loose';
 }

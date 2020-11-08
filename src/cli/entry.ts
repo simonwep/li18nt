@@ -58,7 +58,7 @@ export const entry = (sources: string[], cmd: Command & CLIOptions): void => {
     }
 
     // Prettify?
-    if (cmd.pretty) {
+    if (cmd.prettify) {
         const indent = 4;
         for (const {content, name, filePath} of files) {
             const str = sort(content, indent);

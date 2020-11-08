@@ -1,10 +1,10 @@
 {
-    "name": "lint-i18n",
+    "name": "li18nt",
     "version": "1.0.0",
     "description": "Locales linter, formatter, sorter and prettifier",
-    "main": "./lib/index.min.js",
-    "module": "./lib/index.min.mjs",
-    "types": "./lib/index.min.d.ts",
+    "main": "./lib/li18nt.min.js",
+    "module": "./lib/li18nt.min.mjs",
+    "types": "./lib/li18nt.min.d.ts",
     "author": "Simon Reinisch <trash@reinisch.io>",
     "license": "MIT",
     "bin": {
@@ -24,8 +24,11 @@
         "lint",
         "linter",
         "i18n",
+        "internationalization",
+        "json",
         "locales",
-        "translation",
+        "cli",
+        "cli-tool",
         "formatter",
         "prettier"
     ],

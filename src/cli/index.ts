@@ -11,7 +11,7 @@ program
     .usage('[files...] [options]')
     .arguments('[files...]')
     .option('-d, --debug', 'Debug information')
-    .option('-p, --pretty', 'Prettify files')
+    .option('-p, --prettify', 'Prettify files')
     .option('-d, --duplicates [mode]', 'Find duplicates', 'loose')
     .option('-c, --diff [mode]', 'Find differences and conflicts', 'strict')
     .action(entry)

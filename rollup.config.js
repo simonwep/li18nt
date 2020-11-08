@@ -4,7 +4,7 @@ import replace from '@rollup/plugin-replace';
 import pkg from './package.json';
 
 const production = process.env.NODE_ENV === 'production';
-const banner = `/*! LintI18n ${pkg.version} MIT | https://github.com/Simonwep/lint-i18n */`;
+const banner = `/*! Li18nt ${pkg.version} MIT | https://github.com/Simonwep/li18nt */`;
 
 const variables = replace({
     VERSION: JSON.stringify(pkg.version)
@@ -31,7 +31,7 @@ export default [
             {
                 banner,
                 file: pkg.main,
-                name: 'LintI18n',
+                name: 'Li18nt',
                 format: 'umd',
                 sourcemap: true
             },
