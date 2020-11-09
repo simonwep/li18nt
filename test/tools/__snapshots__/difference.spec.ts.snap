@@ -72,10 +72,23 @@ Array [
   Object {
     "conflicts": Array [
       Array [
+        "c",
+      ],
+      Array [
         "b",
+      ],
+      Array [
+        "x",
+        "p",
+        "k",
       ],
     ],
     "missing": Array [
+      Array [
+        "x",
+        "p",
+        "z",
+      ],
       Array [
         "a",
       ],
@@ -84,7 +97,15 @@ Array [
   Object {
     "conflicts": Array [
       Array [
+        "c",
+      ],
+      Array [
         "b",
+      ],
+      Array [
+        "x",
+        "p",
+        "k",
       ],
     ],
     "missing": Array [
@@ -99,7 +120,12 @@ Array [
 exports[`[tool] difference Should work with nested objects and arrays 1`] = `
 Array [
   Object {
-    "conflicts": Array [],
+    "conflicts": Array [
+      Array [
+        "x",
+        0,
+      ],
+    ],
     "missing": Array [
       Array [
         "x",
@@ -111,7 +137,12 @@ Array [
     ],
   },
   Object {
-    "conflicts": Array [],
+    "conflicts": Array [
+      Array [
+        "x",
+        0,
+      ],
+    ],
     "missing": Array [
       Array [
         "x",
@@ -120,7 +151,12 @@ Array [
     ],
   },
   Object {
-    "conflicts": Array [],
+    "conflicts": Array [
+      Array [
+        "x",
+        0,
+      ],
+    ],
     "missing": Array [
       Array [
         "l",

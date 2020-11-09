@@ -8,6 +8,29 @@ export type Difference = {
 };
 
 /**
+ * Pushes the item if not already present.
+ * @param arr
+ * @param el
+ */
+const pushUnique = (arr: PropertyPath[], el: PropertyPath): boolean => {
+    outer: for (const item of arr) {
+        if (item.length === el.length) {
+
+            for (let i = 0; i < arr.length; i++) {
+                if (item[i] !== el[i]) {
+                    continue outer;
+                }
+            }
+
+            return false;
+        }
+    }
+
+    arr.push(el);
+    return true;
+};
+
+/**
  * Compares an object to others
  * @param target
  * @param others
@@ -29,7 +52,7 @@ const compare = (target: JSONObject, others: JSONObject[]): Difference => {
 
         // Property missing?
         if (targetType === 'undefined') {
-            diff.missing.push([...parent, key]);
+            pushUnique(diff.missing, [...parent, key]);
             return;
         }
 
@@ -40,19 +63,19 @@ const compare = (target: JSONObject, others: JSONObject[]): Difference => {
 
             // Property missing, skip
             if (objType === 'undefined') {
-                return;
+                continue;
             }
 
             // Property-type mismatch?
             if (objType !== targetType) {
-                diff.conflicts.push([...parent, key]);
-                return;
+                pushUnique(diff.conflicts, [...parent, key]);
+                continue;
             }
 
             // Child object?
             if (objType === 'object' && objType === targetType) {
                 resolve(targetValue as JSONObject, [objValue] as Record<number, JSONArray>[], [...parent, key]);
-                return;
+                continue;
             }
 
             // Child array?
@@ -60,8 +83,8 @@ const compare = (target: JSONObject, others: JSONObject[]): Difference => {
 
                 // Length mismatch
                 if ((targetValue as JSONArray).length !== (targetValue as JSONArray).length) {
-                    diff.conflicts.push([...parent, key]);
-                    return;
+                    pushUnique(diff.conflicts, [...parent, key]);
+                    continue;
                 }
 
                 // Resolve
@@ -70,7 +93,7 @@ const compare = (target: JSONObject, others: JSONObject[]): Difference => {
         }
     }
 
-    function resolve<T extends JSONObject | JSONArray, O extends(T extends JSONObject ? JSONObject[] : JSONArray)>(
+    function resolve<T extends JSONObject | JSONArray, O extends (T extends JSONObject ? JSONObject[] : JSONArray)>(
         target: T,
         others: O,
         parent: PropertyPath = []
