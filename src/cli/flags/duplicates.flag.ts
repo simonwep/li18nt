@@ -6,7 +6,7 @@ import chalk from 'chalk';
 
 /* eslint-disable no-console */
 export const duplicatesFlag: CLIModule = ({files, cmd}) => {
-    const strict = cmd.duplicates === 'strict';
+    const strict = (cmd.duplicates || 'loose') === 'strict';
     let count = 0;
 
     for (const {name, content} of files) {
@@ -25,7 +25,7 @@ export const duplicatesFlag: CLIModule = ({files, cmd}) => {
                         console.log(`        ${prettyPropertyPath(path, chalk.cyanBright)}`);
                     }
                 } else if (paths.length) {
-                    console.log(prettyPropertyPath(paths[0]));
+                    console.log(prettyPropertyPath(paths[0], chalk.cyanBright));
                 }
             }
 
@@ -33,6 +33,6 @@ export const duplicatesFlag: CLIModule = ({files, cmd}) => {
         }
     }
 
-    !count && successLn('No duplicates found!');
+    !count && !cmd.quiet && successLn('No duplicates found!');
     return !strict || !count;
 };

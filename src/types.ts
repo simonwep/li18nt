@@ -2,15 +2,16 @@ import {Command} from 'commander';
 
 export type CLIOptions = {
     debug: boolean;
+    quiet: boolean;
     prettify: boolean;
     duplicates: true | 'strict' | 'loose';
     diff: true | 'strict' | 'loose';
-}
+};
 
 export type SourceFile = {
     content: JSONObject;
-    name: string;
     filePath: string;
+    name: string;
 };
 
 export type CLIModuleArguments = {

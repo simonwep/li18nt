@@ -13,7 +13,7 @@
     },
     "scripts": {
         "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",
-        "watch": "cross-env NODE_ENV=development rollup -c rollup.config.js --watch",
+        "build:watch": "cross-env NODE_ENV=development rollup -c rollup.config.js --watch",
         "test": "jest --runInBand",
         "test:watch": "jest --runInBand --watch",
         "lint": "eslint ./src/**/*.ts ./test/**/*.ts",
@@ -37,6 +37,7 @@
         "@babel/preset-env": "^7.12.1",
         "@babel/preset-typescript": "^7.12.1",
         "@rollup/plugin-replace": "^2.3.4",
+        "@types/node": "^14.14.6",
         "@types/jest": "^26.0.15",
         "@typescript-eslint/eslint-plugin": "^4.6.1",
         "@typescript-eslint/parser": "^4.6.1",

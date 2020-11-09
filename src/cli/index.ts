@@ -10,10 +10,11 @@ program
     .description('Lints your locales files, li18nt is an alias.')
     .usage('[files...] [options]')
     .arguments('[files...]')
+    .option('-q, --quiet', 'Print only errors and warnings')
     .option('-d, --debug', 'Debug information')
     .option('-p, --prettify', 'Prettify files')
-    .option('-d, --duplicates [mode]', 'Find duplicates', 'loose')
-    .option('-c, --diff [mode]', 'Find differences and conflicts', 'strict')
+    .option('--duplicates [mode]', 'Find duplicates')
+    .option('--diff [mode]', 'Find differences and conflicts')
     .action(entry)
     .parse();
 

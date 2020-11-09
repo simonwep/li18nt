@@ -7,10 +7,10 @@ import {Command} from 'commander';
 import fs from 'fs';
 import path from 'path';
 
-const flags: CLIModule[] = [
-    differencesFlag,
-    duplicatesFlag
-];
+const flags: Partial<Record<keyof CLIOptions, CLIModule>> = {
+    'diff': differencesFlag,
+    'duplicates': duplicatesFlag
+};
 
 // Entry point
 /* eslint-disable no-console */
@@ -53,8 +53,12 @@ export const entry = (sources: string[], cmd: Command & CLIOptions): void => {
 
     // Process files
     let errored = false;
-    for (const handler of flags) {
-        errored = handler({files, cmd}) === false || errored;
+    for (const [flag, handler] of Object.entries(flags)) {
+        if (cmd[flag] && handler) {
+
+            // We need to check against false as undefined is falsy
+            errored = handler({files, cmd}) === false || errored;
+        }
     }
 
     // Prettify?
