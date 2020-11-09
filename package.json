@@ -1,6 +1,6 @@
 {
     "name": "li18nt",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Locales linter, formatter, sorter and prettifier",
     "main": "./lib/li18nt.min.js",
     "module": "./lib/li18nt.min.mjs",
@@ -11,6 +11,10 @@
         "lint-i18n": "bin/cli.js",
         "li18nt": "bin/cli.js"
     },
+    "files": [
+        "lib",
+        "src"
+    ],
     "scripts": {
         "build": "cross-env NODE_ENV=production rollup -c rollup.config.js",
         "build:watch": "cross-env NODE_ENV=development rollup -c rollup.config.js --watch",

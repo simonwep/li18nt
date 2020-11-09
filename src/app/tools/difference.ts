@@ -93,7 +93,7 @@ const compare = (target: JSONObject, others: JSONObject[]): Difference => {
         }
     }
 
-    function resolve<T extends JSONObject | JSONArray, O extends (T extends JSONObject ? JSONObject[] : JSONArray)>(
+    function resolve<T extends JSONObject | JSONArray, O extends(T extends JSONObject ? JSONObject[] : JSONArray)>(
         target: T,
         others: O,
         parent: PropertyPath = []
