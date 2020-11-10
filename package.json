@@ -36,6 +36,14 @@
         "formatter",
         "prettier"
     ],
+    "homepage": "https://github.com/Simonwep/li18nt#readme",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Simonwep/li18nt.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Simonwep/li18nt/issues"
+    },
     "devDependencies": {
         "@babel/core": "^7.12.3",
         "@babel/preset-env": "^7.12.1",
