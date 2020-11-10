@@ -1,7 +1,29 @@
-import {program} from 'commander';
+import {error} from '@utils/log';
 import {entry} from './entry';
+import program from 'commander';
 
 const version = typeof VERSION === 'undefined' ? 'unknown' : VERSION;
+
+const parseIndentation = (v: string): string | number | never => {
+    if (v === 'tab') {
+        return '\t';
+    } else if (v.match(/^\d*$/g)) {
+        return Number(v);
+    }
+
+
+    error('Invalid value for --indent, expected number (spaces) or \'tab\'.');
+    process.exit(-4);
+};
+
+const parseMode = (flag: string) => (v: string): string | never => {
+    if (['strict', 'loose'].includes(v)) {
+        return v;
+    }
+
+    error(`Invalid value for ${flag}, expected 'strict' or 'loose'.`);
+    process.exit(-4);
+};
 
 program
     .version(version, '--version', 'Output the current version')
@@ -12,9 +34,16 @@ program
     .arguments('[files...]')
     .option('-q, --quiet', 'Print only errors and warnings')
     .option('-d, --debug', 'Debug information')
-    .option('-p, --prettify', 'Prettify files')
-    .option('--duplicates [mode]', 'Find duplicates')
-    .option('--diff [mode]', 'Find differences and conflicts')
-    .action(entry)
-    .parse();
+    .option('-p, --prettify [number|tab]', 'Prettify files (default: 4 spaces)', parseIndentation)
+    .option('--duplicates [strict|loose]', 'Find duplicates (default: loose)', parseMode('--duplicates'))
+    .option('--diff [strict|loose]', 'Find differences and conflicts (default: strict)', parseMode('--diff'))
+    .action((args, cmd) => {
 
+        // TODO: See https://github.com/tj/commander.js/issues/1394
+        cmd.prettify = cmd.prettify === true ? 4 : cmd.prettify;
+        cmd.duplicates = cmd.duplicates === true ? 'loose' : cmd.duplicates;
+        cmd.diff = cmd.diff === true ? 'strict' : cmd.diff;
+
+        entry(args, cmd);
+    })
+    .parse();

@@ -63,9 +63,8 @@ export const entry = (sources: string[], cmd: Command & CLIOptions): void => {
 
     // Prettify?
     if (cmd.prettify) {
-        const indent = 4;
         for (const {content, name, filePath} of files) {
-            const str = sort(content, indent);
+            const str = sort(content, cmd.prettify);
             fs.writeFileSync(filePath, str);
             cmd.debug && debugLn(`Prettified ${name} (${filePath})`);
         }
