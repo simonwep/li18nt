@@ -14,7 +14,7 @@ export default [
     {
         input: 'src/cli/index.ts',
         plugins: [ts(), variables],
-        external: ['commander', 'chalk', 'fs', 'path'],
+        external: ['commander', 'chalk', 'fs', 'path', 'glob'],
         output: {
             file: 'lib/cli.js',
             format: 'cjs'
