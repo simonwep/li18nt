@@ -1,6 +1,6 @@
 {
     "name": "li18nt",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "description": "Locales linter, formatter, sorter and prettifier",
     "main": "./lib/li18nt.min.js",
     "module": "./lib/li18nt.min.mjs",
