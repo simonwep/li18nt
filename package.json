@@ -1,6 +1,6 @@
 {
     "name": "li18nt",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "Locales linter, formatter, sorter and prettifier",
     "main": "./lib/li18nt.min.js",
     "module": "./lib/li18nt.min.mjs",
@@ -23,7 +23,7 @@
         "lint": "eslint ./src/**/*.ts ./test/**/*.ts",
         "lint:fix": "eslint ./src/**/*.ts ./test/**/*.ts --fix",
         "install:local": "npm run build && npm install -g .",
-        "ttt": "li18nt ./.test/locales/*.json --duplicates --diff loose --prettify tab"
+        "dryrun": "npm run test && npm run lint:fix"
     },
     "keywords": [
         "lint",
