@@ -7,7 +7,7 @@ import {typeOfJsonValue} from '@utils/typeOfJsonValue';
  */
 const sortedKeys = (obj: JSONObject): string[] => {
     return Object.keys(obj).sort(
-        (a, b) => a === b ? 0 : a > b ? 1 : -1
+        (a, b) => a === b ? 0 : a.localeCompare(b)
     );
 };
 
@@ -47,9 +47,9 @@ export const sort = (obj: JSONObject, space?: number | string): string => {
             case 'boolean':
             case 'number':
             case 'null':
-                return v as (string | boolean | number);
+                return v as (boolean | number | null);
             case 'string':
-                return `"${v}"`;
+                return JSON.stringify(v);
         }
 
         return null;

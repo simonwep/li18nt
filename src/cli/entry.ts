@@ -67,7 +67,7 @@ export const entry = (sources: string[], cmd: Command & CLIOptions): void => {
     // Prettify?
     if (cmd.prettify) {
         for (const {content, name, filePath} of files) {
-            const str = sort(content, cmd.prettify);
+            const str = `${sort(content, cmd.prettify)}\n`;
             fs.writeFileSync(filePath, str);
             cmd.debug && debugLn(`Prettified ${name} (${filePath})`);
         }
