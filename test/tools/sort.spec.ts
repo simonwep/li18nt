@@ -1,4 +1,4 @@
-import {sort} from '@tools/sort';
+import {sort} from '../../src/tools/sort';
 
 describe('[tool] sort', () => {
 

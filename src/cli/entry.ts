@@ -2,10 +2,10 @@ import {CLIModule, CLIOptions, SourceFile} from '@types';
 import {debugLn, errorLn, warnLn} from '@utils/log';
 import {differencesFlag} from './flags/differences.flag';
 import {duplicatesFlag} from './flags/duplicates.flag';
-import {sort} from '@tools/sort';
 import {Command} from 'commander';
-import glob from 'glob';
+import {sort} from '@tools/sort';
 import fs from 'fs';
+import glob from 'glob';
 import path from 'path';
 
 const flags: Partial<Record<keyof CLIOptions, CLIModule>> = {

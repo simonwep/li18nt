@@ -1,8 +1,8 @@
-import {duplicates} from '@tools/duplicates';
+import {CLIModule} from '@types';
 import {infoLn, successLn} from '@utils/log';
 import {prettyPropertyPath} from '@utils/prettyPropertyPath';
-import {CLIModule} from '@types';
 import chalk from 'chalk';
+import {duplicates} from '../../tools/duplicates';
 
 /* eslint-disable no-console */
 export const duplicatesFlag: CLIModule = ({files, cmd}) => {

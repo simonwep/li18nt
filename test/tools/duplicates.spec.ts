@@ -1,4 +1,4 @@
-import {duplicates} from '@tools/duplicates';
+import {duplicates} from '../../src/tools/duplicates';
 
 describe('[tool] duplicates', () => {
 

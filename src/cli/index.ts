@@ -1,6 +1,6 @@
 import {error} from '@utils/log';
-import {entry} from './entry';
 import program from 'commander';
+import {entry} from './entry';
 
 const version = typeof VERSION === 'undefined' ? 'unknown' : VERSION;
 

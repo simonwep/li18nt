@@ -13,7 +13,7 @@
         "baseUrl": ".",
         "paths": {
             "@utils/*": ["./src/utils/*"],
-            "@tools/*": ["./src/app/tools/*"],
+            "@tools/*": ["./src/tools/*"],
             "@types": ["./src/types.ts"]
         }
     }

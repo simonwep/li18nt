@@ -21,7 +21,7 @@ export default [
         }
     },
     {
-        input: 'src/app/index.ts',
+        input: 'src/index.ts',
         plugins: [
             ts(),
             ...(production ? [terser()] : []),
