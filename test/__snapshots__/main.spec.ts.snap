@@ -1,5 +1,77 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Main library Should accept further duplicates-configuration 1`] = `
+Object {
+  "conflicts": Array [
+    Object {
+      "conflicts": Array [
+        Array [
+          "b",
+        ],
+      ],
+      "missing": Array [
+        Array [
+          "c",
+          "x",
+        ],
+      ],
+    },
+    Object {
+      "conflicts": Array [
+        Array [
+          "b",
+        ],
+      ],
+      "missing": Array [
+        Array [
+          "c",
+          "a",
+        ],
+      ],
+    },
+  ],
+  "duplicates": Array [
+    Map {
+      "a" => Array [
+        Array [
+          "b",
+          "a",
+        ],
+      ],
+    },
+    Map {
+      "a" => Array [
+        Array [
+          "c",
+          "x",
+          "a",
+        ],
+      ],
+    },
+  ],
+  "prettified": Array [
+    "{
+	\\"a\\": 20,
+	\\"b\\": {
+		\\"a\\": 322
+	},
+	\\"c\\": {
+		\\"a\\": 50
+	}
+}",
+    "{
+	\\"a\\": 23,
+	\\"b\\": \\"Super\\",
+	\\"c\\": {
+		\\"x\\": {
+			\\"a\\": 100
+		}
+	}
+}",
+  ],
+}
+`;
+
 exports[`Main library Should properly lint the given objects 1`] = `
 Object {
   "conflicts": Array [
@@ -103,6 +175,87 @@ Object {
             \\"dashboard\\": \\"Dashboard\\"
         }
     }
+}",
+  ],
+}
+`;
+
+exports[`Main library Should work with the example given in the README 1`] = `
+Object {
+  "conflicts": Array [
+    Object {
+      "conflicts": Array [
+        Array [
+          "a",
+        ],
+        Array [
+          "b",
+        ],
+        Array [
+          "c",
+        ],
+      ],
+      "missing": Array [
+        Array [
+          "c",
+          "y",
+        ],
+      ],
+    },
+    Object {
+      "conflicts": Array [
+        Array [
+          "a",
+        ],
+        Array [
+          "b",
+        ],
+        Array [
+          "c",
+        ],
+      ],
+      "missing": Array [],
+    },
+    Object {
+      "conflicts": Array [
+        Array [
+          "a",
+        ],
+        Array [
+          "b",
+        ],
+        Array [
+          "c",
+        ],
+      ],
+      "missing": Array [],
+    },
+  ],
+  "duplicates": Array [
+    Map {},
+    Map {},
+    Map {},
+  ],
+  "prettified": Array [
+    "{
+	\\"a\\": 20,
+	\\"b\\": null,
+	\\"c\\": {
+		\\"x\\": 20
+	}
+}",
+    "{
+	\\"a\\": 50,
+	\\"b\\": \\"Hello\\",
+	\\"c\\": {
+		\\"x\\": 100,
+		\\"y\\": 20
+	}
+}",
+    "{
+	\\"a\\": \\"Five\\",
+	\\"b\\": \\"Super\\",
+	\\"c\\": null
 }",
   ],
 }

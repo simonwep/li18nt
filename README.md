@@ -27,6 +27,8 @@
      src="https://img.shields.io/badge/github-support-3498DB.svg"></a>
 </p>
 
+> Info: The README is always up-to-date with the latest commit, check out [releases](https://github.com/Simonwep/li18nt/releases) to see the docs for your version!
+
 This linter will do three major things:
 1. Finding conflicts: Comparing your files against each other to see if there are any properties with types not matching up.
 2. Finding duplicates: Finding duplicates to reduce redundancy and elimitate duplicate translations.

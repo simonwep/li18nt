@@ -19,10 +19,11 @@ export const lint = (conf: Li18ntOptions, objects: JSONObject[]): Li18ntResult =
     }
 
     if (conf.duplicates) {
+        const options = typeof conf.duplicates !== 'boolean' ? conf.duplicates : undefined;
         res.duplicates = [];
 
         for (const obj of objects) {
-            res.duplicates.push(duplicates(obj));
+            res.duplicates.push(duplicates(obj, options));
         }
     }
 

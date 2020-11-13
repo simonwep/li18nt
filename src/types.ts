@@ -1,10 +1,10 @@
 import {Conflicts} from '@tools/conflicts';
-import {Duplicates} from '@tools/duplicates';
+import {Duplicates, DuplicatesConfig} from '@tools/duplicates';
 import {Command} from 'commander';
 
 export interface Li18ntOptions {
     prettify?: number | string;
-    duplicates?: boolean;
+    duplicates?: boolean | DuplicatesConfig;
     conflicts?: boolean
 }
 

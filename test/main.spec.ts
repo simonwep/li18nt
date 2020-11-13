@@ -49,6 +49,22 @@ describe('Main library', () => {
             {a: 20, b: null, c: {x: 20}},
             {a: 50, b: 'Hello', c: {x: 100, y: 20}},
             {a: 'Five', b: 'Super', c: null}
-        ]));
+        ])).toMatchSnapshot();
+    });
+
+    it('Should accept further duplicates-configuration', ()=>{
+        expect(lint({
+            prettify: '\t',
+            duplicates: {
+                ignore: [
+                    ['c', 'a'],
+                    ['b', 'a']
+                ]
+            },
+            conflicts: true
+        }, [
+            {a: 20, b: {a: 322}, c: {a: 50}},
+            {a: 23, b: 'Super', c: {x: {a: 100}}}
+        ])).toMatchSnapshot();
     });
 });
