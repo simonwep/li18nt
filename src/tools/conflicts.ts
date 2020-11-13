@@ -3,10 +3,12 @@ import {containsDeep} from '@utils/containsDeep';
 import {keysFrom} from '@utils/keysFrom';
 import {typeOfJsonValue} from '@utils/typeOfJsonValue';
 
-export type Difference = {
+export interface Conflict {
     missing: PropertyPath[];
     conflicts: PropertyPath[];
-};
+}
+
+export type Conflicts = Conflict[];
 
 /**
  * Pushes the item if not already present.
@@ -28,8 +30,8 @@ const pushUnique = (arr: PropertyPath[], el: PropertyPath): boolean => {
  * @param others
  * @param conf Optional, additional configuration
  */
-const compare = (target: JSONObject, others: JSONObject[]): Difference => {
-    const diff: Difference = {
+const compare = (target: JSONObject, others: JSONObject[]): Conflict => {
+    const diff: Conflict = {
         conflicts: [],
         missing: []
     };
@@ -115,10 +117,10 @@ const compare = (target: JSONObject, others: JSONObject[]): Difference => {
  * Finds the difference between given objects
  * @param objects
  */
-export const difference = (objects: JSONObject[]): Difference[] => {
+export const conflicts = (objects: JSONObject[]): Conflict[] => {
 
     // Create result objects
-    const differences: Difference[] = [];
+    const differences: Conflict[] = [];
     for (let i = 0; i < objects.length; i++) {
         const target = objects[i];
         const others = [...objects];

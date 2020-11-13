@@ -1,26 +1,40 @@
+import {Conflicts} from '@tools/conflicts';
+import {Duplicates} from '@tools/duplicates';
 import {Command} from 'commander';
 
-export type Li18ntOptions = {
-    debug?: boolean;
-    quiet?: boolean;
+export interface Li18ntOptions {
+    prettify?: number | string;
+    duplicates?: boolean;
+    diff?: boolean
+}
+
+export interface CLIOptions {
     prettify?: number | string;
     duplicates?: 'strict' | 'loose';
     diff?: 'strict' | 'loose';
-};
+    debug?: boolean;
+    quiet?: boolean;
+}
 
-export type SourceFile = {
+export interface SourceFile {
     content: JSONObject;
     filePath: string;
     name: string;
-};
+}
 
-export type CLIModuleArguments = {
+export interface CLIModuleArguments {
     files: SourceFile[];
-    cmd: Command & Li18ntOptions;
+    cmd: Command & CLIOptions;
 }
 
 export interface CLIModule {
     (args: CLIModuleArguments): boolean | void;
+}
+
+export interface Li18ntResult {
+    prettified?: string[];
+    duplicates?: Duplicates[];
+    conflicts?: Conflicts;
 }
 
 export type PropertyPath = (string | number)[];

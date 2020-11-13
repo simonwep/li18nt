@@ -1,21 +1,21 @@
-import {CLIModule, Li18ntOptions, SourceFile} from '@types';
+import {CLIModule, CLIOptions, SourceFile} from '@types';
 import {debugLn, errorLn, warnLn} from '@utils/log';
 import {differencesFlag} from './flags/differences.flag';
 import {duplicatesFlag} from './flags/duplicates.flag';
 import {Command} from 'commander';
-import {sort} from '@tools/sort';
+import {prettify} from '@tools/prettify';
 import fs from 'fs';
 import glob from 'glob';
 import path from 'path';
 
-const flags: Partial<Record<keyof Li18ntOptions, CLIModule>> = {
+const flags: Partial<Record<keyof CLIOptions, CLIModule>> = {
     'diff': differencesFlag,
     'duplicates': duplicatesFlag
 };
 
 // Entry point
 /* eslint-disable no-console */
-export const entry = (sources: string[], cmd: Command & Li18ntOptions): void => {
+export const entry = (sources: string[], cmd: Command & CLIOptions): void => {
     const cwd = process.cwd();
 
     // Resolve files
@@ -67,7 +67,7 @@ export const entry = (sources: string[], cmd: Command & Li18ntOptions): void => 
     // Prettify?
     if (cmd.prettify) {
         for (const {content, name, filePath} of files) {
-            const str = `${sort(content, cmd.prettify)}\n`;
+            const str = `${prettify(content, cmd.prettify)}\n`;
             fs.writeFileSync(filePath, str);
             cmd.debug && debugLn(`Prettified ${name} (${filePath})`);
         }

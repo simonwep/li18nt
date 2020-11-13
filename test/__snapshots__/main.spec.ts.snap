@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Main library Should properly lint the given objects 1`] = `
+Object {
+  "conflicts": Array [
+    Object {
+      "conflicts": Array [
+        Array [
+          "pages",
+          "dashboard",
+          "s",
+        ],
+      ],
+      "missing": Array [
+        Array [
+          "pages",
+          "dashboard",
+          "panels",
+        ],
+        Array [
+          "pages",
+          "main",
+        ],
+        Array [
+          "about",
+        ],
+      ],
+    },
+    Object {
+      "conflicts": Array [
+        Array [
+          "pages",
+          "dashboard",
+          "s",
+        ],
+      ],
+      "missing": Array [],
+    },
+  ],
+  "duplicates": Array [
+    Map {
+      "back" => Array [
+        Array [
+          "pages",
+          "back",
+        ],
+      ],
+      "dashboard" => Array [
+        Array [
+          "pages",
+          "dashboard",
+          "dashboard",
+        ],
+      ],
+    },
+    Map {
+      "back" => Array [
+        Array [
+          "pages",
+          "back",
+        ],
+      ],
+      "dashboard" => Array [
+        Array [
+          "pages",
+          "dashboard",
+          "dashboard",
+        ],
+        Array [
+          "pages",
+          "main",
+          "dashboard",
+        ],
+      ],
+    },
+  ],
+  "prettified": Array [
+    "{
+    \\"back\\": \\"Zurück\\",
+    \\"dashboard\\": \\"Dashboard\\",
+    \\"pages\\": {
+        \\"back\\": \\"Zurück\\",
+        \\"dashboard\\": {
+            \\"dashboard\\": \\"Dashboard\\",
+            \\"footer\\": \\"Fußbar\\",
+            \\"s\\": null
+        }
+    }
+}",
+    "{
+    \\"about\\": \\"About\\",
+    \\"back\\": \\"Back\\",
+    \\"dashboard\\": \\"Dashboard\\",
+    \\"pages\\": {
+        \\"back\\": \\"Back\\",
+        \\"dashboard\\": {
+            \\"dashboard\\": \\"Dashboard\\",
+            \\"footer\\": [],
+            \\"panels\\": \\"Panels\\",
+            \\"s\\": []
+        },
+        \\"main\\": {
+            \\"dashboard\\": \\"Dashboard\\"
+        }
+    }
+}",
+  ],
+}
+`;

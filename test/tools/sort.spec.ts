@@ -1,9 +1,9 @@
-import {sort} from '../../src/tools/sort';
+import {prettify} from '@tools/prettify';
 
 describe('[tool] sort', () => {
 
     it('Should sort a simple object', () => {
-        expect(sort({
+        expect(prettify({
             'z': 10,
             'y': 20,
             'a': 1
@@ -11,7 +11,7 @@ describe('[tool] sort', () => {
     });
 
     it('Should sort a nested object and indent using spaces', () => {
-        expect(sort({
+        expect(prettify({
             'z': 10,
             'y': 20,
             'a': {
@@ -26,7 +26,7 @@ describe('[tool] sort', () => {
     });
 
     it('Should sort a package.json file and indent using tab', () => {
-        expect(sort({
+        expect(prettify({
             'name': 'lint-i18n',
             'version': '1.0.0',
             'description': 'Locales linter, formatter, sorter and prettifier',

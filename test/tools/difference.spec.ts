@@ -1,9 +1,9 @@
-import {difference} from '../../src/tools/difference';
+import {conflicts} from '@tools/conflicts';
 
 describe('[tool] difference', () => {
 
     it('Should find the difference between three, two-dimensional object', () => {
-        expect(difference([
+        expect(conflicts([
             {a: 10, b: '20'},
             {c: 10, b: 20},
             {c: 10, z: 200}
@@ -11,7 +11,7 @@ describe('[tool] difference', () => {
     });
 
     it('Should work with nested objects', () => {
-        expect(difference([
+        expect(conflicts([
             {
                 a: 10,
                 b: {u: 'u'},
@@ -39,7 +39,7 @@ describe('[tool] difference', () => {
     });
 
     it('Should work with nested objects and arrays', () => {
-        expect(difference([
+        expect(conflicts([
             {
                 a: 10,
                 b: {u: 'u'},

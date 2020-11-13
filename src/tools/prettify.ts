@@ -17,7 +17,7 @@ const sortedKeys = (obj: JSONObject): string[] => {
  * @param obj
  * @param space
  */
-export const sort = (obj: JSONObject, space?: number | string): string => {
+export const prettify = (obj: JSONObject, space?: number | string): string => {
     const spacer = typeof space === 'number' ? ' '.repeat(space) : typeof space === 'string' ? space : '';
     let str = '{\n';
 

@@ -1,4 +1,4 @@
-import {difference} from '@tools/difference';
+import {conflicts} from '@tools/conflicts';
 import {CLIModule} from '@types';
 import {error, successLn, warn} from '@utils/log';
 import {prettyPropertyPath} from '@utils/prettyPropertyPath';
@@ -6,7 +6,7 @@ import chalk from 'chalk';
 
 /* eslint-disable no-console */
 export const differencesFlag: CLIModule = ({files, cmd}) => {
-    const diff = difference(files.map(v => v.content));
+    const diff = conflicts(files.map(v => v.content));
     const strict = (cmd.diff || 'strict') === 'strict';
     let count = 0;
 

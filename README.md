@@ -78,117 +78,27 @@ This library comes in commonjs and ES6 format, you can include it directly:
 ... or using modules:
 
 ```ts
-import {...} from 'https://cdn.jsdelivr.net/npm/li18nt/lib/li18nt.min.mjs'
+import {lint, version} from 'https://cdn.jsdelivr.net/npm/li18nt/lib/li18nt.min.mjs'
 ```
 
-#### `difference`
-Used to detect differences / conflicts between objects:
+You can use it the following, option- and result-types can be found [here](src/types.ts):
 
 ```ts
-import {difference} from 'li18nt';
+import {lint} from 'li18nt';
 
-const diff = difference([
-    {a: 10, b: {x: 20}},
-    {a: '10', b: {x: 20}},
-    {a: 30, b: {x: 20, y: 'Hello'}}
-]);
-
-console.log(JSON.stringify(diff, null, 2));
-```
-
-Output:
-```js
-[
-    {
-        'conflicts': [['a']], // Conflicts with 2nd object
-        'missing': [['b', 'y']] // 3rd object has this property
-    },
-    {
-        'conflicts': [['a']], // Conflicts with 1st object
-        'missing': [['b', 'y']] // 3rd object has this property
-    },
-    {
-        'conflicts': [['a']], // Conflicts with 2nd object
-        'missing': []
-    }
-];
-```
-
-#### `duplicates`
-Will find re-used keys, can be used to reduce redundancy and duplicate translations:
-
-```ts
-import {duplicates} from 'li18nt';
-
-const dupes = duplicates({
-    a: 10,
-    x: {
-        y: {
-            b: {
-                x: 20
-            }
-        }
-    },
-    b: {
-        x: 20,
-        a: 20
-    }
-});
-
-const obj = Object.fromEntries([...dupes.entries()]);
-console.log(JSON.stringify(obj, null, 2));
-```
-
-Output:
-```js
-{
-    'x': [
-        ['b', 'x'], // Already present root.x.y.b.x
-    ],
-    'a': [
-        ['b', 'a'] // Already present in root.a
-    ]
+const options = {
+    prettify: 4, // 4 spaces, use '\t' for tabs
+    duplicates: true, // We want to analyze our translations for duplicates
+    diff: true // Find differences
 };
+
+const objects = [
+    {a: 20, b: null, c: {x: 20}},
+    {a: 50, b: 'Hello', c: {x: 100, y: 20}},
+    {a: 'Five', b: 'Super', c: null}
+];
+
+const result = lint(options, objects);
+console.log(result);
 ```
 
-
-#### `sort`
-Used to stringify an object and sorting its properties alphabetically:
-
-> The second argument is the same as the third one for JSON.stringify!
-
-```ts
-import {sort} from 'li18nt';
-
-const sorted = sort({
-    'hello': 'world',
-    'baz': 'baz',
-    'abc': 'abc',
-    'bar': 'bar',
-    'list': ['hello', 'world', 'abc'],
-    'sub': {
-        'foo': 'foo',
-        'bam': 'bam'
-    }
-}, 4);
-
-console.log(sorted);
-```
-
-```json
-{
-    "abc": "abc",
-    "bar": "bar",
-    "baz": "baz",
-    "hello": "world",
-    "list": [
-        "hello",
-        "world",
-        "abc"
-    ],
-    "sub": {
-        "bam": "bam",
-        "foo": "foo"
-    }
-}
-```
