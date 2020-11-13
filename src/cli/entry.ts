@@ -1,4 +1,4 @@
-import {CLIModule, CLIOptions, SourceFile} from '@types';
+import {CLIModule, Li18ntOptions, SourceFile} from '@types';
 import {debugLn, errorLn, warnLn} from '@utils/log';
 import {differencesFlag} from './flags/differences.flag';
 import {duplicatesFlag} from './flags/duplicates.flag';
@@ -8,14 +8,14 @@ import fs from 'fs';
 import glob from 'glob';
 import path from 'path';
 
-const flags: Partial<Record<keyof CLIOptions, CLIModule>> = {
+const flags: Partial<Record<keyof Li18ntOptions, CLIModule>> = {
     'diff': differencesFlag,
     'duplicates': duplicatesFlag
 };
 
 // Entry point
 /* eslint-disable no-console */
-export const entry = (sources: string[], cmd: Command & CLIOptions): void => {
+export const entry = (sources: string[], cmd: Command & Li18ntOptions): void => {
     const cwd = process.cwd();
 
     // Resolve files

@@ -1,4 +1,5 @@
 import {JSONArray, JSONObject, JSONValue, PropertyPath} from '@types';
+import {containsDeep} from '@utils/containsDeep';
 import {keysFrom} from '@utils/keysFrom';
 import {typeOfJsonValue} from '@utils/typeOfJsonValue';
 
@@ -13,27 +14,19 @@ export type Difference = {
  * @param el
  */
 const pushUnique = (arr: PropertyPath[], el: PropertyPath): boolean => {
-    outer: for (const item of arr) {
-        if (item.length === el.length) {
-
-            for (let i = 0; i < arr.length; i++) {
-                if (item[i] !== el[i]) {
-                    continue outer;
-                }
-            }
-
-            return false;
-        }
+    if (!containsDeep(arr, el)) {
+        arr.push(el);
+        return true;
     }
 
-    arr.push(el);
-    return true;
+    return false;
 };
 
 /**
  * Compares an object to others
  * @param target
  * @param others
+ * @param conf Optional, additional configuration
  */
 const compare = (target: JSONObject, others: JSONObject[]): Difference => {
     const diff: Difference = {

@@ -1,5 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`[tool] duplicates Should be able to ignore certain pahts 1`] = `
+Map {
+  "welcome" => Array [
+    Array [
+      "home",
+      "welcome",
+    ],
+  ],
+}
+`;
+
 exports[`[tool] duplicates Should find a duplicate property and its paths 1`] = `
 Map {
   "welcome" => Array [

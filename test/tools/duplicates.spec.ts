@@ -44,4 +44,27 @@ describe('[tool] duplicates', () => {
             }
         })).toMatchSnapshot();
     });
+
+    it('Should be able to ignore certain pahts', () => {
+        expect(duplicates({
+            'welcome': 'Willkommen',
+            'back': 'Zurück',
+            'home': {
+                'welcome': 'Willkommen'
+            },
+            'about': {
+                'header': {
+                    'welcome': 'Willkommen'
+                },
+                'footer': {
+                    'welcome': 'Willkommen'
+                }
+            }
+        }, {
+            ignore: [
+                ['home', 'welcome'],
+                ['header', 'welcome']
+            ]
+        })).toMatchSnapshot();
+    });
 });

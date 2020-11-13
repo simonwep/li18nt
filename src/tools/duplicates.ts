@@ -1,11 +1,19 @@
 import {JSONArray, JSONObject, PropertyPath} from '@types';
+import {containsDeep} from '@utils/containsDeep';
 import {typeOfJsonValue} from '@utils/typeOfJsonValue';
+
+export type DuplicatesConfig = {
+    ignore?: PropertyPath[]
+};
+
+export type Duplicates = Map<string, PropertyPath[]>;
 
 /**
  * Finds duplicate keys in the given object.
  * @param object
+ * @param conf Optional configuration
  */
-export const duplicates = (object: JSONObject): Map<string, PropertyPath[]> => {
+export const duplicates = (object: JSONObject, conf?: DuplicatesConfig): Duplicates => {
     const duplicates: Map<string, PropertyPath[]> = new Map<string, PropertyPath[]>();
     const keys: string[] = [];
 
@@ -28,7 +36,14 @@ export const duplicates = (object: JSONObject): Map<string, PropertyPath[]> => {
                         walk(value as JSONObject, [...parentPath, key]);
                     } else if (keys.includes(key)) {
                         const list = duplicates.get(key) || [];
-                        duplicates.set(key, [...list, [...parentPath, key]]);
+
+                        // Check against ignored list
+                        if (
+                            !conf?.ignore ||
+                            conf.ignore.every(v => !containsDeep(list, v))
+                        ) {
+                            duplicates.set(key, [...list, [...parentPath, key]]);
+                        }
                     } else {
                         keys.push(key);
                     }

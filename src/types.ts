@@ -1,6 +1,6 @@
 import {Command} from 'commander';
 
-export type CLIOptions = {
+export type Li18ntOptions = {
     debug?: boolean;
     quiet?: boolean;
     prettify?: number | string;
@@ -16,7 +16,7 @@ export type SourceFile = {
 
 export type CLIModuleArguments = {
     files: SourceFile[];
-    cmd: Command & CLIOptions;
+    cmd: Command & Li18ntOptions;
 }
 
 export interface CLIModule {
