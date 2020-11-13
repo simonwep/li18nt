@@ -5,13 +5,13 @@ import {Command} from 'commander';
 export interface Li18ntOptions {
     prettify?: number | string;
     duplicates?: boolean;
-    diff?: boolean
+    conflicts?: boolean
 }
 
 export interface CLIOptions {
     prettify?: number | string;
     duplicates?: 'strict' | 'loose';
-    diff?: 'strict' | 'loose';
+    conflicts?: 'strict' | 'loose';
     debug?: boolean;
     quiet?: boolean;
 }

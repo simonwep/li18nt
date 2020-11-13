@@ -5,9 +5,9 @@ import {prettyPropertyPath} from '@utils/prettyPropertyPath';
 import chalk from 'chalk';
 
 /* eslint-disable no-console */
-export const differencesFlag: CLIModule = ({files, cmd}) => {
+export const conflictsFlag: CLIModule = ({files, cmd}) => {
     const diff = conflicts(files.map(v => v.content));
-    const strict = (cmd.diff || 'strict') === 'strict';
+    const strict = (cmd.conflicts || 'strict') === 'strict';
     let count = 0;
 
     for (let i = 0; i < diff.length; i++) {

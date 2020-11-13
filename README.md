@@ -56,18 +56,31 @@ Examples:
 # Prettify your files (this will sort all your properties alphabetically)
 $ li18nt locales/*.json --pretty
 
-# Prettify your files, check for differences and duplicates
-$ li18nt locales/*.json --pretty --diff --duplicates
+# Prettify your files, check for conflicts / missing properties and duplicates
+$ li18nt locales/*.json --pretty --conflicts --duplicates
 
 # List all commands
 $ li18nt --help
+Usage: lint-i18n [files...] [options]
+
+Lints your locales files, li18nt is an alias.
+
+Options:
+  --version                    Output the current version
+  -q, --quiet                  Print only errors and warnings
+  -d, --debug                  Debug information
+  -p, --prettify [number|tab]  Prettify files (default: 4 spaces)
+  --duplicates [strict|loose]  Find duplicates (default: loose)
+  --conflicts [strict|loose]   Find type conflicts and missing properties (default: strict)
+  -h, --help                   Show this help text
 ```
+
 
 #### Modes
 
-Both `--diff` and `--duplicates` both come with a `loose` and `strict` mode. `loose` means that, in case there is something wrong with your files, an error won't be thrown. `strict` tells the linter that an error **should** be thrown.
+Both `--conflicts` and `--duplicates` both come with a `loose` and `strict` mode. `loose` means that, in case there is something wrong with your files, an error won't be thrown. `strict` tells the linter that an error **should** be thrown.
 
-For `--diff` it's normally `strict` as you will probably want to keep your files consistent and for `--duplicates` it's `loose` because translations may differ.
+For `--conflicts` it's normally `strict` as you will probably want to keep your files consistent and for `--duplicates` it's `loose` because translations may differ.
 
 
 ### API Usage

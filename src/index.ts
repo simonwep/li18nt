@@ -14,7 +14,7 @@ export const version = typeof VERSION !== 'undefined' ? VERSION : 'unknown';
 export const lint = (conf: Li18ntOptions, objects: JSONObject[]): Li18ntResult => {
     const res: Li18ntResult = {};
 
-    if (conf.diff) {
+    if (conf.conflicts) {
         res.conflicts = conflicts(objects);
     }
 

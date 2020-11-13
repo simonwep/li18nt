@@ -1,6 +1,6 @@
 import {CLIModule, CLIOptions, SourceFile} from '@types';
 import {debugLn, errorLn, warnLn} from '@utils/log';
-import {differencesFlag} from './flags/differences.flag';
+import {conflictsFlag} from './flags/conflicts.flag';
 import {duplicatesFlag} from './flags/duplicates.flag';
 import {Command} from 'commander';
 import {prettify} from '@tools/prettify';
@@ -9,7 +9,7 @@ import glob from 'glob';
 import path from 'path';
 
 const flags: Partial<Record<keyof CLIOptions, CLIModule>> = {
-    'diff': differencesFlag,
+    'conflicts': conflictsFlag,
     'duplicates': duplicatesFlag
 };
 

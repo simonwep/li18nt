@@ -28,10 +28,9 @@ const pushUnique = (arr: PropertyPath[], el: PropertyPath): boolean => {
  * Compares an object to others
  * @param target
  * @param others
- * @param conf Optional, additional configuration
  */
 const compare = (target: JSONObject, others: JSONObject[]): Conflict => {
-    const diff: Conflict = {
+    const con: Conflict = {
         conflicts: [],
         missing: []
     };
@@ -47,7 +46,7 @@ const compare = (target: JSONObject, others: JSONObject[]): Conflict => {
 
         // Property missing?
         if (targetType === 'undefined') {
-            pushUnique(diff.missing, [...parent, key]);
+            pushUnique(con.missing, [...parent, key]);
             return;
         }
 
@@ -63,7 +62,7 @@ const compare = (target: JSONObject, others: JSONObject[]): Conflict => {
 
             // Property-type mismatch?
             if (objType !== targetType) {
-                pushUnique(diff.conflicts, [...parent, key]);
+                pushUnique(con.conflicts, [...parent, key]);
                 continue;
             }
 
@@ -78,7 +77,7 @@ const compare = (target: JSONObject, others: JSONObject[]): Conflict => {
 
                 // Length mismatch
                 if ((targetValue as JSONArray).length !== (targetValue as JSONArray).length) {
-                    pushUnique(diff.conflicts, [...parent, key]);
+                    pushUnique(con.conflicts, [...parent, key]);
                     continue;
                 }
 
@@ -110,7 +109,7 @@ const compare = (target: JSONObject, others: JSONObject[]): Conflict => {
     }
 
     resolve(target, others);
-    return diff;
+    return con;
 };
 
 /**
@@ -120,13 +119,13 @@ const compare = (target: JSONObject, others: JSONObject[]): Conflict => {
 export const conflicts = (objects: JSONObject[]): Conflict[] => {
 
     // Create result objects
-    const differences: Conflict[] = [];
+    const conflicts: Conflict[] = [];
     for (let i = 0; i < objects.length; i++) {
         const target = objects[i];
         const others = [...objects];
         others.splice(i, 1);
-        differences.push(compare(target, others));
+        conflicts.push(compare(target, others));
     }
 
-    return differences;
+    return conflicts;
 };

@@ -6,7 +6,7 @@ describe('Main library', () => {
         expect(lint({
             prettify: 4,
             duplicates: true,
-            diff: true
+            conflicts: true
         }, [
             {
                 'back': 'Zurück',
@@ -44,7 +44,7 @@ describe('Main library', () => {
         expect(lint({
             prettify: '\t',
             duplicates: true,
-            diff: true
+            conflicts: true
         }, [
             {a: 20, b: null, c: {x: 20}},
             {a: 50, b: 'Hello', c: {x: 100, y: 20}},

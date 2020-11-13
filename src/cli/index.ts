@@ -36,13 +36,13 @@ program
     .option('-d, --debug', 'Debug information')
     .option('-p, --prettify [number|tab]', 'Prettify files (default: 4 spaces)', parseIndentation)
     .option('--duplicates [strict|loose]', 'Find duplicates (default: loose)', parseMode('--duplicates'))
-    .option('--diff [strict|loose]', 'Find differences and conflicts (default: strict)', parseMode('--diff'))
+    .option('--conflicts [strict|loose]', 'Find type conflicts and missing properties (default: strict)', parseMode('--conflicts'))
     .action((args, cmd) => {
 
         // TODO: See https://github.com/tj/commander.js/issues/1394
         cmd.prettify = cmd.prettify === true ? 4 : cmd.prettify;
         cmd.duplicates = cmd.duplicates === true ? 'loose' : cmd.duplicates;
-        cmd.diff = cmd.diff === true ? 'strict' : cmd.diff;
+        cmd.conflicts = cmd.conflicts === true ? 'strict' : cmd.conflicts;
 
         entry(args, cmd);
     })
