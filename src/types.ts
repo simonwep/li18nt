@@ -5,15 +5,17 @@ import {Command} from 'commander';
 export interface Li18ntOptions {
     prettify?: number | string;
     duplicates?: boolean | DuplicatesConfig;
-    conflicts?: boolean
+    conflicts?: boolean;
 }
 
+export type Mode = 'strict' | 'loose';
 export interface CLIOptions {
     prettify?: number | string;
-    duplicates?: 'strict' | 'loose';
-    conflicts?: 'strict' | 'loose';
+    duplicates?: Mode | (DuplicatesConfig & {mode: Mode});
+    conflicts?: Mode;
     debug?: boolean;
     quiet?: boolean;
+    config?: string;
 }
 
 export interface SourceFile {

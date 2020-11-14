@@ -74,7 +74,29 @@ Options:
   -p, --prettify [number|tab]  Prettify files (default: 4 spaces)
   --duplicates [strict|loose]  Find duplicates (default: loose)
   --conflicts [strict|loose]   Find type conflicts and missing properties (default: strict)
+  --config                     Use configuration file
   -h, --help                   Show this help text
+```
+
+The following file-names can be used as configuration: `.li18ntrc`, `.li18nt.json`,`.li18ntrc.json` or `li18nt.config.js`.
+A configuration file will override specified properties. Example:
+
+```json5
+{
+    // true will use the default value (strict), you may pass "loose" or "strict" explicitly
+    "conflicts": true,
+
+    // Either true or false
+    "prettify": true,
+
+    // Here you can either pass true ("loose"), false, "strict", "loose" or an extended configuration object.
+    "duplicates": {
+        "mode": "loose", // Mode is now a sub-property
+        "ignore": [
+            ["pages", "dashboard", "dashboard"]
+        ]
+    }
+}
 ```
 
 

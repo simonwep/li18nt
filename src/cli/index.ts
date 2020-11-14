@@ -1,6 +1,7 @@
 import {error} from '@utils/log';
 import program from 'commander';
 import {entry} from './entry';
+import {resolveConfiguration} from './resolveConfiguration';
 
 const version = typeof VERSION === 'undefined' ? 'unknown' : VERSION;
 
@@ -37,12 +38,21 @@ program
     .option('-p, --prettify [number|tab]', 'Prettify files (default: 4 spaces)', parseIndentation)
     .option('--duplicates [strict|loose]', 'Find duplicates (default: loose)', parseMode('--duplicates'))
     .option('--conflicts [strict|loose]', 'Find type conflicts and missing properties (default: strict)', parseMode('--conflicts'))
+    .option('--config [path]', 'Use configuration file')
     .action((args, cmd) => {
 
         // TODO: See https://github.com/tj/commander.js/issues/1394
         cmd.prettify = cmd.prettify === true ? 4 : cmd.prettify;
         cmd.duplicates = cmd.duplicates === true ? 'loose' : cmd.duplicates;
         cmd.conflicts = cmd.conflicts === true ? 'strict' : cmd.conflicts;
+
+        // Try to resolve and load config file
+        const options = resolveConfiguration(cmd);
+        if (options) {
+            cmd.prettify = options.prettify || cmd.prettify;
+            cmd.duplicates = options.duplicates || cmd.duplicates;
+            cmd.conflicts = options.conflicts || cmd.conflicts;
+        }
 
         entry(args, cmd);
     })

@@ -1,16 +1,23 @@
-import {CLIModule} from '@types';
+import {duplicates} from '@tools/duplicates';
+import {CLIModule, CLIOptions} from '@types';
 import {infoLn, successLn} from '@utils/log';
 import {prettyPropertyPath} from '@utils/prettyPropertyPath';
 import chalk from 'chalk';
-import {duplicates} from '../../tools/duplicates';
 
 /* eslint-disable no-console */
 export const duplicatesFlag: CLIModule = ({files, cmd}) => {
-    const strict = (cmd.duplicates || 'loose') === 'strict';
-    let count = 0;
+    let config: Partial<CLIOptions['duplicates']> = {mode: 'loose'};
+    const options = cmd.duplicates;
 
+    if (typeof options === 'string') {
+        config = {mode: options};
+    } else if (typeof options === 'object' && options !== null) {
+        config = options;
+    }
+
+    let count = 0;
     for (const {name, content} of files) {
-        const dupes = duplicates(content);
+        const dupes = duplicates(content, config);
 
         if (dupes.size) {
             infoLn(`${chalk.blueBright(`${name}:`)} Found ${dupes.size === 1 ? 'one duplicate' : `${dupes.size} duplicates`}:`);
@@ -34,5 +41,5 @@ export const duplicatesFlag: CLIModule = ({files, cmd}) => {
     }
 
     !count && !cmd.quiet && successLn('No duplicates found!');
-    return !strict || !count;
+    return config.mode === 'loose' || !count;
 };

@@ -26,5 +26,5 @@ export const info = (str: string): void => {
 };
 
 export const debug = (str: string): void => {
-    stdout.write(`'[-]' ${str}`);
+    stdout.write(`[-] ${str}`);
 };

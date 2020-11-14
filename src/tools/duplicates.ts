@@ -2,9 +2,9 @@ import {JSONArray, JSONObject, PropertyPath} from '@types';
 import {containsDeep} from '@utils/containsDeep';
 import {typeOfJsonValue} from '@utils/typeOfJsonValue';
 
-export type DuplicatesConfig = {
+export interface DuplicatesConfig {
     ignore?: PropertyPath[]
-};
+}
 
 export type Duplicates = Map<string, PropertyPath[]>;
 
