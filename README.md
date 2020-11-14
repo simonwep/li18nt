@@ -76,7 +76,7 @@ Options:
   -p, --prettify [number|tab]  Prettify files (default: 4 spaces)
   --duplicates [strict|loose]  Find duplicates (default: loose)
   --conflicts [strict|loose]   Find type conflicts and missing properties (default: strict)
-  --config                     Use configuration file
+  --config [path]              Use configuration file
   -h, --help                   Show this help text
 ```
 
@@ -88,8 +88,8 @@ A configuration file will override specified properties. Example:
     // true will use the default value (strict), you may pass "loose" or "strict" explicitly
     "conflicts": true,
 
-    // Either true or false
-    "prettify": true,
+    // Use a number for spaces, '\t' for tabs, false or leave it out to disable
+    "prettify": 4,
 
     // Here you can either pass true ("loose"), false, "strict", "loose" or an extended configuration object.
     "duplicates": {
@@ -120,10 +120,11 @@ This library comes in commonjs and ES6 format, you can include it directly:
 ... or using es6 modules:
 
 ```ts
-import {lint, version} from 'https://cdn.jsdelivr.net/npm/li18nt/lib/li18nt.min.mjs'
+import {...} from 'https://cdn.jsdelivr.net/npm/li18nt/lib/li18nt.min.mjs'
 ```
 
-You can use it the following, option- and result-types can be found [here](src/types.ts):
+You can use the exported `lint` function to lint a set of objects.
+Option- and result-types can be found [here](src/types.ts):
 
 ```ts
 import {lint} from 'li18nt';
@@ -150,7 +151,7 @@ console.log(result);
 Sometimes you may want to exclude certain properties from being linted, for that you can either specify a
 property path as array (e.g. `['foo', 'bar', 4]`), as a string (`foo.bar[4]`), or you can use the `propertyPath` utility function to convert a string to an array:
 
-```
+```ts
 import {lint, propertyPath} from 'li18nt';
 
 const options = {
