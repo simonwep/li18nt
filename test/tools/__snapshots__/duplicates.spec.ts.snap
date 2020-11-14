@@ -1,11 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[tool] duplicates Should be able to ignore certain pahts 1`] = `
+exports[`[tool] duplicates Should be able to ignore certain paths 1`] = `
 Map {
   "welcome" => Array [
     Array [
       "about",
       "footer",
+      "welcome",
+    ],
+  ],
+}
+`;
+
+exports[`[tool] duplicates Should be able to ignore sub-trees 1`] = `
+Map {
+  "welcome" => Array [
+    Array [
+      "home",
+      "welcome",
+    ],
+    Array [
+      "about",
+      "header",
       "welcome",
     ],
   ],

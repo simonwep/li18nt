@@ -45,7 +45,7 @@ describe('[tool] duplicates', () => {
         })).toMatchSnapshot();
     });
 
-    it('Should be able to ignore certain pahts', () => {
+    it('Should be able to ignore certain paths', () => {
         expect(duplicates({
             'welcome': 'Willkommen',
             'back': 'Zurück',
@@ -64,6 +64,31 @@ describe('[tool] duplicates', () => {
             ignore: [
                 ['home', 'welcome'],
                 ['about', 'header', 'welcome']
+            ]
+        })).toMatchSnapshot();
+    });
+
+    it('Should be able to ignore sub-trees', () => {
+        expect(duplicates({
+            'welcome': 'Willkommen',
+            'back': 'Zurück',
+            'home': {
+                'welcome': 'Willkommen'
+            },
+            'about': {
+                'header': {
+                    'welcome': 'Willkommen'
+                },
+                'footer': {
+                    'welcome': 'Willkommen',
+                    'side': {
+                        'welcome': 'Willkommen'
+                    }
+                }
+            }
+        }, {
+            ignore: [
+                'about.footer'
             ]
         })).toMatchSnapshot();
     });

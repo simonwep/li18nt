@@ -97,6 +97,7 @@ A configuration file will override specified properties. Example:
         "ignore": [
 
             // You can also use the array-sytax e.g. ["pages", "dashboard", "dashboard"]
+            // If the specified target is an object it'll be skipped, e.g. you can ignore entire sub-trees
             "pages.dashboard.dashboard"
         ]
     }

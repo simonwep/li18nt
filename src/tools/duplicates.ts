@@ -1,5 +1,5 @@
 import {JSONArray, JSONObject, PropertyPath} from '@types';
-import {containsDeep} from '@utils/containsDeep';
+import {startsWithDeep} from '@utils/containsDeep';
 import {propertyPath} from '@utils/propertyPath';
 import {typeOfJsonValue} from '@utils/typeOfJsonValue';
 
@@ -34,17 +34,21 @@ export const duplicates = (object: JSONObject, conf?: DuplicatesConfig): Duplica
         } else {
             for (const key in entry) {
                 if (Object.prototype.hasOwnProperty.call(entry, key)) {
+                    const newKey = [...parentPath, key];
                     const value = entry[key];
                     const type = typeOfJsonValue(value);
 
                     if (type === 'object' || type === 'array') {
-                        walk(value as JSONObject, [...parentPath, key]);
+
+                        // Make it possible to ignore entire sub-trees
+                        if (!startsWithDeep(ignored, newKey)) {
+                            walk(value as JSONObject, newKey);
+                        }
                     } else if (keys.includes(key)) {
                         const list = duplicates.get(key) || [];
-                        const newKey = [...parentPath, key];
 
                         // Check against ignored list
-                        if (!conf?.ignore || !containsDeep(ignored, newKey)) {
+                        if (!startsWithDeep(ignored, newKey)) {
                             duplicates.set(key, [...list, newKey]);
                         }
                     } else {
