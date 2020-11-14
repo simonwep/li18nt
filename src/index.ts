@@ -1,7 +1,10 @@
+import {JSONObject, Li18ntOptions, Li18ntResult} from '@types';
 import {conflicts} from '@tools/conflicts';
 import {duplicates} from '@tools/duplicates';
 import {prettify} from '@tools/prettify';
-import {JSONObject, Li18ntOptions, Li18ntResult} from '@types';
+
+// Export property path utility
+export * from './utils/propertyPath';
 
 // Current version
 export const version = typeof VERSION !== 'undefined' ? VERSION : 'unknown';

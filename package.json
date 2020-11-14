@@ -2,9 +2,9 @@
     "name": "li18nt",
     "version": "1.1.1",
     "description": "Locales linter, formatter, sorter and prettifier",
-    "main": "./lib/li18nt.min.js",
-    "module": "./lib/li18nt.min.mjs",
-    "types": "./lib/li18nt.min.d.ts",
+    "main": "./lib/index.min.js",
+    "module": "./lib/index.min.mjs",
+    "types": "./lib/index.min.d.ts",
     "author": "Simon Reinisch <trash@reinisch.io>",
     "license": "MIT",
     "bin": {
