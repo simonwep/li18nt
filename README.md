@@ -35,6 +35,8 @@ This linter will do three major things:
 3. Cleanup: Sorting all properties alphabetically which will make working with your file easier and maintain consistency across all your files.
 
 It comes with a CLI and an API.
+
+
 ### Gettings started
 Install via npm:
 
@@ -93,7 +95,9 @@ A configuration file will override specified properties. Example:
     "duplicates": {
         "mode": "loose", // Mode is now a sub-property
         "ignore": [
-            ["pages", "dashboard", "dashboard"]
+
+            // You can also use the array-sytax e.g. ["pages", "dashboard", "dashboard"]
+            "pages.dashboard.dashboard"
         ]
     }
 }
@@ -143,7 +147,7 @@ console.log(result);
 #### Utilities
 
 Sometimes you may want to exclude certain properties from being linted, for that you can either specify a
-property path (e.g. `foo.bar[3]`), or you can use the `propertyPath` utility function:
+property path as array (e.g. `['foo', 'bar', 4]`), as a string (`foo.bar[4]`), or you can use the `propertyPath` utility function to convert a string to an array:
 
 ```
 import {lint, propertyPath} from 'li18nt';
@@ -151,6 +155,7 @@ import {lint, propertyPath} from 'li18nt';
 const options = {
     duplicates: {
         ignore: [
+            // Info: This is normally not requried as strings in ignore will automatically be converted to an array!
 
             /**
              * Returns ['b', 'a'], but you can use any valid js-property-path e.g.

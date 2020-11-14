@@ -1,9 +1,10 @@
 import {JSONArray, JSONObject, PropertyPath} from '@types';
 import {containsDeep} from '@utils/containsDeep';
+import {propertyPath} from '@utils/propertyPath';
 import {typeOfJsonValue} from '@utils/typeOfJsonValue';
 
 export interface DuplicatesConfig {
-    ignore?: PropertyPath[]
+    ignore?: (PropertyPath | string)[];
 }
 
 export type Duplicates = Map<string, PropertyPath[]>;
@@ -16,6 +17,10 @@ export type Duplicates = Map<string, PropertyPath[]>;
 export const duplicates = (object: JSONObject, conf?: DuplicatesConfig): Duplicates => {
     const duplicates: Map<string, PropertyPath[]> = new Map<string, PropertyPath[]>();
     const keys: string[] = [];
+
+    const ignored = conf?.ignore?.map(v => {
+        return Array.isArray(v) ? v : propertyPath(v);
+    }) || [];
 
     const walk = (entry: JSONObject | JSONArray, parentPath: PropertyPath): void => {
         if (Array.isArray(entry)) {
@@ -39,7 +44,7 @@ export const duplicates = (object: JSONObject, conf?: DuplicatesConfig): Duplica
                         const newKey = [...parentPath, key];
 
                         // Check against ignored list
-                        if (!conf?.ignore || !containsDeep(conf.ignore, newKey)) {
+                        if (!conf?.ignore || !containsDeep(ignored, newKey)) {
                             duplicates.set(key, [...list, newKey]);
                         }
                     } else {
