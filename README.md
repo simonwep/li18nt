@@ -90,7 +90,7 @@ This library comes in commonjs and ES6 format, you can include it directly:
 ```html
 <script src="https://cdn.jsdelivr.net/npm/li18nt/lib/li18nt.min.js"></script>
 ```
-... or using modules:
+... or using es6 modules:
 
 ```ts
 import {lint, version} from 'https://cdn.jsdelivr.net/npm/li18nt/lib/li18nt.min.mjs'
@@ -117,3 +117,35 @@ const result = lint(options, objects);
 console.log(result);
 ```
 
+
+#### Utilities
+
+Sometimes you may want to exclude certain properties from being linted, for that you can either specify a
+property path (e.g. `foo.bar[3]`), or you can use the `propertyPath` utility function:
+
+```
+import {lint, propertyPath} from 'li18nt';
+
+const options = {
+    duplicates: {
+        ignore: [
+
+            /**
+             * Returns ['b', 'a'], but you can use any valid js-property-path e.g.
+             * foo[3].bar.baz['Hello "world"'].xy
+             * would give us ['foo', 3, 'bar', 'baz', 'Hello "world"'].xy
+             */
+            propertyPath('b.a')
+        ]
+    }
+};
+
+const objects = [
+    {a: 20, b: {a: 20}, c: {a: 20}}
+];
+
+const result = lint(options, objects);
+
+// Will log Map {'a' => [['c', 'a']]}
+console.log(result.duplicates[0]);
+```
