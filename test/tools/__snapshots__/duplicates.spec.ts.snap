@@ -4,7 +4,8 @@ exports[`[tool] duplicates Should be able to ignore certain pahts 1`] = `
 Map {
   "welcome" => Array [
     Array [
-      "home",
+      "about",
+      "footer",
       "welcome",
     ],
   ],

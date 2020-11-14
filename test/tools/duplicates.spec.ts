@@ -1,4 +1,4 @@
-import {duplicates} from '../../src/tools/duplicates';
+import {duplicates} from '@tools/duplicates';
 
 describe('[tool] duplicates', () => {
 
@@ -63,7 +63,7 @@ describe('[tool] duplicates', () => {
         }, {
             ignore: [
                 ['home', 'welcome'],
-                ['header', 'welcome']
+                ['about', 'header', 'welcome']
             ]
         })).toMatchSnapshot();
     });

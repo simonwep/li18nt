@@ -36,13 +36,11 @@ export const duplicates = (object: JSONObject, conf?: DuplicatesConfig): Duplica
                         walk(value as JSONObject, [...parentPath, key]);
                     } else if (keys.includes(key)) {
                         const list = duplicates.get(key) || [];
+                        const newKey = [...parentPath, key];
 
                         // Check against ignored list
-                        if (
-                            !conf?.ignore ||
-                            conf.ignore.every(v => !containsDeep(list, v))
-                        ) {
-                            duplicates.set(key, [...list, [...parentPath, key]]);
+                        if (!conf?.ignore || !containsDeep(conf.ignore, newKey)) {
+                            duplicates.set(key, [...list, newKey]);
                         }
                     } else {
                         keys.push(key);

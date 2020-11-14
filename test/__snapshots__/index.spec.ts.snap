@@ -31,14 +31,7 @@ Object {
     },
   ],
   "duplicates": Array [
-    Map {
-      "a" => Array [
-        Array [
-          "b",
-          "a",
-        ],
-      ],
-    },
+    Map {},
     Map {
       "a" => Array [
         Array [
