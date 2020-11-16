@@ -22,18 +22,15 @@ export const duplicatesFlag: CLIModule = ({files, cmd}) => {
         if (dupes.size) {
             infoLn(`${chalk.blueBright(`${name}:`)} Found ${dupes.size === 1 ? 'one duplicate' : `${dupes.size} duplicates`}:`);
 
-            for (const [key, paths] of dupes.entries()) {
-                process.stdout.write(`    ${chalk.cyanBright(key)} (${paths.length}x): `);
+            for (const [initial, ...duplicates] of dupes.values()) {
+                process.stdout.write(`    ${prettyPropertyPath(initial, chalk.cyanBright)} (${duplicates.length}x): `);
 
-                if (paths.length > 1) {
-                    process.stdout.write('\n');
+                process.stdout.write('\n');
 
-                    for (const path of paths) {
-                        console.log(`        ${prettyPropertyPath(path, chalk.cyanBright)}`);
-                    }
-                } else if (paths.length) {
-                    console.log(prettyPropertyPath(paths[0], chalk.cyanBright));
+                for (const path of duplicates) {
+                    console.log(`        ${prettyPropertyPath(path, chalk.yellowBright)}`);
                 }
+
             }
 
             count++;

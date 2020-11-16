@@ -4,6 +4,9 @@ exports[`[tool] duplicates Should be able to ignore certain paths 1`] = `
 Map {
   "welcome" => Array [
     Array [
+      "welcome",
+    ],
+    Array [
       "about",
       "footer",
       "welcome",
@@ -15,6 +18,9 @@ Map {
 exports[`[tool] duplicates Should be able to ignore sub-trees 1`] = `
 Map {
   "welcome" => Array [
+    Array [
+      "welcome",
+    ],
     Array [
       "home",
       "welcome",
@@ -32,6 +38,9 @@ exports[`[tool] duplicates Should find a duplicate property and its paths 1`] = 
 Map {
   "welcome" => Array [
     Array [
+      "welcome",
+    ],
+    Array [
       "home",
       "welcome",
     ],
@@ -42,6 +51,9 @@ Map {
 exports[`[tool] duplicates Should find multiple, nested duplicate 1`] = `
 Map {
   "welcome" => Array [
+    Array [
+      "welcome",
+    ],
     Array [
       "home",
       "welcome",
@@ -58,6 +70,9 @@ Map {
 exports[`[tool] duplicates Should work with arrays too 1`] = `
 Map {
   "welcome" => Array [
+    Array [
+      "welcome",
+    ],
     Array [
       "home",
       "welcome",
@@ -87,6 +102,9 @@ Map {
     ],
   ],
   "copyright" => Array [
+    Array [
+      "copyright",
+    ],
     Array [
       "about",
       "footer",

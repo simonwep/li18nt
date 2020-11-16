@@ -35,6 +35,9 @@ Object {
     Map {
       "a" => Array [
         Array [
+          "a",
+        ],
+        Array [
           "c",
           "x",
           "a",
@@ -106,11 +109,17 @@ Object {
     Map {
       "back" => Array [
         Array [
+          "back",
+        ],
+        Array [
           "pages",
           "back",
         ],
       ],
       "dashboard" => Array [
+        Array [
+          "dashboard",
+        ],
         Array [
           "pages",
           "dashboard",
@@ -121,11 +130,17 @@ Object {
     Map {
       "back" => Array [
         Array [
+          "back",
+        ],
+        Array [
           "pages",
           "back",
         ],
       ],
       "dashboard" => Array [
+        Array [
+          "dashboard",
+        ],
         Array [
           "pages",
           "dashboard",

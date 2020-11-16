@@ -175,6 +175,7 @@ const objects = [
 
 const result = lint(options, objects);
 
-// Will log Map {'a' => [['c', 'a']]}
+// Will log Map {'a' => [['a'], [ 'c', 'a']]}
+// The first element in the array will always be the first appereance of that property
 console.log(result.duplicates[0]);
 ```

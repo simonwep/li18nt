@@ -16,7 +16,7 @@ export type Duplicates = Map<string, PropertyPath[]>;
  */
 export const duplicates = (object: JSONObject, conf?: DuplicatesConfig): Duplicates => {
     const duplicates: Map<string, PropertyPath[]> = new Map<string, PropertyPath[]>();
-    const keys: string[] = [];
+    const keys: Map<string, PropertyPath> = new Map();
 
     const ignored = conf?.ignore?.map(v => {
         return Array.isArray(v) ? v : propertyPath(v);
@@ -44,15 +44,20 @@ export const duplicates = (object: JSONObject, conf?: DuplicatesConfig): Duplica
                         if (!startsWithDeep(ignored, newKey)) {
                             walk(value as JSONObject, newKey);
                         }
-                    } else if (keys.includes(key)) {
-                        const list = duplicates.get(key) || [];
+
+                        continue;
+                    }
+
+                    const existingPath = keys.get(key);
+                    if (existingPath) {
+                        const list = duplicates.get(key) || [existingPath];
 
                         // Check against ignored list
                         if (!startsWithDeep(ignored, newKey)) {
                             duplicates.set(key, [...list, newKey]);
                         }
                     } else {
-                        keys.push(key);
+                        keys.set(key, newKey);
                     }
                 }
             }
