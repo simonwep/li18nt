@@ -28,8 +28,8 @@ export const prettyPropertyPath = (path: PropertyPath, last: Chalk | null = null
         }
 
         str += (i === path.length - 1) && last ?
-            (divider ? ' > ' : '') + last(snippet) :
-            (divider ? ' > ' : '') + snippet;
+            (divider ? '.' : '') + last(snippet) :
+            (divider ? '.' : '') + snippet;
     }
 
     return str;
