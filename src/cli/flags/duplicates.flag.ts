@@ -1,6 +1,7 @@
 import {duplicates} from '@tools/duplicates';
 import {CLIModule, CLIOptions} from '@types';
 import {infoLn, successLn} from '@utils/log';
+import {makeList} from '@utils/makeList';
 import {prettyPropertyPath} from '@utils/prettyPropertyPath';
 import chalk from 'chalk';
 
@@ -25,12 +26,15 @@ export const duplicatesFlag: CLIModule = ({files, cmd}) => {
             for (const [initial, ...duplicates] of dupes.values()) {
                 process.stdout.write(`    ${prettyPropertyPath(initial, chalk.cyanBright)} (${duplicates.length}x): `);
 
-                process.stdout.write('\n');
+                if (duplicates.length > 1) {
+                    process.stdout.write('\n');
 
-                for (const path of duplicates) {
-                    console.log(`        ${prettyPropertyPath(path, chalk.yellowBright)}`);
+                    for (const [num, path] of makeList(duplicates)) {
+                        console.log(`       ${num}. ${prettyPropertyPath(path, chalk.yellowBright)}`);
+                    }
+                } else if (duplicates.length) {
+                    console.log(prettyPropertyPath(duplicates[0], chalk.yellowBright));
                 }
-
             }
 
             count++;

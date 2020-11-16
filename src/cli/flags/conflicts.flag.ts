@@ -1,6 +1,7 @@
 import {conflicts} from '@tools/conflicts';
 import {CLIModule} from '@types';
 import {error, successLn, warn} from '@utils/log';
+import {makeList} from '@utils/makeList';
 import {prettyPropertyPath} from '@utils/prettyPropertyPath';
 import chalk from 'chalk';
 
@@ -20,11 +21,11 @@ export const conflictsFlag: CLIModule = ({files, cmd}) => {
             if (conflicts.length > 1) {
                 console.log();
 
-                for (const path of conflicts) {
-                    console.log(`    ${prettyPropertyPath(path, chalk.yellowBright)}`);
+                for (const [num, path] of makeList(conflicts)) {
+                    console.log(`    ${num}. ${prettyPropertyPath(path, chalk.yellowBright)}`);
                 }
-            } else if (conflicts.length) {
-                console.log(` ${prettyPropertyPath(conflicts[0])}`);
+            } else {
+                console.log(` ${prettyPropertyPath(conflicts[0], chalk.yellowBright)}`);
             }
         }
 
@@ -34,11 +35,11 @@ export const conflictsFlag: CLIModule = ({files, cmd}) => {
             if (missing.length > 1) {
                 console.log();
 
-                for (const path of missing) {
-                    console.log(`    ${prettyPropertyPath(path, chalk.redBright)}`);
+                for (const [num, path] of makeList(missing)) {
+                    console.log(`    ${num}. ${prettyPropertyPath(path, chalk.redBright)}`);
                 }
-            } else if (missing.length) {
-                console.log(` ${prettyPropertyPath(missing[0], chalk.cyanBright)}`);
+            } else {
+                console.log(` ${prettyPropertyPath(missing[0], chalk.redBright)}`);
             }
         }
 

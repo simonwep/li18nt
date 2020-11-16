@@ -70,10 +70,11 @@ Usage: lint-i18n [files...] [options]
 Lints your locales files, li18nt is an alias.
 
 Options:
-  --version                    Output the current version
+  -v, --version                Output the current version
   -q, --quiet                  Print only errors and warnings
   -d, --debug                  Debug information
   -p, --prettify [number|tab]  Prettify files (default: 4 spaces)
+  -t, --test                   Used in combination with --prettify, will validate the current formatting
   --duplicates [strict|loose]  Find duplicates (default: loose)
   --conflicts [strict|loose]   Find type conflicts and missing properties (default: strict)
   --config [path]              Use configuration file
