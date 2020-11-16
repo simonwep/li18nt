@@ -1,12 +1,12 @@
-import {CLIModule, CLIOptions, SourceFile} from '@types';
-import {debugLn, errorLn, warnLn} from '@utils/log';
-import {conflictsFlag} from './flags/conflicts.flag';
-import {duplicatesFlag} from './flags/duplicates.flag';
-import {Command} from 'commander';
 import {prettify} from '@tools/prettify';
+import {CLIModule, CLIOptions, SourceFile} from '@types';
+import {debugLn, errorLn, successLn, warnLn} from '@utils/log';
+import {Command} from 'commander';
 import fs from 'fs';
 import glob from 'glob';
 import path from 'path';
+import {conflictsFlag} from './flags/conflicts.flag';
+import {duplicatesFlag} from './flags/duplicates.flag';
 
 const flags: Partial<Record<keyof CLIOptions, CLIModule>> = {
     'conflicts': conflictsFlag,
@@ -33,10 +33,10 @@ export const entry = (sources: string[], cmd: Command & CLIOptions): void => {
 
             // Try to read an parse
             try {
-                const content = fs.readFileSync(filePath, 'utf-8');
+                const source = fs.readFileSync(filePath, 'utf-8');
                 files.push({
-                    content: JSON.parse(content),
-                    name, filePath
+                    content: JSON.parse(source),
+                    source, name, filePath
                 });
             } catch (e) {
                 errorLn(`Couldn't read / parse file: ${filePath}`);
@@ -66,12 +66,26 @@ export const entry = (sources: string[], cmd: Command & CLIOptions): void => {
 
     // Prettify?
     if (cmd.prettify) {
-        for (const {content, name, filePath} of files) {
+        const test = !!cmd.test;
+
+        for (const {content, source, name, filePath} of files) {
             const str = `${prettify(content, cmd.prettify)}\n`;
-            fs.writeFileSync(filePath, str);
-            cmd.debug && debugLn(`Prettified ${name} (${filePath})`);
+
+            if (test) {
+                if (str !== source) {
+                    errorLn(`Unformatted: ${name} (${filePath})`);
+                    errored = true;
+                } else if (!cmd.quiet) {
+                    successLn(`Validated: ${name} (${filePath})`);
+                }
+            } else {
+                fs.writeFileSync(filePath, str);
+                cmd.debug && debugLn(`Prettified ${name} (${filePath})`);
+            }
         }
     }
 
-    process.exit(errored ? -1 : 0);
+    const exitCode = errored ? -1 : 0;
+    cmd.debug && debugLn(`Exiting with error: ${errored} (code: ${exitCode})`);
+    process.exit(exitCode);
 };

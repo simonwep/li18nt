@@ -13,6 +13,7 @@ export interface CLIOptions {
     prettify?: number | string;
     duplicates?: Mode | (DuplicatesConfig & {mode: Mode});
     conflicts?: Mode;
+    test?: boolean;
     debug?: boolean;
     quiet?: boolean;
     config?: string;
@@ -20,6 +21,7 @@ export interface CLIOptions {
 
 export interface SourceFile {
     content: JSONObject;
+    source: string;
     filePath: string;
     name: string;
 }

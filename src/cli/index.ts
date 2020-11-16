@@ -27,7 +27,7 @@ const parseMode = (flag: string) => (v: string): string | never => {
 };
 
 program
-    .version(version, '--version', 'Output the current version')
+    .version(version, '-v, --version', 'Output the current version')
     .helpOption('-h, --help', 'Show this help text')
     .name('lint-i18n')
     .description('Lints your locales files, li18nt is an alias.')
@@ -36,6 +36,7 @@ program
     .option('-q, --quiet', 'Print only errors and warnings')
     .option('-d, --debug', 'Debug information')
     .option('-p, --prettify [number|tab]', 'Prettify files (default: 4 spaces)', parseIndentation)
+    .option('-t, --test', 'Used in combination with --prettify, will validate the current formatting')
     .option('--duplicates [strict|loose]', 'Find duplicates (default: loose)', parseMode('--duplicates'))
     .option('--conflicts [strict|loose]', 'Find type conflicts and missing properties (default: strict)', parseMode('--conflicts'))
     .option('--config [path]', 'Use configuration file')
