@@ -112,6 +112,11 @@ Both `--conflicts` and `--duplicates` both come with a `loose` and `strict` mode
 
 For `--conflicts` it's normally `strict` as you will probably want to keep your files consistent and for `--duplicates` it's `loose` because translations may differ.
 
+#### Example output:
+Using `--conflicts`, `--duplicates` and `--prettify` on "corrupt" files would look like this (example):
+
+<img src="https://user-images.githubusercontent.com/30767528/99299539-a290f800-284b-11eb-99f8-cc0d4b4fe38b.png" alt="example output" height="450">
+
 
 ### API Usage
 This library comes in commonjs and ES6 format, you can include it directly:

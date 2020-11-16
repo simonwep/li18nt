@@ -71,16 +71,16 @@ export const entry = (sources: string[], cmd: Command & CLIOptions): void => {
         for (const {content, source, name, filePath} of files) {
             const str = `${prettify(content, cmd.prettify)}\n`;
 
-            if (test) {
-                if (str !== source) {
-                    errorLn(`Unformatted: ${name} (${filePath})`);
+            if (str !== source) {
+                if (test) {
+                    errorLn(`Unformatted: ${name}`);
                     errored = true;
-                } else if (!cmd.quiet) {
-                    successLn(`Validated: ${name} (${filePath})`);
+                } else {
+                    fs.writeFileSync(filePath, str);
+                    successLn(`Prettified: ${name}`);
                 }
-            } else {
-                fs.writeFileSync(filePath, str);
-                cmd.debug && debugLn(`Prettified ${name} (${filePath})`);
+            } else if (!cmd.quiet && test) {
+                successLn(`Validated: ${name}`);
             }
         }
     }
