@@ -4,7 +4,7 @@ describe('Main library', () => {
 
     it('Should properly lint the given objects', ()=>{
         expect(lint({
-            prettify: 4,
+            prettified: 4,
             duplicates: true,
             conflicts: true
         }, [
@@ -42,7 +42,7 @@ describe('Main library', () => {
 
     it('Should work with the example given in the README', ()=>{
         expect(lint({
-            prettify: '\t',
+            prettified: '\t',
             duplicates: true,
             conflicts: true
         }, [
@@ -54,7 +54,7 @@ describe('Main library', () => {
 
     it('Should accept further duplicates-configuration', ()=>{
         expect(lint({
-            prettify: '\t',
+            prettified: '\t',
             duplicates: {
                 ignore: [
                     ['c', 'a'],

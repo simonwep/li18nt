@@ -70,15 +70,15 @@ Usage: lint-i18n [files...] [options]
 Lints your locales files, li18nt is an alias.
 
 Options:
-  -v, --version                Output the current version
-  -q, --quiet                  Print only errors and warnings
-  -d, --debug                  Debug information
-  -p, --prettify [number|tab]  Prettify files (default: 4 spaces)
-  -t, --test                   Used in combination with --prettify, will validate the current formatting
-  --duplicates [strict|loose]  Find duplicates (default: loose)
-  --conflicts [strict|loose]   Find type conflicts and missing properties (default: strict)
-  --config [path]              Use configuration file
-  -h, --help                   Show this help text
+  -v, --version                  Output the current version
+  -q, --quiet                    Print only errors and warnings
+  -d, --debug                    Debug information
+  -f, --fix                      Tries to fix existing errors
+  -p, --prettified [number|tab]  Check if files are properly formatted (default: 4 spaces)
+  --duplicates [strict|loose]    Find duplicates (default: loose)
+  --conflicts [strict|loose]     Find type conflicts and missing properties (default: strict)
+  --config [path]                Use configuration file
+  -h, --help                     Show this help text
 ```
 
 The following file-names can be used as configuration: `.li18ntrc`, `.li18nt.json`,`.li18ntrc.json` or `li18nt.config.js`.
@@ -90,7 +90,7 @@ A configuration file will override specified properties. Example:
     "conflicts": true,
 
     // Use a number for spaces, '\t' for tabs, false or leave it out to disable
-    "prettify": 4,
+    "prettified": 4,
 
     // Here you can either pass true ("loose"), false, "strict", "loose" or an extended configuration object.
     "duplicates": {
@@ -136,7 +136,7 @@ Option- and result-types can be found [here](src/types.ts):
 import {lint} from 'li18nt';
 
 const options = {
-    prettify: 4, // 4 spaces, use '\t' for tabs
+    prettified: 4, // 4 spaces, use '\t' for tabs
     duplicates: true, // We want to analyze our translations for duplicates
     diff: true // Find differences
 };

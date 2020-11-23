@@ -23,7 +23,8 @@
         "lint": "eslint ./src/**/*.ts ./test/**/*.ts",
         "lint:fix": "eslint ./src/**/*.ts ./test/**/*.ts --fix",
         "install:local": "npm run build && npm install -g .",
-        "dryrun": "npm run test && npm run lint:fix"
+        "dryrun": "npm run test && npm run lint:fix",
+        "publish": "npm run test && npm run lint && npm run build && npm publish"
     },
     "keywords": [
         "lint",

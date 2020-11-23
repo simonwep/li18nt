@@ -3,17 +3,17 @@ import {Duplicates, DuplicatesConfig} from '@tools/duplicates';
 import {Command} from 'commander';
 
 export interface Li18ntOptions {
-    prettify?: number | string;
+    prettified?: number | string;
     duplicates?: boolean | DuplicatesConfig;
     conflicts?: boolean;
 }
 
 export type Mode = 'strict' | 'loose';
 export interface CLIOptions {
-    prettify?: number | string;
+    prettified?: number | string;
     duplicates?: Mode | (DuplicatesConfig & {mode: Mode});
     conflicts?: Mode;
-    test?: boolean;
+    fix?: boolean;
     debug?: boolean;
     quiet?: boolean;
     config?: string;

@@ -30,11 +30,11 @@ export const lint = (conf: Li18ntOptions, objects: JSONObject[]): Li18ntResult =
         }
     }
 
-    if (typeof conf.prettify !== 'undefined') {
+    if (typeof conf.prettified !== 'undefined') {
         res.prettified = [];
 
         for (const obj of objects) {
-            res.prettified.push(prettify(obj, conf.prettify));
+            res.prettified.push(prettify(obj, conf.prettified));
         }
     }
 

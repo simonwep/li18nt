@@ -35,8 +35,8 @@ program
     .arguments('[files...]')
     .option('-q, --quiet', 'Print only errors and warnings')
     .option('-d, --debug', 'Debug information')
-    .option('-p, --prettify [number|tab]', 'Prettify files (default: 4 spaces)', parseIndentation)
-    .option('-t, --test', 'Used in combination with --prettify, will validate the current formatting')
+    .option('-f, --fix', 'Tries to fix existing errors')
+    .option('-p, --prettified [number|tab]', 'Check if files are properly formatted (default: 4 spaces)', parseIndentation)
     .option('--duplicates [strict|loose]', 'Find duplicates (default: loose)', parseMode('--duplicates'))
     .option('--conflicts [strict|loose]', 'Find type conflicts and missing properties (default: strict)', parseMode('--conflicts'))
     .option('--config [path]', 'Use configuration file')
@@ -50,7 +50,7 @@ program
         // Try to resolve and load config file
         const options = resolveConfiguration(cmd);
         if (options) {
-            cmd.prettify = options.prettify || cmd.prettify;
+            cmd.prettified = options.prettified || cmd.prettify;
             cmd.duplicates = options.duplicates || cmd.duplicates;
             cmd.conflicts = options.conflicts || cmd.conflicts;
         }
