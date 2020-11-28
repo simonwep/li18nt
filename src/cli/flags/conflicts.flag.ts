@@ -8,7 +8,7 @@ import chalk from 'chalk';
 /* eslint-disable no-console */
 export const conflictsFlag: CLIModule = ({files, cmd}) => {
     const diff = conflicts(files.map(v => v.content));
-    const strict = (cmd.conflicts || 'strict') === 'strict';
+    const strict = (cmd.conflicts || 'error') === 'error';
     let count = 0;
 
     for (let i = 0; i < diff.length; i++) {

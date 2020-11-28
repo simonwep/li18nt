@@ -18,11 +18,11 @@ const parseIndentation = (v: string): string | number | never => {
 };
 
 const parseMode = (flag: string) => (v: string): string | never => {
-    if (['strict', 'loose'].includes(v)) {
+    if (['off', 'warn', 'error'].includes(v)) {
         return v;
     }
 
-    error(`Invalid value for ${flag}, expected 'strict' or 'loose'.`);
+    error(`Invalid value for ${flag}, expected 'off', 'warn' or 'error'.`);
     process.exit(-4);
 };
 
@@ -37,15 +37,15 @@ program
     .option('-d, --debug', 'Debug information')
     .option('-f, --fix', 'Tries to fix existing errors')
     .option('-p, --prettified [number|tab]', 'Check if files are properly formatted (default: 4 spaces)', parseIndentation)
-    .option('--duplicates [strict|loose]', 'Find duplicates (default: loose)', parseMode('--duplicates'))
-    .option('--conflicts [strict|loose]', 'Find type conflicts and missing properties (default: strict)', parseMode('--conflicts'))
+    .option('--duplicates [off|warn|error]', 'Find duplicates (default: warn)', parseMode('--duplicates'))
+    .option('--conflicts [off|warn|error]', 'Find type conflicts and missing properties (default: error)', parseMode('--conflicts'))
     .option('--config [path]', 'Use configuration file')
     .action((args, cmd) => {
 
         // TODO: See https://github.com/tj/commander.js/issues/1394
         cmd.prettify = cmd.prettify === true ? 4 : cmd.prettify;
-        cmd.duplicates = cmd.duplicates === true ? 'loose' : cmd.duplicates;
-        cmd.conflicts = cmd.conflicts === true ? 'strict' : cmd.conflicts;
+        cmd.duplicates = cmd.duplicates === true ? 'warn' : cmd.duplicates;
+        cmd.conflicts = cmd.conflicts === true ? 'error' : cmd.conflicts;
 
         // Try to resolve and load config file
         const options = resolveConfiguration(cmd);

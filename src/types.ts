@@ -8,7 +8,7 @@ export interface Li18ntOptions {
     conflicts?: boolean;
 }
 
-export type Mode = 'strict' | 'loose';
+export type Mode = 'off' | 'warn' | 'error';
 export interface CLIOptions {
     prettified?: number | string;
     duplicates?: Mode | (DuplicatesConfig & {mode: Mode});

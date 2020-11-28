@@ -57,7 +57,9 @@ export const entry = (sources: string[], cmd: Command & CLIOptions): void => {
     // Process files
     let errored = false;
     for (const [flag, handler] of Object.entries(flags)) {
-        if (cmd[flag] && handler) {
+        const flagValue = cmd[flag];
+
+        if (flagValue && flagValue !== 'off' && handler) {
 
             // We need to check against false as undefined is falsy
             errored = handler({files, cmd}) === false || errored;

@@ -7,7 +7,7 @@ import chalk from 'chalk';
 
 /* eslint-disable no-console */
 export const duplicatesFlag: CLIModule = ({files, cmd}) => {
-    let config: Partial<CLIOptions['duplicates']> = {mode: 'loose'};
+    let config: Partial<CLIOptions['duplicates']> = {mode: 'warn'};
     const options = cmd.duplicates;
 
     if (typeof options === 'string') {
@@ -42,5 +42,5 @@ export const duplicatesFlag: CLIModule = ({files, cmd}) => {
     }
 
     !count && !cmd.quiet && successLn('No duplicates found!');
-    return config.mode === 'loose' || !count;
+    return config.mode === 'warn' || !count;
 };

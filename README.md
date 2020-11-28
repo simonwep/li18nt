@@ -75,8 +75,8 @@ Options:
   -d, --debug                    Debug information
   -f, --fix                      Tries to fix existing errors
   -p, --prettified [number|tab]  Check if files are properly formatted (default: 4 spaces)
-  --duplicates [strict|loose]    Find duplicates (default: loose)
-  --conflicts [strict|loose]     Find type conflicts and missing properties (default: strict)
+  --duplicates [off|warn|error]  Find duplicates (default: warn)
+  --conflicts [off|warn|error]   Find type conflicts and missing properties (default: error)
   --config [path]                Use configuration file
   -h, --help                     Show this help text
 ```
@@ -86,7 +86,7 @@ A configuration file will override specified properties. Example:
 
 ```json5
 {
-    // true will use the default value (strict), you may pass "loose" or "strict" explicitly
+    // true will use the default value (error), you may pass "warn", "strict" or "off" explicitly
     "conflicts": true,
 
     // Use a number for spaces, '\t' for tabs, false or leave it out to disable
@@ -94,7 +94,7 @@ A configuration file will override specified properties. Example:
 
     // Here you can either pass true ("loose"), false, "strict", "loose" or an extended configuration object.
     "duplicates": {
-        "mode": "loose", // Mode is now a sub-property
+        "mode": "warn", // Mode is now a sub-property
         "ignore": [
 
             // You can also use the array-sytax e.g. ["pages", "dashboard", "dashboard"]
