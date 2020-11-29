@@ -40,6 +40,7 @@ program
     .option('--duplicates [off|warn|error]', 'Find duplicates (default: warn)', parseMode('--duplicates'))
     .option('--conflicts [off|warn|error]', 'Find type conflicts and missing properties (default: error)', parseMode('--conflicts'))
     .option('--config [path]', 'Use configuration file')
+    .option('--skip-invalid', 'Skip invalid files without exiting')
     .action((args, cmd) => {
 
         // TODO: See https://github.com/tj/commander.js/issues/1394

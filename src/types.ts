@@ -17,6 +17,7 @@ export interface CLIOptions {
     debug?: boolean;
     quiet?: boolean;
     config?: string;
+    skipInvalid?: boolean;
 }
 
 export interface SourceFile {

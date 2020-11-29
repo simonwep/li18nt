@@ -41,7 +41,7 @@ export const entry = (sources: string[], cmd: Command & CLIOptions): void => {
             } catch (e) {
                 errorLn(`Couldn't read / parse file: ${filePath}`);
                 cmd.debug && console.error(e);
-                process.exit(-2);
+                !cmd.skipInvalid && process.exit(-2);
                 continue;
             }
 
@@ -59,6 +59,7 @@ export const entry = (sources: string[], cmd: Command & CLIOptions): void => {
     for (const [flag, handler] of Object.entries(flags)) {
         const flagValue = cmd[flag];
 
+        cmd.debug && debugLn(`Flag "${flag}": "${flagValue}"`);
         if (flagValue && flagValue !== 'off' && handler) {
 
             // We need to check against false as undefined is falsy

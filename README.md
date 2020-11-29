@@ -78,6 +78,7 @@ Options:
   --duplicates [off|warn|error]  Find duplicates (default: warn)
   --conflicts [off|warn|error]   Find type conflicts and missing properties (default: error)
   --config [path]                Use configuration file
+  --skip-invalid                 Skip invalid files without exiting
   -h, --help                     Show this help text
 ```
 
