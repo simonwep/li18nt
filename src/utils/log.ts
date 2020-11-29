@@ -3,11 +3,16 @@ import chalk from 'chalk';
 
 const {stdout} = process;
 
+export const blankLn = (str: string): void => blank(`${str}\n`);
 export const warnLn = (str: string): void => warn(`${str}\n`);
 export const errorLn = (str: string): void => error(`${str}\n`);
 export const successLn = (str: string): void => success(`${str}\n`);
 export const infoLn = (str: string): void => info(`${str}\n`);
 export const debugLn = (str: string): void => debug(`${str}\n`);
+
+export const blank = (str: string): void => {
+    stdout.write(str);
+};
 
 export const warn = (str: string): void => {
     stdout.write(`${chalk.yellowBright('[!]')} ${str}`);

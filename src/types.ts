@@ -9,6 +9,7 @@ export interface Li18ntOptions {
 }
 
 export type Mode = 'off' | 'warn' | 'error';
+
 export interface CLIOptions {
     prettified?: number | string;
     duplicates?: Mode | (DuplicatesConfig & {mode: Mode});
@@ -18,6 +19,7 @@ export interface CLIOptions {
     quiet?: boolean;
     config?: string;
     skipInvalid?: boolean;
+    report?: boolean;
 }
 
 export interface SourceFile {

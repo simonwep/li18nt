@@ -15,7 +15,7 @@ const flags: Partial<Record<keyof CLIOptions, CLIModule>> = {
 
 // Entry point
 /* eslint-disable no-console */
-export const entry = (sources: string[], cmd: Command & CLIOptions): void => {
+export const entry = async (sources: string[], cmd: Command & CLIOptions): Promise<void> => {
     const cwd = process.cwd();
 
     // Resolve files

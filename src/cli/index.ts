@@ -1,6 +1,7 @@
 import {error} from '@utils/log';
 import program from 'commander';
 import {entry} from './entry';
+import {printReport} from './printReport';
 import {resolveConfiguration} from './resolveConfiguration';
 
 const version = typeof VERSION === 'undefined' ? 'unknown' : VERSION;
@@ -41,7 +42,13 @@ program
     .option('--conflicts [off|warn|error]', 'Find type conflicts and missing properties (default: error)', parseMode('--conflicts'))
     .option('--config [path]', 'Use configuration file')
     .option('--skip-invalid', 'Skip invalid files without exiting')
+    .option('--report', 'Prints system information at the end of the script')
     .action((args, cmd) => {
+
+        // Print report and exit immediately
+        if (cmd.report) {
+            return printReport(version);
+        }
 
         // TODO: See https://github.com/tj/commander.js/issues/1394
         cmd.prettify = cmd.prettify === true ? 4 : cmd.prettify;
@@ -56,6 +63,6 @@ program
             cmd.conflicts = options.conflicts || cmd.conflicts;
         }
 
-        entry(args, cmd);
+        return entry(args, cmd);
     })
     .parse();
