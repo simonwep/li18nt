@@ -1,7 +1,35 @@
 /* eslint-disable no-console */
-import chalk from 'chalk';
+import {Mode} from '@types';
+import chalk, {Chalk} from 'chalk';
 
 const {stdout} = process;
+
+export interface ConsoleOutputUtils {
+    log: (str: string) => void;
+    logLn: (str: string) => void;
+    accent: Chalk;
+}
+
+export const getLoggingSet = (mode: Omit<Mode, 'off'>): ConsoleOutputUtils => {
+    switch (mode) {
+        case 'warn': {
+            return {
+                log: warn,
+                logLn: warnLn,
+                accent: chalk.yellowBright
+            };
+        }
+        case 'error': {
+            return {
+                log: error,
+                logLn: errorLn,
+                accent: chalk.redBright
+            };
+        }
+    }
+
+    throw new Error(`Unknown mode: ${mode}`);
+};
 
 export const blankLn = (str: string): void => blank(`${str}\n`);
 export const warnLn = (str: string): void => warn(`${str}\n`);

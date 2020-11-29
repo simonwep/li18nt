@@ -1,14 +1,14 @@
 import {conflicts} from '@tools/conflicts';
 import {CLIModule} from '@types';
-import {error, successLn, warn} from '@utils/log';
+import {getLoggingSet, successLn} from '@utils/log';
 import {makeList} from '@utils/makeList';
+import {pluralize} from '@utils/pluralize';
 import {prettyPropertyPath} from '@utils/prettyPropertyPath';
-import chalk from 'chalk';
 
 /* eslint-disable no-console */
 export const conflictsFlag: CLIModule = ({files, cmd}) => {
     const diff = conflicts(files.map(v => v.content));
-    const strict = (cmd.conflicts || 'error') === 'error';
+    const {log, accent} = getLoggingSet(cmd.conflicts as string);
     let count = 0;
 
     for (let i = 0; i < diff.length; i++) {
@@ -16,30 +16,30 @@ export const conflictsFlag: CLIModule = ({files, cmd}) => {
         const {name} = files[i];
 
         if (conflicts.length) {
-            warn(`${chalk.yellowBright(`${name}:`)} Found ${conflicts.length === 1 ? 'one conflict' : `${conflicts.length} conflicts`}:`);
+            log(`${accent(`${name}:`)} Found ${pluralize('conflict', conflicts.length)}:`);
 
             if (conflicts.length > 1) {
                 console.log();
 
                 for (const [num, path] of makeList(conflicts)) {
-                    console.log(`    ${num}. ${prettyPropertyPath(path, chalk.yellowBright)}`);
+                    console.log(`    ${num}. ${prettyPropertyPath(path, accent)}`);
                 }
             } else {
-                console.log(` ${prettyPropertyPath(conflicts[0], chalk.yellowBright)}`);
+                console.log(` ${prettyPropertyPath(conflicts[0], accent)}`);
             }
         }
 
         if (missing.length) {
-            error(`${chalk.redBright(`${name}:`)} Found ${missing.length === 1 ? 'one missing value' : `${missing.length} missing values`}:`);
+            log(`${accent(`${name}:`)} Found ${pluralize('one missing value', missing.length)}:`);
 
             if (missing.length > 1) {
                 console.log();
 
                 for (const [num, path] of makeList(missing)) {
-                    console.log(`    ${num}. ${prettyPropertyPath(path, chalk.redBright)}`);
+                    console.log(`    ${num}. ${prettyPropertyPath(path, accent)}`);
                 }
             } else {
-                console.log(` ${prettyPropertyPath(missing[0], chalk.redBright)}`);
+                console.log(` ${prettyPropertyPath(missing[0], accent)}`);
             }
         }
 
@@ -47,5 +47,5 @@ export const conflictsFlag: CLIModule = ({files, cmd}) => {
     }
 
     !count && !cmd.quiet && successLn('No conflicts found!');
-    return !strict || !count;
+    return cmd.conflicts === 'warn' || !count;
 };

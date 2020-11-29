@@ -1,8 +1,8 @@
 import {CLIOptions, Li18ntOptions} from '@types';
-import {debugLn, error} from '@utils/log';
 import {Command} from 'commander';
 import fs from 'fs';
 import path from 'path';
+import {debugLn, error} from './log';
 
 const configFileNames = [
     '.li18ntrc',

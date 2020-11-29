@@ -1,7 +1,8 @@
 import {duplicates} from '@tools/duplicates';
 import {CLIModule, CLIOptions} from '@types';
-import {infoLn, successLn} from '@utils/log';
+import {getLoggingSet, successLn} from '@utils/log';
 import {makeList} from '@utils/makeList';
+import {pluralize} from '@utils/pluralize';
 import {prettyPropertyPath} from '@utils/prettyPropertyPath';
 import chalk from 'chalk';
 
@@ -16,12 +17,14 @@ export const duplicatesFlag: CLIModule = ({files, cmd}) => {
         config = options;
     }
 
+    const {logLn, accent} = getLoggingSet(config.mode as string);
+
     let count = 0;
     for (const {name, content} of files) {
         const dupes = duplicates(content, config);
 
         if (dupes.size) {
-            infoLn(`${chalk.blueBright(`${name}:`)} Found ${dupes.size === 1 ? 'one duplicate' : `${dupes.size} duplicates`}:`);
+            logLn(`${accent(`${name}:`)} Found ${pluralize('duplicate', dupes.size)}:`);
 
             for (const [initial, ...duplicates] of dupes.values()) {
                 process.stdout.write(`    ${prettyPropertyPath(initial, chalk.cyanBright)} (${duplicates.length}x): `);
@@ -30,10 +33,10 @@ export const duplicatesFlag: CLIModule = ({files, cmd}) => {
                     process.stdout.write('\n');
 
                     for (const [num, path] of makeList(duplicates)) {
-                        console.log(`       ${num}. ${prettyPropertyPath(path, chalk.yellowBright)}`);
+                        console.log(`       ${num}. ${prettyPropertyPath(path, accent)}`);
                     }
                 } else if (duplicates.length) {
-                    console.log(prettyPropertyPath(duplicates[0], chalk.yellowBright));
+                    console.log(prettyPropertyPath(duplicates[0], accent));
                 }
             }
 

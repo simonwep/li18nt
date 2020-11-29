@@ -1,8 +1,8 @@
 import {error} from '@utils/log';
+import {printReport} from '@utils/printReport';
+import {resolveConfiguration} from '@utils/resolveConfiguration';
 import program from 'commander';
 import {entry} from './entry';
-import {printReport} from './printReport';
-import {resolveConfiguration} from './resolveConfiguration';
 
 const version = typeof VERSION === 'undefined' ? 'unknown' : VERSION;
 
