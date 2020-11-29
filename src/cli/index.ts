@@ -42,7 +42,7 @@ program
     .option('--conflicts [off|warn|error]', 'Find type conflicts and missing properties (default: error)', parseMode('--conflicts'))
     .option('--config [path]', 'Use configuration file')
     .option('--skip-invalid', 'Skip invalid files without exiting')
-    .option('--report', 'Prints system information at the end of the script')
+    .option('--report', 'Print system information')
     .action((args, cmd) => {
 
         // Print report and exit immediately
