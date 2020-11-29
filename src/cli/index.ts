@@ -51,7 +51,7 @@ program
         }
 
         // TODO: See https://github.com/tj/commander.js/issues/1394
-        cmd.prettify = cmd.prettify === true ? 4 : cmd.prettify;
+        cmd.prettified = cmd.prettified === true ? 4 : cmd.prettified;
         cmd.duplicates = cmd.duplicates === true ? 'warn' : cmd.duplicates;
         cmd.conflicts = cmd.conflicts === true ? 'error' : cmd.conflicts;
 
