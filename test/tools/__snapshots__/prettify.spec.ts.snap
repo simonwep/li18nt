@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[tool] sort Should sort a nested object and indent using spaces 1`] = `
+exports[`[tool] prettify Should prettify a nested object and indent using spaces 1`] = `
 "{
     \\"a\\": {
         \\"p\\": 100,
@@ -15,7 +15,7 @@ exports[`[tool] sort Should sort a nested object and indent using spaces 1`] = `
 }"
 `;
 
-exports[`[tool] sort Should sort a package.json file and indent using tab 1`] = `
+exports[`[tool] prettify Should prettify a package.json file and indent using tab 1`] = `
 "{
 	\\"author\\": \\"Simon Reinisch <trash@reinisch.io>\\",
 	\\"bin\\": {
@@ -68,10 +68,10 @@ exports[`[tool] sort Should sort a package.json file and indent using tab 1`] = 
 }"
 `;
 
-exports[`[tool] sort Should sort a simple object 1`] = `
+exports[`[tool] prettify Should prettify a simple object 1`] = `
 "{
-\\"a\\": 1,
-\\"y\\": 20,
-\\"z\\": 10
+  \\"a\\": 1,
+  \\"y\\": 20,
+  \\"z\\": 10
 }"
 `;

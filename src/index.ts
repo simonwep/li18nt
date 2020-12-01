@@ -22,19 +22,22 @@ export const lint = (conf: Li18ntOptions, objects: JSONObject[]): Li18ntResult =
     }
 
     if (conf.duplicates) {
-        const options = typeof conf.duplicates !== 'boolean' ? conf.duplicates : undefined;
-        res.duplicates = [];
+        const options = typeof conf.duplicates === 'boolean' ? {} : conf.duplicates;
 
+        res.duplicates = [];
         for (const obj of objects) {
             res.duplicates.push(duplicates(obj, options));
         }
     }
 
     if (typeof conf.prettified !== 'undefined') {
-        res.prettified = [];
+        const options = typeof conf.prettified !== 'object' ? {
+            indent: conf.prettified
+        } : conf.prettified;
 
+        res.prettified = [];
         for (const obj of objects) {
-            res.prettified.push(prettify(obj, conf.prettified));
+            res.prettified.push(prettify(obj, options));
         }
     }
 

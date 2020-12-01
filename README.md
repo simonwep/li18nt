@@ -57,68 +57,70 @@ Installing it will add `li18nt` (and the alias `lint-i18n`) to your command line
 
 Examples:
 ```sh
-# Check if your files are prettified
-$ li18nt locales/*.json --prettified
+# Lint all json files in /locales
+$ li18nt locales/*.json
 
-# Prettify your files, check for conflicts / missing properties and duplicates
-$ li18nt locales/*.json --prettified --conflicts --duplicates --fix
+# Lint all valid json files in /locales, print out only warnings and errors
+$ li18nt locales/*.json --skip-invalid --quiet
 
 # List all commands
 $ li18nt --help
-Usage: li18nt [files...] [options]
+Usage: lint-i18n [files...] [options]
 
 Lints your locales files, lint-i18n is an alias.
 
 Options:
-  -v, --version                  Output the current version
-  -q, --quiet                    Print only errors and warnings
-  -d, --debug                    Debug information
-  -f, --fix                      Tries to fix existing errors
-  -p, --prettified [number|tab]  Check if files are properly formatted (default: 4 spaces)
-  --duplicates [off|warn|error]  Find duplicates (default: warn)
-  --conflicts [off|warn|error]   Find type conflicts and missing properties (default: error)
-  --config [path]                Use configuration file
-  --skip-invalid                 Skip invalid files without exiting
-  --report                       Print system information
-  -h, --help                     Show this help text
+  -v, --version    Output the current version
+  -q, --quiet      Print only errors and warnings
+  -d, --debug      Debug information
+  -f, --fix        Tries to fix existing errors
+  --config [path]  Configuration file path (it'll try to resolve one in the current directory)
+  --skip-invalid   Skip invalid files without exiting
+  --report         Print system information
+  -h, --help       Show this help text
 ```
 
-The following file-names can be used as configuration: `.li18ntrc`, `.li18nt.json`,`.li18ntrc.json` or `li18nt.config.js`.
-A configuration file will override specified properties. Example:
+Li18nt is configuration drive, you'll need to add a configuration. It'll try to resolve a  `.li18ntrc`, `.li18nt.json`,`.li18ntrc.json` or `li18nt.config.js`
+in the current directory. Use the `--config [path]` option to specify a different path.
+
+> The Li18nt config file is usually located in locales/.li18nt or in your root folder.
 
 ```json5
 {
-    // true will use the default value (error), you may pass "warn", "strict" or "off" explicitly
-    "conflicts": true,
+    // Override the --quiet cli option
+    "quiet": false,
 
-    // Use a number for spaces, '\t' for tabs, false or leave it out to disable
-    "prettified": 4,
+    // Override the --skip-invalid cli option
+    "skipInvalid": false,
 
-    // Here you can either pass true ("loose"), false, "strict", "loose" or an extended configuration object.
-    "duplicates": {
-        "mode": "warn", // Mode is now a sub-property
-        "ignore": [
+    // List of rules
+    "rules": {
 
-            // You can also use the array-sytax e.g. ["pages", "dashboard", "dashboard"]
-            // If the specified target is an object it'll be skipped, e.g. you can ignore entire sub-trees
-            "pages.dashboard.dashboard"
-        ]
+        // Checks if your files are properly formatted,
+        // you can also just pass "warn" as value - 4 spaces are default
+        "prettified": ["warn", {"indent": "tab"}],
+
+        // Checks for conflicts
+        "conflicts": "warn",
+
+        // Check for duplicates
+        "duplicates": ["warn", {
+            "ignore": [
+                // You can also use the array-sytax e.g. ["pages", "dashboard", "dashboard"]
+                // If the specified target is an object it'll be skipped, e.g. you can ignore entire sub-trees
+                "pages.dashboard.dashboard"
+            ]
+        }]
     }
 }
 ```
 
+The syntax for each option is:
+```ts
+type Rule = Mode | [Mode, Options | undefined];
+```
 
-#### Modes
-
-Both `--conflicts` and `--duplicates` both come with a `loose` and `strict` mode. `loose` means that, in case there is something wrong with your files, an error won't be thrown. `strict` tells the linter that an error **should** be thrown.
-
-For `--conflicts` it's normally `strict` as you will probably want to keep your files consistent and for `--duplicates` it's `loose` because translations may differ.
-
-#### Example output:
-Using `--conflicts`, `--duplicates` and `--prettify` on "corrupt" files would look like this (example):
-
-<img src="https://user-images.githubusercontent.com/30767528/99299539-a290f800-284b-11eb-99f8-cc0d4b4fe38b.png" alt="example output" height="450">
-
+where `Mode` can be `off`, `warn` or `error`. `off` won't do anything, `error` will exit with a non-zero code in case of errors.
 
 ### API Usage
 This library comes in commonjs and ES6 format, you can include it directly:
@@ -138,9 +140,9 @@ Option- and result-types can be found [here](src/types.ts):
 import {lint} from 'li18nt';
 
 const options = {
-    prettified: 4, // 4 spaces, use '\t' for tabs
+    prettified: 4, // 4 spaces, use 'tab' for tabs
     duplicates: true, // We want to analyze our translations for duplicates
-    diff: true // Find differences
+    conflicts: true // Find differences
 };
 
 const objects = [

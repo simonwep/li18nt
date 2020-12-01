@@ -42,7 +42,7 @@ describe('Main library', () => {
 
     it('Should work with the example given in the README', ()=>{
         expect(lint({
-            prettified: '\t',
+            prettified: 'tab',
             duplicates: true,
             conflicts: true
         }, [
@@ -54,11 +54,11 @@ describe('Main library', () => {
 
     it('Should accept further duplicates-configuration', ()=>{
         expect(lint({
-            prettified: '\t',
+            prettified: 'tab',
             duplicates: {
                 ignore: [
                     ['c', 'a'],
-                    ['b', 'a']
+                    'b.a'
                 ]
             },
             conflicts: true

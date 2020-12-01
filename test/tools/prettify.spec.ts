@@ -1,16 +1,16 @@
 import {prettify} from '@tools/prettify';
 
-describe('[tool] sort', () => {
+describe('[tool] prettify', () => {
 
-    it('Should sort a simple object', () => {
+    it('Should prettify a simple object', () => {
         expect(prettify({
             'z': 10,
             'y': 20,
             'a': 1
-        })).toMatchSnapshot();
+        }, {indent: 2})).toMatchSnapshot();
     });
 
-    it('Should sort a nested object and indent using spaces', () => {
+    it('Should prettify a nested object and indent using spaces', () => {
         expect(prettify({
             'z': 10,
             'y': 20,
@@ -22,10 +22,10 @@ describe('[tool] sort', () => {
                     'u': 5
                 }
             }
-        }, 4)).toMatchSnapshot();
+        }, {indent: 4})).toMatchSnapshot();
     });
 
-    it('Should sort a package.json file and indent using tab', () => {
+    it('Should prettify a package.json file and indent using tab', () => {
         expect(prettify({
             'name': 'lint-i18n',
             'version': '1.0.0',
@@ -75,6 +75,6 @@ describe('[tool] sort', () => {
                     'eslint-config-simon': '^2.1.0'
                 }
             ]
-        }, '\t')).toMatchSnapshot();
+        }, {indent: 'tab'})).toMatchSnapshot();
     });
 });

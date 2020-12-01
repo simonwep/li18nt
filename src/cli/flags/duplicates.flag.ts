@@ -1,5 +1,5 @@
-import {duplicates} from '@tools/duplicates';
-import {CLIModule, CLIOptions} from '@types';
+import {duplicates, DuplicatesConfig} from '@tools/duplicates';
+import {CLIModule} from '@types';
 import {getLoggingSet, successLn} from '@utils/log';
 import {makeList} from '@utils/makeList';
 import {pluralize} from '@utils/pluralize';
@@ -7,21 +7,13 @@ import {prettyPropertyPath} from '@utils/prettyPropertyPath';
 import chalk from 'chalk';
 
 /* eslint-disable no-console */
-export const duplicatesFlag: CLIModule = ({files, cmd}) => {
-    let config: Partial<CLIOptions['duplicates']> = {mode: 'warn'};
-    const options = cmd.duplicates;
-
-    if (typeof options === 'string') {
-        config = {mode: options};
-    } else if (typeof options === 'object' && options !== null) {
-        config = options;
-    }
-
-    const {logLn, accent} = getLoggingSet(config.mode as string);
+export const duplicatesFlag: CLIModule<DuplicatesConfig> = ({files, cmd, rule}) => {
+    const [mode, options] = rule;
+    const {logLn, accent} = getLoggingSet(mode);
 
     let count = 0;
     for (const {name, content} of files) {
-        const dupes = duplicates(content, config);
+        const dupes = duplicates(content, options);
 
         if (dupes.size) {
             logLn(`${accent(`${name}:`)} Found ${pluralize('duplicate', dupes.size)}:`);
@@ -45,5 +37,5 @@ export const duplicatesFlag: CLIModule = ({files, cmd}) => {
     }
 
     !count && !cmd.quiet && successLn('No duplicates found!');
-    return config.mode === 'warn' || !count;
+    return mode === 'warn' || !count;
 };

@@ -1,5 +1,5 @@
 import {prettify} from '@tools/prettify';
-import {CLIModule, CLIOptions, SourceFile} from '@types';
+import {CLIModule, CLIOptions, CLIRules, SourceFile} from '@types';
 import {debugLn, errorLn, successLn, warnLn} from '@utils/log';
 import {Command} from 'commander';
 import fs from 'fs';
@@ -8,7 +8,8 @@ import path from 'path';
 import {conflictsFlag} from './flags/conflicts.flag';
 import {duplicatesFlag} from './flags/duplicates.flag';
 
-const flags: Partial<Record<keyof CLIOptions, CLIModule>> = {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const flags: Partial<Record<keyof CLIOptions['rules'], CLIModule<any>>> = {
     'conflicts': conflictsFlag,
     'duplicates': duplicatesFlag
 };
@@ -17,6 +18,7 @@ const flags: Partial<Record<keyof CLIOptions, CLIModule>> = {
 /* eslint-disable no-console */
 export const entry = async (sources: string[], cmd: Command & CLIOptions): Promise<void> => {
     const cwd = process.cwd();
+    const {rules} = cmd;
 
     // Resolve files
     const files: SourceFile[] = [];
@@ -57,31 +59,37 @@ export const entry = async (sources: string[], cmd: Command & CLIOptions): Promi
     // Process files
     let errored = false;
     for (const [flag, handler] of Object.entries(flags)) {
-        const flagValue = cmd[flag];
+        const rule = rules[flag as keyof CLIRules];
 
-        cmd.debug && debugLn(`Flag "${flag}": "${flagValue}"`);
-        if (flagValue && flagValue !== 'off' && handler) {
+        cmd.debug && debugLn(`Rule "${flag}": ${rule?.[0] || 'off'}`);
+        if (rule && rule[0] !== 'off' && handler) {
 
             // We need to check against false as undefined is falsy
-            errored = handler({files, cmd}) === false || errored;
+            errored = handler({files, cmd, rule}) === false || errored;
         }
     }
 
     // Prettify?
-    if (cmd.prettified) {
-        for (const {content, source, name, filePath} of files) {
-            const str = `${prettify(content, cmd.prettified)}\n`;
+    if (rules.prettified) {
+        const [mode, options = {indent: 4}] = rules.prettified;
 
-            if (str !== source) {
-                if (cmd.fix) {
-                    fs.writeFileSync(filePath, str);
-                    successLn(`Prettified: ${name}`);
-                } else {
-                    errorLn(`Unformatted: ${name}`);
-                    errored = true;
+        if (mode !== 'off') {
+            for (const {content, source, name, filePath} of files) {
+                const str = `${prettify(content, options)}\n`;
+
+                if (str !== source) {
+                    if (cmd.fix) {
+                        fs.writeFileSync(filePath, str);
+                        successLn(`Prettified: ${name}`);
+                    } else if (mode === 'warn') {
+                        warnLn(`Unformatted: ${name}`);
+                    } else {
+                        errorLn(`Unformatted: ${name}`);
+                        errored = true;
+                    }
+                } else if (!cmd.quiet && cmd.fix) {
+                    successLn(`Validated: ${name}`);
                 }
-            } else if (!cmd.quiet && cmd.fix) {
-                successLn(`Validated: ${name}`);
             }
         }
     }

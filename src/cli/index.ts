@@ -1,30 +1,19 @@
-import {error} from '@utils/log';
+import {CLIOptions, Li18ntOptions, Mode} from '@types';
+import {warnLn} from '@utils/log';
 import {printReport} from '@utils/printReport';
 import {resolveConfiguration} from '@utils/resolveConfiguration';
-import program from 'commander';
+import program, {Command} from 'commander';
 import {entry} from './entry';
 
 const version = typeof VERSION === 'undefined' ? 'unknown' : VERSION;
 
-const parseIndentation = (v: string): string | number | never => {
-    if (v === 'tab') {
-        return '\t';
-    } else if (v.match(/^\d*$/g)) {
-        return Number(v);
-    }
-
-
-    error('Invalid value for --indent, expected number (spaces) or \'tab\'.');
-    process.exit(-4);
+/* eslint-disable @typescript-eslint/no-explicit-any */
+const processRule = (mode: Mode | [Mode, unknown]): [Mode, any] => {
+    return typeof mode === 'string' ? [mode, undefined] : mode;
 };
 
-const parseMode = (flag: string) => (v: string): string | never => {
-    if (['off', 'warn', 'error'].includes(v)) {
-        return v;
-    }
-
-    error(`Invalid value for ${flag}, expected 'off', 'warn' or 'error'.`);
-    process.exit(-4);
+const undefinedOr = <A>(a: A | undefined, b: A | undefined) => {
+    return typeof a !== 'undefined' ? a : b;
 };
 
 program
@@ -37,30 +26,30 @@ program
     .option('-q, --quiet', 'Print only errors and warnings')
     .option('-d, --debug', 'Debug information')
     .option('-f, --fix', 'Tries to fix existing errors')
-    .option('-p, --prettified [number|tab]', 'Check if files are properly formatted (default: 4 spaces)', parseIndentation)
-    .option('--duplicates [off|warn|error]', 'Find duplicates (default: warn)', parseMode('--duplicates'))
-    .option('--conflicts [off|warn|error]', 'Find type conflicts and missing properties (default: error)', parseMode('--conflicts'))
-    .option('--config [path]', 'Use configuration file')
+    .option('--config [path]', 'Configuration file path (it\'ll try to resolve one in the current directory)')
     .option('--skip-invalid', 'Skip invalid files without exiting')
     .option('--report', 'Print system information')
-    .action((args, cmd) => {
+    .action((args, cmd: Command & CLIOptions) => {
 
         // Print report and exit immediately
         if (cmd.report) {
             return printReport(version);
         }
 
-        // TODO: See https://github.com/tj/commander.js/issues/1394
-        cmd.prettified = cmd.prettified === true ? 4 : cmd.prettified;
-        cmd.duplicates = cmd.duplicates === true ? 'warn' : cmd.duplicates;
-        cmd.conflicts = cmd.conflicts === true ? 'error' : cmd.conflicts;
-
         // Try to resolve and load config file
         const options = resolveConfiguration(cmd);
         if (options) {
-            cmd.prettified = options.prettified || cmd.prettify;
-            cmd.duplicates = options.duplicates || cmd.duplicates;
-            cmd.conflicts = options.conflicts || cmd.conflicts;
+
+            // Override options
+            cmd.quiet = undefinedOr(cmd.quiet, options.quiet);
+            cmd.skipInvalid = undefinedOr(cmd.skipInvalid, options.skipInvalid);
+            cmd.rules = options.rules || {};
+
+            for (const [name, value] of Object.entries(cmd.rules)) {
+                cmd.rules[name as keyof Li18ntOptions] = processRule(value as Mode | [Mode, unknown]);
+            }
+        } else {
+            return warnLn('Missing configuration file.');
         }
 
         return entry(args, cmd);

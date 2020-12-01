@@ -1,6 +1,12 @@
 import {JSONArray, JSONObject, JSONValue} from '@types';
 import {typeOfJsonValue} from '@utils/typeOfJsonValue';
 
+export type Indentation = 'tab' | number;
+
+export interface PrettifyOptions {
+    indent?: Indentation;
+}
+
 /**
  * Returns the sorted keys of an object as string array
  * @param obj
@@ -17,8 +23,8 @@ const sortedKeys = (obj: JSONObject): string[] => {
  * @param obj
  * @param space
  */
-export const prettify = (obj: JSONObject, space?: number | string): string => {
-    const spacer = typeof space === 'number' ? ' '.repeat(space) : typeof space === 'string' ? space : '';
+export const prettify = (obj: JSONObject, {indent = 4}: PrettifyOptions): string => {
+    const spacer = indent === 'tab' ? '\t' : ' '.repeat(indent);
     let str = '{\n';
 
     const stringify = (v: JSONValue, indent: string): string | boolean | number | null => {

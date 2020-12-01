@@ -1,19 +1,25 @@
 import {Conflicts} from '@tools/conflicts';
 import {Duplicates, DuplicatesConfig} from '@tools/duplicates';
+import {Indentation, PrettifyOptions} from '@tools/prettify';
 import {Command} from 'commander';
 
+export type Mode = 'off' | 'warn' | 'error';
+export type Li18ntOption<T> = [Mode, T?]
+
 export interface Li18ntOptions {
-    prettified?: number | string;
+    prettified?: Indentation | PrettifyOptions;
     duplicates?: boolean | DuplicatesConfig;
     conflicts?: boolean;
 }
 
-export type Mode = 'off' | 'warn' | 'error';
+export type CLIRules = {
+    prettified?: Li18ntOption<PrettifyOptions>;
+    duplicates?: Li18ntOption<DuplicatesConfig>;
+    conflicts?: Li18ntOption<boolean>;
+}
 
 export interface CLIOptions {
-    prettified?: number | string;
-    duplicates?: Mode | (DuplicatesConfig & {mode: Mode});
-    conflicts?: Mode;
+    rules: CLIRules;
     fix?: boolean;
     debug?: boolean;
     quiet?: boolean;
@@ -29,13 +35,14 @@ export interface SourceFile {
     name: string;
 }
 
-export interface CLIModuleArguments {
+export interface CLIModuleArguments<Config> {
     files: SourceFile[];
     cmd: Command & CLIOptions;
+    rule: Li18ntOption<Config>;
 }
 
-export interface CLIModule {
-    (args: CLIModuleArguments): boolean | void;
+export interface CLIModule<Config = undefined> {
+    (args: CLIModuleArguments<Config>): boolean | void;
 }
 
 export interface Li18ntResult {

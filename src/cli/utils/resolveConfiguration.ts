@@ -1,4 +1,4 @@
-import {CLIOptions, Li18ntOptions} from '@types';
+import {CLIOptions} from '@types';
 import {Command} from 'commander';
 import fs from 'fs';
 import path from 'path';
@@ -24,7 +24,7 @@ const load = (filePath: string) => {
  * Tries to find a configuration ile and parses it
  * @param cmd
  */
-export const resolveConfiguration = (cmd: Command & CLIOptions): Li18ntOptions | null => {
+export const resolveConfiguration = (cmd: Command & CLIOptions): CLIOptions | null => {
     const cwd = process.cwd();
 
     // User specified a file-path

@@ -6,9 +6,10 @@ import {pluralize} from '@utils/pluralize';
 import {prettyPropertyPath} from '@utils/prettyPropertyPath';
 
 /* eslint-disable no-console */
-export const conflictsFlag: CLIModule = ({files, cmd}) => {
+export const conflictsFlag: CLIModule = ({files, cmd, rule}) => {
     const diff = conflicts(files.map(v => v.content));
-    const {log, accent} = getLoggingSet(cmd.conflicts as string);
+    const [mode] = rule;
+    const {log, accent} = getLoggingSet(mode);
     let count = 0;
 
     for (let i = 0; i < diff.length; i++) {
@@ -47,5 +48,5 @@ export const conflictsFlag: CLIModule = ({files, cmd}) => {
     }
 
     !count && !cmd.quiet && successLn('No conflicts found!');
-    return cmd.conflicts === 'warn' || !count;
+    return mode === 'warn' || !count;
 };
