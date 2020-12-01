@@ -57,17 +57,17 @@ Installing it will add `li18nt` (and the alias `lint-i18n`) to your command line
 
 Examples:
 ```sh
-# Prettify your files (this will sort all your properties alphabetically)
-$ li18nt locales/*.json --pretty
+# Check if your files are prettified
+$ li18nt locales/*.json --prettified
 
 # Prettify your files, check for conflicts / missing properties and duplicates
-$ li18nt locales/*.json --pretty --conflicts --duplicates
+$ li18nt locales/*.json --prettified --conflicts --duplicates --fix
 
 # List all commands
 $ li18nt --help
-Usage: lint-i18n [files...] [options]
+Usage: li18nt [files...] [options]
 
-Lints your locales files, li18nt is an alias.
+Lints your locales files, lint-i18n is an alias.
 
 Options:
   -v, --version                  Output the current version

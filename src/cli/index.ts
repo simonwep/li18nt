@@ -31,7 +31,7 @@ program
     .version(version, '-v, --version', 'Output the current version')
     .helpOption('-h, --help', 'Show this help text')
     .name('lint-i18n')
-    .description('Lints your locales files, li18nt is an alias.')
+    .description('Lints your locales files, lint-i18n is an alias.')
     .usage('[files...] [options]')
     .arguments('[files...]')
     .option('-q, --quiet', 'Print only errors and warnings')
