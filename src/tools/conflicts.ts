@@ -1,6 +1,6 @@
 import {JSONArray, JSONObject, JSONValue, PropertyPath} from '@types';
-import {containsDeep} from '@utils/containsDeep';
 import {keysFrom} from '@utils/keysFrom';
+import {containsDeep} from '@utils/object';
 import {typeOfJsonValue} from '@utils/typeOfJsonValue';
 
 export interface Conflict {

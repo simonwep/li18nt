@@ -1,6 +1,5 @@
 import {JSONArray, JSONObject, PropertyPath} from '@types';
-import {startsWithPattern} from '@utils/containsDeep';
-import {propertyPath} from '@utils/propertyPath';
+import {propertyPath, startsWithPattern} from '@utils/object';
 import {typeOfJsonValue} from '@utils/typeOfJsonValue';
 
 export interface DuplicatesConfig {

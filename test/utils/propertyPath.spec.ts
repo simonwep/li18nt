@@ -1,5 +1,5 @@
 import {PropertyPath} from '@types';
-import {propertyPath} from '@utils/propertyPath';
+import {propertyPath} from '@utils/object';
 
 describe('[util] propertyPath', () => {
 

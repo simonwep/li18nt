@@ -4,7 +4,7 @@ import {prettify} from '@tools/prettify';
 import {JSONObject, Li18ntOptions, Li18ntResult} from '@types';
 
 // Export property path utility
-export * from './utils/propertyPath';
+export {propertyPath} from '@utils/object';
 
 // Current version
 export const version = typeof VERSION !== 'undefined' ? VERSION : 'unknown';
