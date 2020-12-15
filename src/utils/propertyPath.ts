@@ -1,6 +1,6 @@
 import {PropertyPath} from '@types';
 
-const PATH_REGEX = /(\.|^)(\w+)|\[(\d+|'(.*?)'|"(.*?)")]/g;
+const PATH_REGEX = /(\.|^)([\w*]+)|\[(\d+|'(.*?)'|"(.*?)")]/g;
 
 /**
  * Parses a property path

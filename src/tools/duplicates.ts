@@ -1,5 +1,5 @@
 import {JSONArray, JSONObject, PropertyPath} from '@types';
-import {startsWithDeep} from '@utils/containsDeep';
+import {startsWithPattern} from '@utils/containsDeep';
 import {propertyPath} from '@utils/propertyPath';
 import {typeOfJsonValue} from '@utils/typeOfJsonValue';
 
@@ -41,7 +41,7 @@ export const duplicates = (object: JSONObject, conf?: DuplicatesConfig): Duplica
                     if (type === 'object' || type === 'array') {
 
                         // Make it possible to ignore entire sub-trees
-                        if (!startsWithDeep(ignored, newKey)) {
+                        if (!startsWithPattern(ignored, newKey)) {
                             walk(value as JSONObject, newKey);
                         }
 
@@ -53,7 +53,7 @@ export const duplicates = (object: JSONObject, conf?: DuplicatesConfig): Duplica
                         const list = duplicates.get(key) || [existingPath];
 
                         // Check against ignored list
-                        if (!startsWithDeep(ignored, newKey)) {
+                        if (!startsWithPattern(ignored, newKey)) {
                             duplicates.set(key, [...list, newKey]);
                         }
                     } else {

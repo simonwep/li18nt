@@ -34,6 +34,20 @@ Map {
 }
 `;
 
+exports[`[tool] duplicates Should be able to ignore sub-trees using the * pattern 1`] = `
+Map {
+  "welcome" => Array [
+    Array [
+      "welcome",
+    ],
+    Array [
+      "about",
+      "welcome",
+    ],
+  ],
+}
+`;
+
 exports[`[tool] duplicates Should find a duplicate property and its paths 1`] = `
 Map {
   "welcome" => Array [

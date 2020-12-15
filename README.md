@@ -108,7 +108,10 @@ in the current directory. Use the `--config [path]` option to specify a differen
             "ignore": [
                 // You can also use the array-sytax e.g. ["pages", "dashboard", "dashboard"]
                 // If the specified target is an object it'll be skipped, e.g. you can ignore entire sub-trees
-                "pages.dashboard.dashboard"
+                "pages.dashboard.dashboard",
+
+                // Use the * to match all properties in a tree
+                "pages.*"
             ]
         }]
     }

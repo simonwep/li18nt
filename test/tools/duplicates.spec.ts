@@ -92,4 +92,32 @@ describe('[tool] duplicates', () => {
             ]
         })).toMatchSnapshot();
     });
+
+    it('Should be able to ignore sub-trees using the * pattern', () => {
+        expect(duplicates({
+            'welcome': 'Willkommen',
+            'back': 'Zurück',
+            'home': {
+                'welcome': 'Willkommen',
+                'sub': {'welcome': 'Willkommen'}
+            },
+            'about': {
+                'welcome': 'Willkommen',
+                'header': {
+                    'welcome': 'Willkommen',
+                    'footer': {
+                        'welcome': 'Willkommen',
+                        'side': {
+                            'welcome': 'Willkommen'
+                        }
+                    }
+                }
+            }
+        }, {
+            ignore: [
+                'home.*',
+                'about.header.*'
+            ]
+        })).toMatchSnapshot();
+    });
 });

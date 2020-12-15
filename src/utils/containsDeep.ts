@@ -1,14 +1,16 @@
+import {PropertyPath} from '@types';
+
 /**
  * Checks if the given array contains another array, only works with primitives.
- * @param arr
+ * @param paths
  * @param target
  */
-export const containsDeep = <T extends Array<string | number | boolean | null | undefined>>(arr: Array<T>, target: T): boolean => {
-    outer: for (const element of arr) {
-        if (element.length === target.length) {
+export const containsDeep = <T extends PropertyPath>(paths: Array<T>, target: T): boolean => {
+    outer: for (const path of paths) {
+        if (path.length === target.length) {
 
-            for (let i = 0; i < arr.length; i++) {
-                if (element[i] !== target[i]) {
+            for (let i = 0; i < paths.length; i++) {
+                if (path[i] !== target[i]) {
                     continue outer;
                 }
             }
@@ -22,15 +24,19 @@ export const containsDeep = <T extends Array<string | number | boolean | null | 
 
 /**
  * Same as containsDeep but only the beginning of the array needs to match the given target
- * @param arr
+ * @param paths
  * @param target
  */
-export const startsWithDeep = <T extends Array<string | number | boolean | null | undefined>>(arr: Array<T>, target: T): boolean => {
-    outer: for (const element of arr) {
-        if (element.length <= target.length) {
+export const startsWithPattern = <T extends string[]>(paths: Array<T>, target: T): boolean => {
+    outer: for (const path of paths) {
+        if (path.length <= target.length) {
 
-            for (let i = 0; i < element.length; i++) {
-                if (element[i] !== target[i]) {
+            for (let i = 0; i < path.length; i++) {
+                const prop = path[i];
+
+                if (prop === '*') {
+                    return true;
+                } else if (prop !== target[i]) {
                     continue outer;
                 }
             }
