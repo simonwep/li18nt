@@ -27,7 +27,7 @@ export const containsDeep = <T extends PropertyPath>(paths: Array<T>, target: T)
  * @param paths
  * @param target
  */
-export const startsWithPattern = <T extends string[]>(paths: Array<T>, target: T): boolean => {
+export const startsWithPattern = <T extends PropertyPath>(paths: Array<T>, target: T): boolean => {
     outer: for (const path of paths) {
         if (path.length <= target.length) {
 
