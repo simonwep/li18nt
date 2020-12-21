@@ -1,5 +1,6 @@
 import {conflicts} from '@tools/conflicts';
 import {duplicates} from '@tools/duplicates';
+import {pattern} from '@tools/pattern';
 import {prettify} from '@tools/prettify';
 import {JSONObject, Li18ntOptions, Li18ntResult} from '@types';
 
@@ -16,6 +17,15 @@ export const version = typeof VERSION !== 'undefined' ? VERSION : 'unknown';
  */
 export const lint = (conf: Li18ntOptions, objects: JSONObject[]): Li18ntResult => {
     const res: Li18ntResult = {};
+
+    if (conf.naming) {
+        const mismatches = [];
+        for (const obj of objects) {
+            mismatches.push(pattern(obj, conf.naming));
+        }
+
+        res.naming = mismatches;
+    }
 
     if (conf.conflicts) {
         res.conflicts = conflicts(objects);

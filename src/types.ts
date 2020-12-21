@@ -1,5 +1,6 @@
 import {Conflicts} from '@tools/conflicts';
 import {Duplicates, DuplicatesConfig} from '@tools/duplicates';
+import {PatternConfig, PatternMismatch} from '@tools/pattern';
 import {Indentation, PrettifyOptions} from '@tools/prettify';
 import {Command} from 'commander';
 
@@ -10,6 +11,7 @@ export interface Li18ntOptions {
     prettified?: Indentation | PrettifyOptions;
     duplicates?: boolean | DuplicatesConfig;
     conflicts?: boolean;
+    naming?: PatternConfig;
 }
 
 export type CLIRules = {
@@ -49,6 +51,7 @@ export interface Li18ntResult {
     prettified?: string[];
     duplicates?: Duplicates[];
     conflicts?: Conflicts;
+    naming?: PatternMismatch[][];
 }
 
 export type PropertyPath = (string | number)[];

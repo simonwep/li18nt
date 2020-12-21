@@ -67,4 +67,19 @@ describe('Main library', () => {
             {a: 23, b: 'Super', c: {x: {a: 100}}}
         ])).toMatchSnapshot();
     });
+
+    it('Should work with naming conventions', ()=>{
+        expect(lint({
+            prettified: 'tab',
+            duplicates: true,
+            conflicts: true,
+            naming: {
+                patterns: [/[^x]/]
+            }
+        }, [
+            {a: 20, b: null, c: {x: 20}},
+            {a: 50, b: 'Hello', c: {x: 100, y: 20}},
+            {a: 'Five', b: 'Super', c: null}
+        ])).toMatchSnapshot();
+    });
 });

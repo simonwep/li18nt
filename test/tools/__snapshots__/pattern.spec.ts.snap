@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[tool] pattern Should do nothing without options 1`] = `Array []`;
+
+exports[`[tool] pattern Should validate a simple object 1`] = `
+Array [
+  Object {
+    "failed": Array [
+      "/^[a-z]+$/",
+    ],
+    "key": "abOut",
+    "path": Array [
+      "abOut",
+    ],
+  },
+  Object {
+    "failed": Array [
+      "/^[a-z]+$/",
+    ],
+    "key": "1next",
+    "path": Array [
+      "home",
+      "1next",
+    ],
+  },
+  Object {
+    "failed": Array [
+      "/^[a-z]+$/",
+    ],
+    "key": "heaDer",
+    "path": Array [
+      "home",
+      "welcome",
+      "heaDer",
+    ],
+  },
+]
+`;

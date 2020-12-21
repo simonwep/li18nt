@@ -188,6 +188,114 @@ Object {
 }
 `;
 
+exports[`Main library Should work with naming conventions 1`] = `
+Object {
+  "conflicts": Array [
+    Object {
+      "conflicts": Array [
+        Array [
+          "a",
+        ],
+        Array [
+          "b",
+        ],
+        Array [
+          "c",
+        ],
+      ],
+      "missing": Array [
+        Array [
+          "c",
+          "y",
+        ],
+      ],
+    },
+    Object {
+      "conflicts": Array [
+        Array [
+          "a",
+        ],
+        Array [
+          "b",
+        ],
+        Array [
+          "c",
+        ],
+      ],
+      "missing": Array [],
+    },
+    Object {
+      "conflicts": Array [
+        Array [
+          "a",
+        ],
+        Array [
+          "b",
+        ],
+        Array [
+          "c",
+        ],
+      ],
+      "missing": Array [],
+    },
+  ],
+  "duplicates": Array [
+    Map {},
+    Map {},
+    Map {},
+  ],
+  "naming": Array [
+    Array [
+      Object {
+        "failed": Array [
+          "/[^x]/",
+        ],
+        "key": "x",
+        "path": Array [
+          "c",
+          "x",
+        ],
+      },
+    ],
+    Array [
+      Object {
+        "failed": Array [
+          "/[^x]/",
+        ],
+        "key": "x",
+        "path": Array [
+          "c",
+          "x",
+        ],
+      },
+    ],
+    Array [],
+  ],
+  "prettified": Array [
+    "{
+	\\"a\\": 20,
+	\\"b\\": null,
+	\\"c\\": {
+		\\"x\\": 20
+	}
+}",
+    "{
+	\\"a\\": 50,
+	\\"b\\": \\"Hello\\",
+	\\"c\\": {
+		\\"x\\": 100,
+		\\"y\\": 20
+	}
+}",
+    "{
+	\\"a\\": \\"Five\\",
+	\\"b\\": \\"Super\\",
+	\\"c\\": null
+}",
+  ],
+}
+`;
+
 exports[`Main library Should work with the example given in the README 1`] = `
 Object {
   "conflicts": Array [

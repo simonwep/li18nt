@@ -1,4 +1,5 @@
-import {PropertyPath} from '@types';
+import {JSONArray, JSONObject, PropertyPath} from '@types';
+import {typeOfJsonValue} from '@utils/typeOfJsonValue';
 
 const PATH_REGEX = /(\.|^)([a-zA-Z]\w*|\*)|\[(\d+|'(.*?)'|"(.*?)")]/g;
 
@@ -78,3 +79,51 @@ export const startsWithPattern = <T extends PropertyPath>(paths: Array<T>, targe
 
     return false;
 };
+
+export interface Property <K extends (string | number)>{
+    key: K;
+    path: PropertyPath;
+}
+
+/**
+ * Iterates over all properties (including nested ones) of an object
+ * @param obj Target object
+ * @param skipArrays Do not list array items (will still include objects in arrays)
+ */
+export function* paths<
+    T extends JSONObject,
+    S extends boolean,
+    P = Property<S extends true ? string :(string | number)>
+>(obj: T, skipArrays?: S): IterableIterator<P> {
+    function* process(val: JSONObject | JSONArray, path: PropertyPath = []): IterableIterator<P> {
+        if (Array.isArray(val)) {
+            for (let i = 0; i < val.length; i++) {
+                const valuePath = [...path, i];
+                const value = val[i];
+
+                if (!skipArrays) {
+                    yield {path: valuePath, key: i} as unknown as P;
+                }
+
+                switch (typeOfJsonValue(value)) {
+                    case 'array':
+                    case 'object':
+                        yield* process(value as JSONObject | JSONArray, valuePath);
+                }
+            }
+        } else {
+            for (const [key, value] of Object.entries(val)) {
+                const valuePath = [...path, key];
+
+                yield {path: valuePath, key} as unknown as P;
+                switch (typeOfJsonValue(value)) {
+                    case 'array':
+                    case 'object':
+                        yield* process(value as JSONObject | JSONArray, valuePath);
+                }
+            }
+        }
+    }
+
+    yield* process(obj);
+}
