@@ -1,22 +1,23 @@
 import {prettify} from '@tools/prettify';
 import {CLIModule, CLIOptions, CLIRules, SourceFile} from '@types';
 import {debugLn, errorLn, successLn, warnLn} from '@utils/log';
-import {Command} from 'commander';
 import fs from 'fs';
 import glob from 'glob';
 import path from 'path';
 import {conflictsFlag} from './flags/conflicts.flag';
 import {duplicatesFlag} from './flags/duplicates.flag';
+import {namingFlag} from './flags/naming.flag';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-const flags: Partial<Record<keyof CLIOptions['rules'], CLIModule<any>>> = {
+const flags: Partial<Record<keyof CLIRules, CLIModule<any>>> = {
     'conflicts': conflictsFlag,
-    'duplicates': duplicatesFlag
+    'duplicates': duplicatesFlag,
+    'naming': namingFlag
 };
 
 // Entry point
 /* eslint-disable no-console */
-export const entry = async (sources: string[], cmd: Command & CLIOptions): Promise<void> => {
+export const entry = async (sources: string[], cmd: CLIOptions): Promise<void> => {
     const cwd = process.cwd();
     const {rules} = cmd;
 

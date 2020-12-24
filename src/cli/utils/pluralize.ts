@@ -4,5 +4,6 @@
  * @param count
  */
 export const pluralize = (str: string, count: number): string => {
-    return count === 1 ? `one ${str}` : `${count} ${str}s`;
+    return count === 1 ? `one ${str}` :
+        `${count} ${str.endsWith('h') ? `${str}e` : str}s`;
 };

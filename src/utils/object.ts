@@ -80,7 +80,7 @@ export const startsWithPattern = <T extends PropertyPath>(paths: Array<T>, targe
     return false;
 };
 
-export interface Property <K extends (string | number)>{
+export interface Property<K extends (string | number)> {
     key: K;
     path: PropertyPath;
 }
@@ -90,8 +90,7 @@ export interface Property <K extends (string | number)>{
  * @param obj Target object
  * @param skipArrays Do not list array items (will still include objects in arrays)
  */
-export function* paths<
-    T extends JSONObject,
+export function* paths<T extends JSONObject,
     S extends boolean,
     P = Property<S extends true ? string :(string | number)>
 >(obj: T, skipArrays?: S): IterableIterator<P> {

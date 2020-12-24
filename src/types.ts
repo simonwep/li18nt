@@ -2,7 +2,6 @@ import {Conflicts} from '@tools/conflicts';
 import {Duplicates, DuplicatesConfig} from '@tools/duplicates';
 import {PatternConfig, PatternMismatch} from '@tools/pattern';
 import {Indentation, PrettifyOptions} from '@tools/prettify';
-import {Command} from 'commander';
 
 export type Mode = 'off' | 'warn' | 'error';
 export type Li18ntOption<T> = [Mode, T?]
@@ -31,6 +30,7 @@ export type CLIRules = {
     prettified?: Li18ntOption<PrettifyOptions>;
     duplicates?: Li18ntOption<DuplicatesConfig>;
     conflicts?: Li18ntOption<boolean>;
+    naming: Li18ntOption<PatternConfig>;
 }
 
 export interface CLIOptions {
@@ -52,7 +52,7 @@ export interface SourceFile {
 
 export interface CLIModuleArguments<Config> {
     files: SourceFile[];
-    cmd: Command & CLIOptions;
+    cmd: CLIOptions;
     rule: Li18ntOption<Config>;
 }
 
