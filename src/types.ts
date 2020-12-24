@@ -8,10 +8,23 @@ export type Mode = 'off' | 'warn' | 'error';
 export type Li18ntOption<T> = [Mode, T?]
 
 export interface Li18ntOptions {
-    prettified?: Indentation | PrettifyOptions;
-    duplicates?: boolean | DuplicatesConfig;
-    conflicts?: boolean;
-    naming?: PatternConfig;
+    prettified: Indentation | PrettifyOptions;
+    duplicates: boolean | DuplicatesConfig;
+    conflicts: boolean;
+    naming: PatternConfig;
+}
+
+export interface Li18ntResult {
+    prettified: string[];
+    duplicates: Duplicates[];
+    conflicts: Conflicts;
+    naming: PatternMismatch[][];
+}
+
+export type PartialLi18ntResult<T extends Partial<Li18ntOptions>> = {
+    [P in keyof T]: T[P] extends undefined ?
+        never : P extends keyof Li18ntResult ?
+            Li18ntResult[P] : never
 }
 
 export type CLIRules = {
@@ -45,13 +58,6 @@ export interface CLIModuleArguments<Config> {
 
 export interface CLIModule<Config = undefined> {
     (args: CLIModuleArguments<Config>): boolean | void;
-}
-
-export interface Li18ntResult {
-    prettified?: string[];
-    duplicates?: Duplicates[];
-    conflicts?: Conflicts;
-    naming?: PatternMismatch[][];
 }
 
 export type PropertyPath = (string | number)[];

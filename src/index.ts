@@ -2,7 +2,7 @@ import {conflicts} from '@tools/conflicts';
 import {duplicates} from '@tools/duplicates';
 import {pattern} from '@tools/pattern';
 import {prettify} from '@tools/prettify';
-import {JSONObject, Li18ntOptions, Li18ntResult} from '@types';
+import {JSONObject, Li18ntOptions, Li18ntResult, PartialLi18ntResult} from '@types';
 
 // Export property path utility
 export {propertyPath} from '@utils/object';
@@ -15,8 +15,8 @@ export const version = typeof VERSION !== 'undefined' ? VERSION : 'unknown';
  * @param conf
  * @param objects
  */
-export const lint = (conf: Li18ntOptions, objects: JSONObject[]): Li18ntResult => {
-    const res: Li18ntResult = {};
+export const lint = <T extends Li18ntOptions>(conf: T, objects: JSONObject[]): PartialLi18ntResult<T> => {
+    const res: Partial<Li18ntResult> = {};
 
     if (conf.naming) {
         const mismatches = [];
@@ -51,5 +51,5 @@ export const lint = (conf: Li18ntOptions, objects: JSONObject[]): Li18ntResult =
         }
     }
 
-    return res;
+    return res as PartialLi18ntResult<T>;
 };

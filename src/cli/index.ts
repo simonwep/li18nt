@@ -1,4 +1,4 @@
-import {CLIOptions, Li18ntOptions, Mode} from '@types';
+import {CLIOptions, CLIRules, Mode} from '@types';
 import {warnLn} from '@utils/log';
 import {printReport} from '@utils/printReport';
 import {resolveConfiguration} from '@utils/resolveConfiguration';
@@ -46,7 +46,7 @@ program
             cmd.rules = options.rules || {};
 
             for (const [name, value] of Object.entries(cmd.rules)) {
-                cmd.rules[name as keyof Li18ntOptions] = processRule(value as Mode | [Mode, unknown]);
+                cmd.rules[name as keyof CLIRules] = processRule(value as Mode | [Mode, unknown]);
             }
         } else {
             return warnLn('Missing configuration file.');
