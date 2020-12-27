@@ -11,7 +11,7 @@ export const namingFlag: CLIModule<PatternConfig> = ({files, cmd, rule}) => {
     const [mode, options] = rule;
     const {logLn, accent} = getLoggingSet(mode);
 
-    let count = 0;
+    let errors = 0;
     for (const {name, content} of files) {
         const mismatches = pattern(content, options);
 
@@ -32,10 +32,10 @@ export const namingFlag: CLIModule<PatternConfig> = ({files, cmd, rule}) => {
                 }
             }
 
-            count++;
+            errors++;
         }
     }
 
-    !count && !cmd.quiet && successLn('No duplicates found!');
-    return mode === 'warn' || !count;
+    !errors && !cmd.quiet && successLn('No duplicates found!');
+    return !errors;
 };

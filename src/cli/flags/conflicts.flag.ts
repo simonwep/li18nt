@@ -10,7 +10,7 @@ export const conflictsFlag: CLIModule = ({files, cmd, rule}) => {
     const diff = conflicts(files.map(v => v.content));
     const [mode] = rule;
     const {log, accent} = getLoggingSet(mode);
-    let count = 0;
+    let errors = 0;
 
     for (let i = 0; i < diff.length; i++) {
         const {conflicts, missing} = diff[i];
@@ -44,9 +44,9 @@ export const conflictsFlag: CLIModule = ({files, cmd, rule}) => {
             }
         }
 
-        count += conflicts.length + missing.length;
+        errors += conflicts.length + missing.length;
     }
 
-    !count && !cmd.quiet && successLn('No conflicts found!');
-    return mode === 'warn' || !count;
+    !errors && !cmd.quiet && successLn('No conflicts found!');
+    return !errors;
 };

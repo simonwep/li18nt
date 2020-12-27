@@ -57,7 +57,7 @@ export interface CLIModuleArguments<Config> {
 }
 
 export interface CLIModule<Config = undefined> {
-    (args: CLIModuleArguments<Config>): boolean | void;
+    (args: CLIModuleArguments<Config>): boolean;
 }
 
 export type PropertyPath = (string | number)[];

@@ -34,7 +34,7 @@ export const entry = async (sources: string[], cmd: CLIOptions): Promise<void> =
                 continue;
             }
 
-            // Try to read an parse
+            // Try to read and parse the locale file
             try {
                 const source = fs.readFileSync(filePath, 'utf-8');
                 files.push({
@@ -43,8 +43,12 @@ export const entry = async (sources: string[], cmd: CLIOptions): Promise<void> =
                 });
             } catch (e) {
                 errorLn(`Couldn't read / parse file: ${filePath}`);
-                cmd.debug && console.error(e);
+
+                // Exit in case invalid files shouldn't be skipped
                 !cmd.skipInvalid && process.exit(-2);
+
+                // Print error message during debug mode
+                cmd.debug && console.error(e);
                 continue;
             }
 
@@ -66,7 +70,8 @@ export const entry = async (sources: string[], cmd: CLIOptions): Promise<void> =
         if (rule && rule[0] !== 'off' && handler) {
 
             // We need to check against false as undefined is falsy
-            errored = handler({files, cmd, rule}) === false || errored;
+            const ok = handler({files, cmd, rule});
+            errored = (rule[0] === 'warn' && !ok) || errored;
         }
     }
 
