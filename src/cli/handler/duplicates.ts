@@ -7,7 +7,7 @@ import {prettyPropertyPath} from '@utils/prettyPropertyPath';
 import chalk from 'chalk';
 
 /* eslint-disable no-console */
-export const duplicatesFlag: CLIModule<DuplicatesConfig> = ({files, cmd, rule}) => {
+export const duplicatesHandler: CLIModule<DuplicatesConfig> = ({files, cmd, rule}) => {
     const [mode, options] = rule;
     const {logLn, accent} = getLoggingSet(mode);
 

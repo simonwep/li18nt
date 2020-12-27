@@ -7,7 +7,7 @@ import {prettyPropertyPath} from '@utils/prettyPropertyPath';
 import chalk from 'chalk';
 
 /* eslint-disable no-console */
-export const namingFlag: CLIModule<PatternConfig> = ({files, cmd, rule}) => {
+export const namingHandler: CLIModule<PatternConfig> = ({files, cmd, rule}) => {
     const [mode, options] = rule;
     const {logLn, accent} = getLoggingSet(mode);
 

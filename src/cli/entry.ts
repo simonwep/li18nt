@@ -1,19 +1,9 @@
-import {prettify} from '@tools/prettify';
-import {CLIModule, CLIOptions, CLIRules, SourceFile} from '@types';
-import {debugLn, errorLn, successLn, warnLn} from '@utils/log';
+import {CLIOptions, CLIRules, SourceFile} from '@types';
+import {debugLn, errorLn, warnLn} from '@utils/log';
 import fs from 'fs';
 import glob from 'glob';
 import path from 'path';
-import {conflictsFlag} from './flags/conflicts.flag';
-import {duplicatesFlag} from './flags/duplicates.flag';
-import {namingFlag} from './flags/naming.flag';
-
-/* eslint-disable @typescript-eslint/no-explicit-any */
-const flags: Partial<Record<keyof CLIRules, CLIModule<any>>> = {
-    'conflicts': conflictsFlag,
-    'duplicates': duplicatesFlag,
-    'naming': namingFlag
-};
+import {handler} from './handler';
 
 // Entry point
 /* eslint-disable no-console */
@@ -58,45 +48,21 @@ export const entry = async (sources: string[], cmd: CLIOptions): Promise<void> =
 
     // Nothing to process
     if (!files.length) {
+        cmd.debug && debugLn('Nothing to process.');
         return;
     }
 
     // Process files
     let errored = false;
-    for (const [flag, handler] of Object.entries(flags)) {
+    for (const [flag, func] of handler) {
         const rule = rules[flag as keyof CLIRules];
 
         cmd.debug && debugLn(`Rule "${flag}": ${rule?.[0] || 'off'}`);
-        if (rule && rule[0] !== 'off' && handler) {
+        if (rule && rule[0] !== 'off') {
 
             // We need to check against false as undefined is falsy
-            const ok = handler({files, cmd, rule});
+            const ok = func({files, cmd, rule});
             errored = (rule[0] === 'warn' && !ok) || errored;
-        }
-    }
-
-    // Prettify?
-    if (rules.prettified) {
-        const [mode, options = {indent: 4}] = rules.prettified;
-
-        if (mode !== 'off') {
-            for (const {content, source, name, filePath} of files) {
-                const str = `${prettify(content, options)}\n`;
-
-                if (str !== source) {
-                    if (cmd.fix) {
-                        fs.writeFileSync(filePath, str);
-                        successLn(`Prettified: ${name}`);
-                    } else if (mode === 'warn') {
-                        warnLn(`Unformatted: ${name}`);
-                    } else {
-                        errorLn(`Unformatted: ${name}`);
-                        errored = true;
-                    }
-                } else if (!cmd.quiet && cmd.fix) {
-                    successLn(`Validated: ${name}`);
-                }
-            }
         }
     }
 

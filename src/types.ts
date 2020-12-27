@@ -27,9 +27,9 @@ export type PartialLi18ntResult<T extends Partial<Li18ntOptions>> = {
 }
 
 export type CLIRules = {
-    prettified?: Li18ntOption<PrettifyOptions>;
-    duplicates?: Li18ntOption<DuplicatesConfig>;
-    conflicts?: Li18ntOption<boolean>;
+    prettified: Li18ntOption<PrettifyOptions>;
+    duplicates: Li18ntOption<DuplicatesConfig>;
+    conflicts: Li18ntOption<boolean>;
     naming: Li18ntOption<PatternConfig>;
 }
 

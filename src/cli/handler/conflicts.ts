@@ -6,7 +6,7 @@ import {pluralize} from '@utils/pluralize';
 import {prettyPropertyPath} from '@utils/prettyPropertyPath';
 
 /* eslint-disable no-console */
-export const conflictsFlag: CLIModule = ({files, cmd, rule}) => {
+export const conflictsHandler: CLIModule = ({files, cmd, rule}) => {
     const diff = conflicts(files.map(v => v.content));
     const [mode] = rule;
     const {log, accent} = getLoggingSet(mode);
