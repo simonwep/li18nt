@@ -28,6 +28,7 @@
 </p>
 
 > Info: The README is always up-to-date with the latest commit, check out [releases](https://github.com/Simonwep/li18nt/releases) to see the docs for your version!
+> If you're curious about what's coming in v4 checkout the [next](https://github.com/Simonwep/li18nt/tree/next) branch :)
 
 This linter will do three major things:
 1. Finding conflicts: Comparing your files against each other to see if there are any properties with types not matching up.
@@ -65,7 +66,7 @@ $ li18nt locales/*.json --skip-invalid --quiet
 
 # List all commands
 $ li18nt --help
-Usage: lint-i18n [files...] [options]
+Usage: li18nt [files...] [options]
 
 Lints your locales files, lint-i18n is an alias.
 
@@ -91,6 +92,7 @@ in the current directory. Use the `--config [path]` option to specify a differen
     "quiet": false,
 
     // Override the --skip-invalid cli option
+    // If this is set to false it'll exit immediately after a file couldn't be parsed or read
     "skipInvalid": false,
 
     // List of rules
@@ -102,6 +104,16 @@ in the current directory. Use the `--config [path]` option to specify a differen
 
         // Checks for conflicts
         "conflicts": "warn",
+
+        // Validate property names
+        "naming": ["warn", {
+
+            // Specify a list of regular expressions to match keys against
+            "patterns": [
+                "^[a-z]*$",
+                "[^r]$"
+            ]
+        }],
 
         // Check for duplicates
         "duplicates": ["warn", {
