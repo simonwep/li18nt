@@ -15,7 +15,7 @@ export const version = typeof VERSION !== 'undefined' ? VERSION : 'unknown';
  * @param conf
  * @param objects
  */
-export const lint = <T extends Li18ntOptions>(conf: T, objects: JSONObject[]): PartialLi18ntResult<T> => {
+export const lint = <T extends Partial<Li18ntOptions>>(conf: T, objects: JSONObject[]): PartialLi18ntResult<T> => {
     const res: Partial<Li18ntResult> = {};
 
     if (conf.naming) {
