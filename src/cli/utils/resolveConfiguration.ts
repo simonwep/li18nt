@@ -33,7 +33,7 @@ export const resolveConfiguration = (cmd: Command & CLIOptions): CLIOptions | nu
 
         if (!fs.existsSync(filePath)) {
             error(`Couldn't find ${filePath}.`);
-            process.exit(-1);
+            process.exit(1);
         }
 
         try {
@@ -41,7 +41,7 @@ export const resolveConfiguration = (cmd: Command & CLIOptions): CLIOptions | nu
         } catch (err) {
             error(`Couldn't import ${filePath}.`);
             cmd.debug && debugLn(err);
-            process.exit(-1);
+            process.exit(1);
         }
     }
 
@@ -57,7 +57,7 @@ export const resolveConfiguration = (cmd: Command & CLIOptions): CLIOptions | nu
             } catch (err) {
                 error(`Couldn't load ${filePath}.`);
                 cmd.debug && debugLn(err);
-                process.exit(-1);
+                process.exit(1);
             }
         }
     }

@@ -35,7 +35,7 @@ export const entry = async (sources: string[], cmd: CLIOptions): Promise<void> =
                 errorLn(`Couldn't read / parse file: ${filePath}`);
 
                 // Exit in case invalid files shouldn't be skipped
-                !cmd.skipInvalid && process.exit(-2);
+                !cmd.skipInvalid && process.exit(2);
 
                 // Print error message during debug mode
                 cmd.debug && console.error(e);
@@ -66,7 +66,7 @@ export const entry = async (sources: string[], cmd: CLIOptions): Promise<void> =
         }
     }
 
-    const exitCode = errored ? -1 : 0;
+    const exitCode = errored ? 1 : 0;
     cmd.debug && debugLn(`Exiting with error: ${errored} (code: ${exitCode})`);
     process.exit(exitCode);
 };
