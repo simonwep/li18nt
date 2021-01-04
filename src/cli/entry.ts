@@ -62,7 +62,7 @@ export const entry = async (sources: string[], cmd: CLIOptions): Promise<void> =
 
             // We need to check against false as undefined is falsy
             const ok = func({files, cmd, rule});
-            errored = (rule[0] === 'warn' && !ok) || errored;
+            errored = (rule[0] === 'error' && !ok) || errored;
         }
     }
 
