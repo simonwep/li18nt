@@ -1,4 +1,5 @@
 {
+    "include": ["src/**/*.ts", "test/**/*.ts"],
     "compilerOptions": {
         "declaration": true,
         "declarationDir": "lib",
@@ -9,14 +10,11 @@
         "sourceMap": true,
         "target": "ES2018",
         "strict": true,
-        "lib": ["DOM", "ES2020"],
+        "lib": ["DOM", "ESNext"],
         "baseUrl": ".",
         "paths": {
-            "@utils/*": [
-                "./src/utils/*",
-                "./src/cli/utils/*"
-            ],
-            "@tools/*": ["./src/tools/*"],
+            "@lib": ["./src/lib"],
+            "@shared": ["./src/shared"],
             "@types": ["./src/types.ts"]
         }
     }

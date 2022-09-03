@@ -1,10 +1,10 @@
-import {duplicates, DuplicatesConfig} from '@tools/duplicates';
+import {duplicates, DuplicatesConfig} from '@lib';
 import {CLIModule} from '@types';
-import {getLoggingSet, successLn} from '@utils/log';
-import {makeList} from '@utils/makeList';
-import {pluralize} from '@utils/pluralize';
-import {prettyPropertyPath} from '@utils/prettyPropertyPath';
 import chalk from 'chalk';
+import {generateList} from '@shared';
+import {getLoggingSet, successLn} from '../utils/log';
+import {pluralize} from '../utils/pluralize';
+import {prettyPropertyPath} from '../utils/prettyPropertyPath';
 
 /* eslint-disable no-console */
 export const duplicatesHandler: CLIModule<DuplicatesConfig> = ({files, cmd, rule}) => {
@@ -24,7 +24,7 @@ export const duplicatesHandler: CLIModule<DuplicatesConfig> = ({files, cmd, rule
                 if (duplicates.length > 1) {
                     process.stdout.write('\n');
 
-                    for (const [num, path] of makeList(duplicates)) {
+                    for (const [num, path] of generateList(duplicates)) {
                         console.log(`       ${num}. ${prettyPropertyPath(path, accent)}`);
                     }
                 } else if (duplicates.length) {

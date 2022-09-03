@@ -1,6 +1,7 @@
-import {conflicts} from '@tools/conflicts';
+import {conflicts} from '@lib';
+import {describe, expect, it} from 'vitest';
 
-describe('[tool] difference', () => {
+describe('Test difference tool', () => {
 
     it('Should find the difference between three, two-dimensional object', () => {
         expect(conflicts([

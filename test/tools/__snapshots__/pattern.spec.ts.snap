@@ -1,34 +1,34 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`[tool] pattern Should do nothing without options 1`] = `Array []`;
+exports[`Test pattern tool > Should do nothing without options 1`] = `[]`;
 
-exports[`[tool] pattern Should validate a simple object 1`] = `
-Array [
-  Object {
-    "failed": Array [
+exports[`Test pattern tool > Should validate a simple object 1`] = `
+[
+  {
+    "failed": [
       "/^[a-z]+$/",
     ],
     "key": "abOut",
-    "path": Array [
+    "path": [
       "abOut",
     ],
   },
-  Object {
-    "failed": Array [
+  {
+    "failed": [
       "/^[a-z]+$/",
     ],
     "key": "1next",
-    "path": Array [
+    "path": [
       "home",
       "1next",
     ],
   },
-  Object {
-    "failed": Array [
+  {
+    "failed": [
       "/^[a-z]+$/",
     ],
     "key": "heaDer",
-    "path": Array [
+    "path": [
       "home",
       "welcome",
       "heaDer",

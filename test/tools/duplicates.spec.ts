@@ -1,6 +1,7 @@
-import {duplicates} from '@tools/duplicates';
+import {duplicates} from '@lib';
+import {describe, expect, it} from 'vitest';
 
-describe('[tool] duplicates', () => {
+describe('Test duplicates tool', () => {
 
     it('Should find a duplicate property and its paths', () => {
         expect(duplicates({

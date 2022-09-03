@@ -1,5 +1,5 @@
 import {JSONObject, PropertyPath} from '@types';
-import {paths} from '@utils/object';
+import {paths} from '@shared';
 
 export interface PatternConfig {
     patterns: (string | RegExp)[];

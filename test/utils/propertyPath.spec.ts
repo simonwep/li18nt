@@ -1,7 +1,8 @@
 import {PropertyPath} from '@types';
-import {propertyPath} from '@utils/object';
+import {describe, expect, it} from 'vitest';
+import {propertyPath} from '../../src/shared';
 
-describe('[util] propertyPath', () => {
+describe('Test propertyPath utility', () => {
 
     const ok: [string, PropertyPath][] = [
         ['a.b.c', ['a', 'b', 'c']],

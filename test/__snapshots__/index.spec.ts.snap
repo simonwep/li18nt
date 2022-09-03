@@ -1,43 +1,43 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`Main library Should accept further duplicates-configuration 1`] = `
-Object {
-  "conflicts": Array [
-    Object {
-      "conflicts": Array [
-        Array [
+exports[`Test api > Should accept further duplicates-configuration 1`] = `
+{
+  "conflicts": [
+    {
+      "conflicts": [
+        [
           "b",
         ],
       ],
-      "missing": Array [
-        Array [
+      "missing": [
+        [
           "c",
           "x",
         ],
       ],
     },
-    Object {
-      "conflicts": Array [
-        Array [
+    {
+      "conflicts": [
+        [
           "b",
         ],
       ],
-      "missing": Array [
-        Array [
+      "missing": [
+        [
           "c",
           "a",
         ],
       ],
     },
   ],
-  "duplicates": Array [
+  "duplicates": [
     Map {},
     Map {
-      "a" => Array [
-        Array [
+      "a" => [
+        [
           "a",
         ],
-        Array [
+        [
           "c",
           "x",
           "a",
@@ -45,7 +45,7 @@ Object {
       ],
     },
   ],
-  "prettified": Array [
+  "prettified": [
     "{
 	\\"a\\": 20,
 	\\"b\\": {
@@ -68,59 +68,59 @@ Object {
 }
 `;
 
-exports[`Main library Should properly lint the given objects 1`] = `
-Object {
-  "conflicts": Array [
-    Object {
-      "conflicts": Array [
-        Array [
+exports[`Test api > Should properly lint the given objects 1`] = `
+{
+  "conflicts": [
+    {
+      "conflicts": [
+        [
           "pages",
           "dashboard",
           "s",
         ],
       ],
-      "missing": Array [
-        Array [
+      "missing": [
+        [
           "pages",
           "dashboard",
           "panels",
         ],
-        Array [
+        [
           "pages",
           "main",
         ],
-        Array [
+        [
           "about",
         ],
       ],
     },
-    Object {
-      "conflicts": Array [
-        Array [
+    {
+      "conflicts": [
+        [
           "pages",
           "dashboard",
           "s",
         ],
       ],
-      "missing": Array [],
+      "missing": [],
     },
   ],
-  "duplicates": Array [
+  "duplicates": [
     Map {
-      "back" => Array [
-        Array [
+      "back" => [
+        [
           "back",
         ],
-        Array [
+        [
           "pages",
           "back",
         ],
       ],
-      "dashboard" => Array [
-        Array [
+      "dashboard" => [
+        [
           "dashboard",
         ],
-        Array [
+        [
           "pages",
           "dashboard",
           "dashboard",
@@ -128,25 +128,25 @@ Object {
       ],
     },
     Map {
-      "back" => Array [
-        Array [
+      "back" => [
+        [
           "back",
         ],
-        Array [
+        [
           "pages",
           "back",
         ],
       ],
-      "dashboard" => Array [
-        Array [
+      "dashboard" => [
+        [
           "dashboard",
         ],
-        Array [
+        [
           "pages",
           "dashboard",
           "dashboard",
         ],
-        Array [
+        [
           "pages",
           "main",
           "dashboard",
@@ -154,7 +154,7 @@ Object {
       ],
     },
   ],
-  "prettified": Array [
+  "prettified": [
     "{
     \\"back\\": \\"Zurück\\",
     \\"dashboard\\": \\"Dashboard\\",
@@ -188,90 +188,90 @@ Object {
 }
 `;
 
-exports[`Main library Should work with naming conventions 1`] = `
-Object {
-  "conflicts": Array [
-    Object {
-      "conflicts": Array [
-        Array [
+exports[`Test api > Should work with naming conventions 1`] = `
+{
+  "conflicts": [
+    {
+      "conflicts": [
+        [
           "a",
         ],
-        Array [
+        [
           "b",
         ],
-        Array [
+        [
           "c",
         ],
       ],
-      "missing": Array [
-        Array [
+      "missing": [
+        [
           "c",
           "y",
         ],
       ],
     },
-    Object {
-      "conflicts": Array [
-        Array [
+    {
+      "conflicts": [
+        [
           "a",
         ],
-        Array [
+        [
           "b",
         ],
-        Array [
+        [
           "c",
         ],
       ],
-      "missing": Array [],
+      "missing": [],
     },
-    Object {
-      "conflicts": Array [
-        Array [
+    {
+      "conflicts": [
+        [
           "a",
         ],
-        Array [
+        [
           "b",
         ],
-        Array [
+        [
           "c",
         ],
       ],
-      "missing": Array [],
+      "missing": [],
     },
   ],
-  "duplicates": Array [
+  "duplicates": [
     Map {},
     Map {},
     Map {},
   ],
-  "naming": Array [
-    Array [
-      Object {
-        "failed": Array [
+  "naming": [
+    [
+      {
+        "failed": [
           "/[^x]/",
         ],
         "key": "x",
-        "path": Array [
+        "path": [
           "c",
           "x",
         ],
       },
     ],
-    Array [
-      Object {
-        "failed": Array [
+    [
+      {
+        "failed": [
           "/[^x]/",
         ],
         "key": "x",
-        "path": Array [
+        "path": [
           "c",
           "x",
         ],
       },
     ],
-    Array [],
+    [],
   ],
-  "prettified": Array [
+  "prettified": [
     "{
 	\\"a\\": 20,
 	\\"b\\": null,
@@ -296,63 +296,63 @@ Object {
 }
 `;
 
-exports[`Main library Should work with the example given in the README 1`] = `
-Object {
-  "conflicts": Array [
-    Object {
-      "conflicts": Array [
-        Array [
+exports[`Test api > Should work with the example given in the README 1`] = `
+{
+  "conflicts": [
+    {
+      "conflicts": [
+        [
           "a",
         ],
-        Array [
+        [
           "b",
         ],
-        Array [
+        [
           "c",
         ],
       ],
-      "missing": Array [
-        Array [
+      "missing": [
+        [
           "c",
           "y",
         ],
       ],
     },
-    Object {
-      "conflicts": Array [
-        Array [
+    {
+      "conflicts": [
+        [
           "a",
         ],
-        Array [
+        [
           "b",
         ],
-        Array [
+        [
           "c",
         ],
       ],
-      "missing": Array [],
+      "missing": [],
     },
-    Object {
-      "conflicts": Array [
-        Array [
+    {
+      "conflicts": [
+        [
           "a",
         ],
-        Array [
+        [
           "b",
         ],
-        Array [
+        [
           "c",
         ],
       ],
-      "missing": Array [],
+      "missing": [],
     },
   ],
-  "duplicates": Array [
+  "duplicates": [
     Map {},
     Map {},
     Map {},
   ],
-  "prettified": Array [
+  "prettified": [
     "{
 	\\"a\\": 20,
 	\\"b\\": null,

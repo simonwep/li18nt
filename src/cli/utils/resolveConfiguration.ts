@@ -40,7 +40,7 @@ export const resolveConfiguration = (cmd: Command & CLIOptions): CLIOptions | nu
             return load(filePath);
         } catch (err) {
             error(`Couldn't import ${filePath}.`);
-            cmd.debug && debugLn(err);
+            cmd.debug && debugLn(err as string);
             process.exit(1);
         }
     }
@@ -56,7 +56,7 @@ export const resolveConfiguration = (cmd: Command & CLIOptions): CLIOptions | nu
                 return load(filePath);
             } catch (err) {
                 error(`Couldn't load ${filePath}.`);
-                cmd.debug && debugLn(err);
+                cmd.debug && debugLn(err as string);
                 process.exit(1);
             }
         }

@@ -1,13 +1,13 @@
 /* eslint-disable no-console */
 import {Mode} from '@types';
-import chalk, {Chalk} from 'chalk';
+import chalk, {ChalkInstance} from 'chalk';
 
 const {stdout} = process;
 
 export interface ConsoleOutputUtils {
     log: (str: string) => void;
     logLn: (str: string) => void;
-    accent: Chalk;
+    accent: ChalkInstance;
 }
 
 export const getLoggingSet = (mode: Omit<Mode, 'off'>): ConsoleOutputUtils => {

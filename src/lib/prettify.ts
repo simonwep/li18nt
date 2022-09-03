@@ -1,5 +1,5 @@
 import {JSONArray, JSONObject, JSONValue} from '@types';
-import {typeOfJsonValue} from '@utils/typeOfJsonValue';
+import {typeOfJsonValue} from '@shared';
 
 export type Indentation = 'tab' | number;
 

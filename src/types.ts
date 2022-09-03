@@ -1,7 +1,4 @@
-import {Conflicts} from '@tools/conflicts';
-import {Duplicates, DuplicatesConfig} from '@tools/duplicates';
-import {PatternConfig, PatternMismatch} from '@tools/pattern';
-import {Indentation, PrettifyOptions} from '@tools/prettify';
+import {Conflicts, Duplicates, DuplicatesConfig, Indentation, PatternConfig, PatternMismatch, PrettifyOptions} from '@lib';
 
 export type Mode = 'off' | 'warn' | 'error';
 export type Li18ntOption<T> = [Mode, T?]

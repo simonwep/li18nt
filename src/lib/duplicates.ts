@@ -1,6 +1,5 @@
 import {JSONArray, JSONObject, PropertyPath} from '@types';
-import {propertyPath, startsWithPattern} from '@utils/object';
-import {typeOfJsonValue} from '@utils/typeOfJsonValue';
+import {propertyPath, startsWithPattern, typeOfJsonValue} from '@shared';
 
 export interface DuplicatesConfig {
     ignore?: (PropertyPath | string)[];

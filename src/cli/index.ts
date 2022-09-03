@@ -1,9 +1,9 @@
 import {CLIOptions, CLIRules, Mode} from '@types';
-import {warnLn} from '@utils/log';
-import {printReport} from '@utils/printReport';
-import {resolveConfiguration} from '@utils/resolveConfiguration';
-import program, {Command} from 'commander';
+import {Command, program} from 'commander';
 import {entry} from './entry';
+import {warnLn} from './utils/log';
+import {printReport} from './utils/printReport';
+import {resolveConfiguration} from './utils/resolveConfiguration';
 
 const version = typeof VERSION === 'undefined' ? 'unknown' : VERSION;
 
@@ -29,7 +29,7 @@ program
     .option('--config [path]', 'Configuration file path (it\'ll try to resolve one in the current directory)')
     .option('--skip-invalid', 'Skip invalid files without exiting')
     .option('--report', 'Print system information')
-    .action((args, cmd: Command & CLIOptions) => {
+    .action((args: any, cmd: Command & CLIOptions) => {
 
         // Print report and exit immediately
         if (cmd.report) {

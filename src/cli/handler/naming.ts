@@ -1,10 +1,10 @@
-import {pattern, PatternConfig} from '@tools/pattern';
+import {pattern, PatternConfig} from '@lib';
 import {CLIModule} from '@types';
-import {getLoggingSet, successLn} from '@utils/log';
-import {makeList} from '@utils/makeList';
-import {pluralize} from '@utils/pluralize';
-import {prettyPropertyPath} from '@utils/prettyPropertyPath';
 import chalk from 'chalk';
+import {generateList} from '@shared';
+import {getLoggingSet, successLn} from '../utils/log';
+import {pluralize} from '../utils/pluralize';
+import {prettyPropertyPath} from '../utils/prettyPropertyPath';
 
 /* eslint-disable no-console */
 export const namingHandler: CLIModule<PatternConfig> = ({files, cmd, rule}) => {
@@ -24,7 +24,7 @@ export const namingHandler: CLIModule<PatternConfig> = ({files, cmd, rule}) => {
                 if (failed.length > 1) {
                     process.stdout.write('\n');
 
-                    for (const [num, pattern] of makeList(failed)) {
+                    for (const [num, pattern] of generateList(failed)) {
                         console.log(`       ${num}. ${chalk.blueBright(pattern)}`);
                     }
                 } else if (failed.length) {

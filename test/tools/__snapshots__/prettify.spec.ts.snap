@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`[tool] prettify Should prettify a nested object and indent using spaces 1`] = `
+exports[`Test prettify tool > Should prettify a nested object and indent using spaces 1`] = `
 "{
     \\"a\\": {
         \\"p\\": 100,
@@ -15,7 +15,7 @@ exports[`[tool] prettify Should prettify a nested object and indent using spaces
 }"
 `;
 
-exports[`[tool] prettify Should prettify a package.json file and indent using tab 1`] = `
+exports[`Test prettify tool > Should prettify a package.json file and indent using tab 1`] = `
 "{
 	\\"author\\": \\"Simon Reinisch <trash@reinisch.io>\\",
 	\\"bin\\": {
@@ -68,7 +68,7 @@ exports[`[tool] prettify Should prettify a package.json file and indent using ta
 }"
 `;
 
-exports[`[tool] prettify Should prettify a simple object 1`] = `
+exports[`Test prettify tool > Should prettify a simple object 1`] = `
 "{
   \\"a\\": 1,
   \\"y\\": 20,

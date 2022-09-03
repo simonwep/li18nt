@@ -1,5 +1,5 @@
 import {JSONArray, JSONObject, PropertyPath} from '@types';
-import {typeOfJsonValue} from '@utils/typeOfJsonValue';
+import {typeOfJsonValue} from './typeOfJsonValue';
 
 const PATH_REGEX = /(\.|^)([a-zA-Z]\w*|\*)|\[(\d+|'(.*?)'|"(.*?)")]/g;
 
@@ -92,8 +92,7 @@ export interface Property<K extends (string | number)> {
  */
 export function* paths<T extends JSONObject,
     S extends boolean,
-    P = Property<S extends true ? string :(string | number)>
->(obj: T, skipArrays?: S): IterableIterator<P> {
+    P = Property<S extends true ? string : (string | number)>>(obj: T, skipArrays?: S): IterableIterator<P> {
     function* process(val: JSONObject | JSONArray, path: PropertyPath = []): IterableIterator<P> {
         if (Array.isArray(val)) {
             for (let i = 0; i < val.length; i++) {

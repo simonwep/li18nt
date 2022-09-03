@@ -1,7 +1,7 @@
-import {prettify, PrettifyOptions} from '@tools/prettify';
+import {prettify, PrettifyOptions} from '@lib';
 import {CLIModule} from '@types';
-import {errorLn, successLn, warnLn} from '@utils/log';
 import fs from 'fs';
+import {errorLn, successLn, warnLn} from '../utils/log';
 
 /* eslint-disable no-console */
 export const prettifyHandler: CLIModule<PrettifyOptions> = ({files, cmd, rule}) => {

@@ -1,6 +1,7 @@
-import {pattern} from '@tools/pattern';
+import {pattern} from '@lib';
+import {describe, expect, it} from 'vitest';
 
-describe('[tool] pattern', () => {
+describe('Test pattern tool', () => {
 
     it('Should do nothing without options', () => {
         expect(pattern({

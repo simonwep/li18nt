@@ -1,9 +1,9 @@
-import {conflicts} from '@tools/conflicts';
+import {conflicts} from '@lib';
 import {CLIModule} from '@types';
-import {getLoggingSet, successLn} from '@utils/log';
-import {makeList} from '@utils/makeList';
-import {pluralize} from '@utils/pluralize';
-import {prettyPropertyPath} from '@utils/prettyPropertyPath';
+import {generateList} from '../../shared';
+import {getLoggingSet, successLn} from '../utils/log';
+import {pluralize} from '../utils/pluralize';
+import {prettyPropertyPath} from '../utils/prettyPropertyPath';
 
 /* eslint-disable no-console */
 export const conflictsHandler: CLIModule = ({files, cmd, rule}) => {
@@ -22,7 +22,7 @@ export const conflictsHandler: CLIModule = ({files, cmd, rule}) => {
             if (conflicts.length > 1) {
                 console.log();
 
-                for (const [num, path] of makeList(conflicts)) {
+                for (const [num, path] of generateList(conflicts)) {
                     console.log(`    ${num}. ${prettyPropertyPath(path, accent)}`);
                 }
             } else {
@@ -36,7 +36,7 @@ export const conflictsHandler: CLIModule = ({files, cmd, rule}) => {
             if (missing.length > 1) {
                 console.log();
 
-                for (const [num, path] of makeList(missing)) {
+                for (const [num, path] of generateList(missing)) {
                     console.log(`    ${num}. ${prettyPropertyPath(path, accent)}`);
                 }
             } else {

@@ -1,12 +1,12 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
-exports[`[tool] duplicates Should be able to ignore certain paths 1`] = `
+exports[`Test duplicates tool > Should be able to ignore certain paths 1`] = `
 Map {
-  "welcome" => Array [
-    Array [
+  "welcome" => [
+    [
       "welcome",
     ],
-    Array [
+    [
       "about",
       "footer",
       "welcome",
@@ -15,17 +15,17 @@ Map {
 }
 `;
 
-exports[`[tool] duplicates Should be able to ignore sub-trees 1`] = `
+exports[`Test duplicates tool > Should be able to ignore sub-trees 1`] = `
 Map {
-  "welcome" => Array [
-    Array [
+  "welcome" => [
+    [
       "welcome",
     ],
-    Array [
+    [
       "home",
       "welcome",
     ],
-    Array [
+    [
       "about",
       "header",
       "welcome",
@@ -34,13 +34,13 @@ Map {
 }
 `;
 
-exports[`[tool] duplicates Should be able to ignore sub-trees using the * pattern 1`] = `
+exports[`Test duplicates tool > Should be able to ignore sub-trees using the * pattern 1`] = `
 Map {
-  "welcome" => Array [
-    Array [
+  "welcome" => [
+    [
       "welcome",
     ],
-    Array [
+    [
       "about",
       "welcome",
     ],
@@ -48,13 +48,13 @@ Map {
 }
 `;
 
-exports[`[tool] duplicates Should find a duplicate property and its paths 1`] = `
+exports[`Test duplicates tool > Should find a duplicate property and its paths 1`] = `
 Map {
-  "welcome" => Array [
-    Array [
+  "welcome" => [
+    [
       "welcome",
     ],
-    Array [
+    [
       "home",
       "welcome",
     ],
@@ -62,17 +62,17 @@ Map {
 }
 `;
 
-exports[`[tool] duplicates Should find multiple, nested duplicate 1`] = `
+exports[`Test duplicates tool > Should find multiple, nested duplicate 1`] = `
 Map {
-  "welcome" => Array [
-    Array [
+  "welcome" => [
+    [
       "welcome",
     ],
-    Array [
+    [
       "home",
       "welcome",
     ],
-    Array [
+    [
       "home",
       "sideBar",
       "welcome",
@@ -81,45 +81,45 @@ Map {
 }
 `;
 
-exports[`[tool] duplicates Should work with arrays too 1`] = `
+exports[`Test duplicates tool > Should work with arrays too 1`] = `
 Map {
-  "welcome" => Array [
-    Array [
+  "welcome" => [
+    [
       "welcome",
     ],
-    Array [
+    [
       "home",
       "welcome",
     ],
-    Array [
+    [
       "home",
       "sideBar",
       "welcome",
     ],
-    Array [
+    [
       "about",
       "footer",
       0,
       "welcome",
     ],
-    Array [
+    [
       "about",
       "footer",
       1,
       "welcome",
     ],
-    Array [
+    [
       "about",
       "footer",
       2,
       "welcome",
     ],
   ],
-  "copyright" => Array [
-    Array [
+  "copyright" => [
+    [
       "copyright",
     ],
-    Array [
+    [
       "about",
       "footer",
       2,

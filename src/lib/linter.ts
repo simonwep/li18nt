@@ -1,13 +1,10 @@
-import {conflicts} from '@tools/conflicts';
-import {duplicates} from '@tools/duplicates';
-import {pattern} from '@tools/pattern';
-import {prettify} from '@tools/prettify';
-import {JSONObject, Li18ntOptions, Li18ntResult, PartialLi18ntResult} from '@types';
-
-// Export property path utility
-export {propertyPath} from '@utils/object';
-
 // Current version
+import {JSONObject, Li18ntOptions, Li18ntResult, PartialLi18ntResult} from '@types';
+import {conflicts} from './conflicts';
+import {duplicates} from './duplicates';
+import {pattern} from './pattern';
+import {prettify} from './prettify';
+
 export const version = typeof VERSION !== 'undefined' ? VERSION : 'unknown';
 
 /**

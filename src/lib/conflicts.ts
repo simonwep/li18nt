@@ -1,7 +1,5 @@
 import {JSONArray, JSONObject, JSONValue, PropertyPath} from '@types';
-import {keysFrom} from '@utils/keysFrom';
-import {containsDeep} from '@utils/object';
-import {typeOfJsonValue} from '@utils/typeOfJsonValue';
+import {containsDeep, keysFrom, typeOfJsonValue} from '@shared';
 
 export interface Conflict {
     missing: PropertyPath[];
@@ -87,7 +85,7 @@ const compare = (target: JSONObject, others: JSONObject[]): Conflict => {
         }
     }
 
-    function resolve<T extends JSONObject | JSONArray, O extends(T extends JSONObject ? JSONObject[] : JSONArray)>(
+    function resolve<T extends JSONObject | JSONArray, O extends (T extends JSONObject ? JSONObject[] : JSONArray)>(
         target: T,
         others: O,
         parent: PropertyPath = []

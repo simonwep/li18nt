@@ -1,5 +1,5 @@
 import {PropertyPath} from '@types';
-import {Chalk} from 'chalk';
+import {ChalkInstance} from 'chalk';
 
 const NO_WHITESPACE = /^\S*$/;
 
@@ -8,7 +8,7 @@ const NO_WHITESPACE = /^\S*$/;
  * @param path
  * @param last
  */
-export const prettyPropertyPath = (path: PropertyPath, last: Chalk | null = null): string => {
+export const prettyPropertyPath = (path: PropertyPath, last: ChalkInstance | null = null): string => {
     let str = '';
 
     for (let i = 0; i < path.length; i++) {

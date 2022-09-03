@@ -1,8 +1,9 @@
-import {lint} from '../src';
+import {lint} from '@lib';
+import {describe, expect, it} from 'vitest';
 
-describe('Main library', () => {
+describe('Test api', () => {
 
-    it('Should properly lint the given objects', ()=>{
+    it('Should properly lint the given objects', () => {
         expect(lint({
             prettified: 4,
             duplicates: true,
@@ -40,7 +41,7 @@ describe('Main library', () => {
         ])).toMatchSnapshot();
     });
 
-    it('Should work with the example given in the README', ()=>{
+    it('Should work with the example given in the README', () => {
         expect(lint({
             prettified: 'tab',
             duplicates: true,
@@ -52,7 +53,7 @@ describe('Main library', () => {
         ])).toMatchSnapshot();
     });
 
-    it('Should accept further duplicates-configuration', ()=>{
+    it('Should accept further duplicates-configuration', () => {
         expect(lint({
             prettified: 'tab',
             duplicates: {
@@ -68,7 +69,7 @@ describe('Main library', () => {
         ])).toMatchSnapshot();
     });
 
-    it('Should work with naming conventions', ()=>{
+    it('Should work with naming conventions', () => {
         expect(lint({
             prettified: 'tab',
             duplicates: true,

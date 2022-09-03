@@ -1,6 +1,7 @@
-import {prettify} from '@tools/prettify';
+import {prettify} from '@lib';
+import {describe, expect, it} from 'vitest';
 
-describe('[tool] prettify', () => {
+describe('Test prettify tool', () => {
 
     it('Should prettify a simple object', () => {
         expect(prettify({

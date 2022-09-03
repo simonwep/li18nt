@@ -1,9 +1,9 @@
 import {CLIOptions, CLIRules, SourceFile} from '@types';
-import {debugLn, errorLn, warnLn} from '@utils/log';
 import fs from 'fs';
 import glob from 'glob';
 import path from 'path';
 import {handler} from './handler';
+import {debugLn, errorLn, warnLn} from './utils/log';
 
 // Entry point
 /* eslint-disable no-console */
